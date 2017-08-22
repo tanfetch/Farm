@@ -1,0 +1,108 @@
+﻿<div class="easyui-tabs" style="height:auto;" fit="true">  
+
+<div title="用户列表" style="margin:0px;">
+    <table id="dg_users" class="easyui-datagrid" style="" onClickCell="onClickCell"
+            url="@Url.Content("~/User/List")" toolbar="#toolbar_users" >  
+        <thead>  
+            <tr>  
+            <th field="userID" sortable="true" width="60">帐号</th>  
+            <th field="userName" sortable="true" width="80">姓名</th>  
+            <th field="roleName"  sortable="true" width="100">权限</th>  
+            <th field="logTimes"  sortable="true" width="80">登录次数</th>  
+            <th field="lastLogTime" formatter="dateTimeFormatter"  sortable="true" width="150">最近登录时间</th>  
+            <th field="lastLogIP"  sortable="true" width="150">最近登录地点</th>  
+            </tr>  
+        </thead>  
+    </table>  
+    <div id="toolbar_users">  
+        <div>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" 
+                onclick="newUser()">增加</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" 
+                onclick="destroyRow('#dg_users','@Url.Content("~/User/Delete")')">删除</a> 
+        </div> 
+        <div style="margin:3px;">
+            <form id="fm_userfilter">
+            <span style="margin:0 5px">帐号: <input name="userID_4" style="width:60px" value="@Request["userID_0"]"></span>
+            <span style="margin:0 5px">姓名: <input name="userName_4" style="width:80px" value="@Request["userName_4"]"></span>
+            <span style="margin:0 5px">权限组：@Html.DropDownList("roleID_0",ViewModelHelper.GetRoleGroup(0,true))</span>
+            <span style="margin:0 5px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearch('#fm_userfilter','#dg_users')">查找</a>
+            </span>
+            </form>
+        </div>
+    </div>  
+    <script type="text/javascript">
+        $(function () {
+            $('#dg_users').datagrid('detailView', '/User/Update?go=Edit');
+        });
+     
+    </script>
+
+    <div id="dlg_newuser" class="easyui-dialog" style="width:400px;height:310px;padding:10px 20px" title="新建" 
+            closed="true" buttons="#tb_newuser" data-options="modal:true" iconCls="icon-add">  
+        <div id="ftitle" class="ftitle">增加用户</div>  
+        <form id="fm_newuser" method="post"  iconCls="icon-set" novalidate>  
+            <div class="fitem">
+                <label>帐号：</label>
+                <input type="text" id="userID" name="userID" class="easyui-validatebox" data-options="required:true"  />
+            </div>
+            <div class="fitem">
+                <label>姓名：</label>
+                <input type="text" id="userName" name="userName" class="easyui-validatebox" data-options="required:true" />
+            </div>
+            <div class="fitem">
+                <label>权限：</label>
+                @Html.DropDownList("roleID",ViewModelHelper.GetRoleGroup())
+            </div>
+
+            <div class="fitem">
+                <label>密码：</label>
+                <input type="password" id="pwd" name="userPassword" class="easyui-validatebox" data-options="required:true" />
+            </div>
+            <div class="fitem">
+                <label>再输一次：</label>
+                <input type="password" id="userPassword" class="easyui-validatebox" data-options="required:true" validType="equals['#pwd']" " />
+            </div>
+            <input type="hidden" name="ID" value="0" />
+        </form>  
+    </div>  
+    <div id="tb_newuser">  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="SaveUser()">保存</a>  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_newuser').dialog('close')">取消</a>  
+    </div> 
+    <script>
+        function newUser() {
+            $('#dlg_newuser').dialog('open');
+        }
+
+        function SaveUser() {
+
+            $('#fm_newuser').ajaxSubmit({
+                url: '/User/Update',
+                beforeSubmit: function () {
+                    return $('#fm_newuser').form('validate');
+                },
+                success: function (result) {
+                    if (result.success) {
+                        $('#dlg_newuser').dialog('close');
+                        $('#fm_newuser').form('clear');
+                        $('#dg_users').datagrid('reload');
+
+                        showSuccess(result.message);
+                    }
+                    else {
+                        showError(result.message);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown + ':' + errorThrown + XMLHttpRequest.responseText);
+                }
+            });
+        }
+      
+    </script>
+
+
+</div>
+</div>

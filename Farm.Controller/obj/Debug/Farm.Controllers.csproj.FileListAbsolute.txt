@@ -1,0 +1,11 @@
+F:\Farm\Farm.Controller\bin\Debug\Farm.Controllers.dll
+F:\Farm\Farm.Controller\bin\Debug\Farm.Controllers.pdb
+F:\Farm\Farm.Controller\bin\Debug\AppCommon.dll
+F:\Farm\Farm.Controller\bin\Debug\Farm.Authority.dll
+F:\Farm\Farm.Controller\bin\Debug\AppCommon.pdb
+F:\Farm\Farm.Controller\bin\Debug\Farm.Authority.pdb
+F:\Farm\Farm.Controller\obj\Debug\Farm.Controllers.dll
+F:\Farm\Farm.Controller\obj\Debug\Farm.Controllers.pdb
+F:\Farm\Farm.Controller\bin\Debug\Farm.Raisers.dll
+F:\Farm\Farm.Controller\bin\Debug\Farm.Raisers.pdb
+F:\Farm\Farm.Controller\obj\Debug\Farm.Controllers.csprojResolveAssemblyReference.cache

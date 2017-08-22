@@ -1,0 +1,20 @@
+F:\Farm\Farm.Raisers\obj\Debug\Farm.Raisers.csprojResolveAssemblyReference.cache
+F:\Farm\Farm.Raisers\bin\Debug\Farm.Raisers.dll.config
+F:\Farm\Farm.Raisers\bin\Debug\Farm.Raisers.dll
+F:\Farm\Farm.Raisers\bin\Debug\Farm.Raisers.pdb
+F:\Farm\Farm.Raisers\bin\Debug\AppCommon.dll
+F:\Farm\Farm.Raisers\bin\Debug\Farm.Authority.dll
+F:\Farm\Farm.Raisers\bin\Debug\AppCommon.pdb
+F:\Farm\Farm.Raisers\bin\Debug\Farm.Authority.pdb
+F:\Farm\Farm.Raisers\obj\Debug\Farm.Raisers.dll
+F:\Farm\Farm.Raisers\obj\Debug\Farm.Raisers.pdb
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Farm.Raisers\bin\Debug\Farm.Raisers.dll.config
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Farm.Raisers\bin\Debug\Farm.Raisers.dll
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Farm.Raisers\bin\Debug\Farm.Raisers.pdb
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Farm.Raisers\bin\Debug\AppCommon.dll
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Farm.Raisers\bin\Debug\Farm.Authority.dll
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Farm.Raisers\bin\Debug\AppCommon.pdb
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Farm.Raisers\bin\Debug\Farm.Authority.pdb
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Farm.Raisers\obj\Debug\Farm.Raisers.csprojResolveAssemblyReference.cache
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Farm.Raisers\obj\Debug\Farm.Raisers.dll
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Farm.Raisers\obj\Debug\Farm.Raisers.pdb

@@ -1,0 +1,62 @@
+﻿@model Farm.Raisers.DataContext.tbSales
+<div style="padding:10px;">
+<fieldset style="width:660px;padding:10px;">
+    <legend>修改销售信息</legend>
+<form action="/Sales/Edit" method="post">
+
+    <table>
+    <tr>
+        <td style="width:60px;"> <label>销售日期：</label></td>  
+        <td style="width:150px;">@Html.TextBoxFor(model => model.salesDate, new { @Class = "easyui-datebox",@style="width:80px;",
+                @Value=string.Format("{0:d}",Model.salesDate) })</td>
+
+        <td style="width:60px;"> <label>销售员：</label></td>  
+        <td style="width:150px;">@Html.TextBoxFor(model => model.salesperson, new { @style="width:80px;"})</td>
+
+        <td style="width:60px;"> <label>买主：</label></td>  
+        <td style="width:150px;">@Html.TextBoxFor(model => model.customer, new { @style="width:80px;"})</td>
+    </tr>
+
+    <tr>
+        <td> <label>金额：</label></td>  
+        <td style="width:100px;">@Html.TextBoxFor(model => model.amount, new { @Class = "easyui-numberbox",@style="width:60px;",
+                @precision=2})</td>
+
+        <td> <label>销售方式：</label></td>  
+        <td>@Html.DropDownList("salesmethods", ViewModelHelper.GetSalesMannerItems(Model.salesmethods))</td>
+
+        <td> <label>等级：</label></td>  
+        <td>@Html.DropDownList("grade", ViewModelHelper.GetSalesGradeItems(Model.grade))</td>
+    </tr>
+
+    <tr>
+        <td> <label>销售数量：</label></td>  
+        <td>@Html.TextBoxFor(model => model.salesNum, new { @Class = "easyui-numberbox",@style="width:60px;"})</td>
+
+        <td> <label>发运重量：</label></td>  
+        <td>@Html.TextBoxFor(model => model.salesWeight, new { @Class = "easyui-numberbox",@style="width:60px;",
+                @precision=2})</td>
+
+        <td> <label>到岸重量：</label></td>  
+        <td>@Html.TextBoxFor(model => model.deliveryWeight, new { @Class = "easyui-numberbox",@style="width:60px;",
+                    @precision=2})</td>
+    </tr>
+    <tr>
+        <td> <label>备注：</label></td>  
+        <td colspan="5">@Html.TextAreaFor(model => model.description)</td>
+    </tr>
+        
+    </table>
+   
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.PigID)
+    
+    <div style="text-align:right;padding-right:30px">
+    <a href="javascript:void(0)" class="easyui-linkbutton save" iconCls="icon-save" plain="true" >保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton cancel" iconCls="icon-cancel" plain="true">取消</a>
+    </div>
+
+</form>
+
+</fieldset>
+</div>

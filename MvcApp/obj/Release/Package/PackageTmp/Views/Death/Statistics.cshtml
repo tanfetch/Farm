@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Farm.Raisers.DataContext.Death>
+
+<span>死亡总数:</span>
+<span style="color:brown;">@Model.Sum(p=>p.deathNum) 头</span>
+<span>&nbsp;&nbsp;</span>
+@{
+    var g = Model.GroupBy(p => p.areaName);
+    foreach(var item in g)
+    {
+        <span>@item.Key :</span>
+        <span style="color:brown;">@item.Sum(p=>p.deathNum) 头</span>
+        <span>&nbsp;&nbsp;</span>
+    }
+}

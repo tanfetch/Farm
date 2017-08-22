@@ -1,0 +1,22 @@
+﻿@using Farm.AppCommon
+@using Farm.Raisers.DataContext
+
+@{
+    var db = new BaseRepository();
+    var structures = db.GetEntities<tbStructure>(p => p.typeID == 1);
+    var feedShort = db.GetCount<LivePig>(p => p.feedSurplusDays < 1);
+    <fieldset>
+    <legend>需要发料的养户（@feedShort）</legend>
+    @foreach (var item in structures)
+    {
+        var text = item.name;
+        var value = db.GetCount<LivePig>(p => p.areaID == item.ID && p.feedSurplusDays < 1);
+
+        <a href="javascript:void(0)" 
+            onclick="newMainPanel('/Pig/List?feedSurplusDays_2=1&areaID_0=@item.ID','在养列表','icon-livepigs')"
+            class="easyui-linkbutton" data-options="plain:true" style="width:80px;">
+        <span>@text</span><span>:</span><span>@value</span>
+        </a>
+    }
+    </fieldset>
+}

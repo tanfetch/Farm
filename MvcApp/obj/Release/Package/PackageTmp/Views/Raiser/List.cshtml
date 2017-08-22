@@ -1,0 +1,140 @@
+﻿
+<div class="easyui-tabs" style="height:auto;" fit="true">  
+
+<div title="养户列表" style="margin:0px;">
+    <table id="dg_raisers" class="easyui-datagrid" toolbar="#toolbar_raisers" >  
+        <thead>  
+            <tr>  
+            <th field="raiserID"     sortable="true" width="60"  >编号</th>  
+            <th field="name"         sortable="true" width="80"  >姓名</th>  
+            <th field="areaName"     sortable="true" width="80" >服务点</th>  
+            <th field="batch"        sortable="true" width="60"  >初始批次</th>  
+            <th field="totalBatch"   sortable="true" width="60"  >总批次</th> 
+            <th field="statusFlag" formatter="fraiserstatusFlag" width="40" >状态</th>  
+            <th field="telephone"    sortable="false" width="100" >电话</th>  
+            <th field="address"      sortable="false" width="200" >地址</th>  
+            <th field="IDCard"       sortable="false" width="150" >身份证</th>  
+            <th field="isDisabled" formatter="formatisDisabled" width="40" >淘汰</th> 
+            </tr>  
+        </thead>  
+    </table>  
+    <div id="toolbar_raisers">  
+        <div>
+            <a href="javascript:void(0)" id="raiser-new" class="easyui-linkbutton" iconCls="icon-add" plain="true" 
+                onclick="r_newRaiser()">增加</a>
+            <a href="javascript:void(0)" id="raiser-newpact" class="easyui-linkbutton" iconCls="icon-pencil" plain="true" 
+               select onclick="r_newPact()">签约</a>
+            <a href="javascript:void(0)" id="raiser-newpig" class="easyui-linkbutton" iconCls="icon-lorry_add" plain="true" 
+               select onclick="r_newPig()">调入</a>
+            <a href="javascript:void(0)" id="raiser-del" class="easyui-linkbutton" iconCls="icon-remove" plain="true" 
+               select onclick="destroyRow('#dg_raisers','@Url.Content("~/Raiser/Delete")')">删除</a> 
+        </div> 
+
+        <script>
+            function r_newRaiser() {
+                newMainPanel('/Raiser/Update', '加入养户', 'icon-add');
+            }
+            function r_newPact() {
+                var row = $('#dg_raisers').datagrid('getSelected');
+                if (row) {
+                    var url = '/Pact/Update?key=' + row.raiserID;
+                    newMainPanel(url, '签约', 'icon-add');
+                }
+            }
+            function r_newPig() {
+                var row = $('#dg_raisers').datagrid('getSelected');
+                if (row) {
+                    var url = '/Pig/Update?key='+row.raiserID;
+                    newMainPanel(url, '调入', 'icon-lorry_add');
+                }
+            }
+        </script>
+
+        <div style="margin:3px;">
+            <form id="fm_raiserfilter">
+            <span style="margin:0 5px">区域
+                @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new { @style = "width:auto;" }) 
+            </span>
+            <span style="margin:0 5px">编号
+                @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:50px;" })
+            </span>
+            <span style="margin:0 5px">养户
+                @Html.TextBox("name_4", Request["name_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">状态
+                @Html.DropDownList("statusFlag_0", ViewModelHelper.GetRaiserStatusItems(Request["statusFlag_0"], true), new { @style = "width:auto;" }) 
+            </span>
+            <span style="margin:0 5px">地址
+                @Html.TextBox("address_4", Request["address_4"], new { @style = "width:100px;" })
+            </span>
+            <span style="margin:0 5px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" 
+                    onclick="doSearch('#fm_raiserfilter','#dg_raisers')">查找</a>
+            </span>
+            </form>
+        </div>
+    </div>  
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('#dg_raisers').datagrid({
+                url: '/Raiser/List',
+                onSelect: function (rowIndex, rowData) {
+                    updateButton('#raiser-newpact', rowData.statusFlag != 3);
+                    updateButton('#raiser-newpig', rowData.statusFlag != 1);
+                    updateButton('#raiser-del', rowData.extantBatch != 0);
+                }
+            });
+            $('#dg_raisers').datagrid('detailView', '/Raiser/Update?go=Edit');
+        });
+
+        function formatisDisabled(val, row, index) {
+            if (val == true) {
+                return '<input type="checkbox" checked="checked" rowID="' + row.ID + '"rowIndex="'+ index +  '" onchange="toggleInvalid(this)" />';
+
+            } else {
+                return '<input type="checkbox" rowID="' + row.ID + '"rowIndex="' + index + '" onchange="toggleInvalid(this)" />';
+            }
+        }
+        function fraiserstatusFlag(val, row) {
+            var s;
+            switch (val) {
+                case 0: s = '淘汰'; break;
+                case 1: s = '待调'; break;
+                case 2: s = '在养'; break;
+                case 3: s = '空闲'; break;
+                default: break;
+            }
+            return s;
+        }
+
+        function toggleInvalid(target) {
+            var n = parseInt($(target).attr("rowIndex"));
+            $.ajax({
+                url: "/Raiser/ToggleInvalid",
+                type: 'POST',
+                data: {
+                    id: $(target).attr("rowID"),
+                    value: $(target).prop("checked")
+                },
+                success: function (data) {
+                    if (data.success) {
+                        showSuccess(data.message);
+                        //$('#dg_raisers').datagrid('reload');
+                    }
+                    else {
+                        $('#dg_raisers').datagrid('refreshRow', n);
+                        showError(data.message);
+                    }
+                },
+                error: function (data, t) {
+                    alert("error:[" + t + "]" + data.responseText);
+                }
+            });
+        }
+    </script>
+
+
+</div>
+</div>

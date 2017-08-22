@@ -1,0 +1,434 @@
+﻿@using System.Web.Mvc;
+@using System.Text;
+@model Farm.Raisers.DataContext.SettledBatch
+@{
+    Layout = null;
+ }
+@functions
+{
+    string SalesDate(Farm.Raisers.DataContext.tbSales sales)
+    {
+        if( sales == null) return "　";
+        return string.Format("{0:yyyy/MM/dd}",sales.salesDate);
+    }
+    string SalesNum(Farm.Raisers.DataContext.tbSales sales)
+    {
+        if( sales == null) return "　";
+        return string.Format("{0}",sales.salesNum);
+    }
+    string SalesWeight(Farm.Raisers.DataContext.tbSales sales)
+    {
+        if( sales == null) return "　";
+        return string.Format("{0:f2}",sales.salesWeight);
+    }
+    string DeathDate(Farm.Raisers.DataContext.tbDeath death)
+    {
+        if (death == null) return "　";
+        return string.Format("{0:yyyy/MM/dd}", death.deathDate);
+    }
+    string DeathNum(Farm.Raisers.DataContext.tbDeath death)
+    {
+        if (death == null) return "　";
+        return string.Format("{0}", death.deathNum);
+    }
+    string VaccineName(Farm.Raisers.DataContext.tbInjection vacc)
+    {
+        if (vacc == null ) return "　";
+        return vacc.vaccineName;
+    }
+    string VaccineDate(Farm.Raisers.DataContext.tbInjection vacc)
+    {
+        if (vacc == null) return "　";
+        return string.Format("{0:yyyy/MM/dd}", vacc.injectionDate);
+    }
+    string VaccineDate_Plan(Farm.Raisers.DataContext.tbInjection vacc)
+    {
+        if (vacc == null) return "　";
+        return string.Format("{0:yyyy/MM/dd}", vacc.planDate);
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>养户批次详细信息</title>
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <table class="table table-bordered table-striped" style="text-align:center;">
+            <thead>
+                <tr>
+                    <th colspan="10" style="text-align:center;">湖南新五丰养殖发展部公司加农户项目</th>
+                </tr>
+                <tr>
+                    <th colspan="10" style="text-align:center;">养户批次详细信息查询表</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width:10%;">养户：</td>
+                    <td style="width:10%;">@Model.raiserName</td>
+                    <td style="width:10%;">区域：</td>
+                    <td style="width:10%;">@Model.areaName</td>
+                    <td style="width:10%;">批次：</td>
+                    <td style="width:10%;">@Model.batch</td>
+                    <td style="width:10%;">技术员：</td>
+                    <td style="width:10%;">@Model.technician</td>
+                    <td style="width:10%;">进猪日期：</td>
+                    <td style="width:10%;">@String.Format("{0:yyy/MM/dd}", Model.grantDate)</td>
+                </tr>
+                <tr>
+                    <td rowspan="12" style="vertical-align:middle;">饲养</td>
+                    <td rowspan="2" style="vertical-align:middle;">调入信息</td>
+                    <td>数量(头)</td>
+                    <td>重量(公斤)</td>
+                    <td>调运员</td>
+                    <td>调运车辆</td>
+                    <td>均重(公斤/头)</td>
+                    <td colspan="3">来源</td>
+                </tr>
+                <tr>
+                    <td>@Model.grantNum</td>
+                    <td>@Model.grantWeight</td>
+                    <td>@Model.transportMan</td>
+                    <td>@Model.transportCar</td>
+                    <td>@String.Format("{0:f2}",Model.weightByNum)</td>
+                    <td colspan="3">@Model.source</td>
+                </tr>
+                <tr>
+                    <td rowspan="10" style="vertical-align:middle;">发料记录</td>
+                    <td>饲料品种</td>
+                    <td>发料日期/公斤</td>
+                    <td>发料日期/公斤</td>
+                    <td>发料日期/公斤</td>
+                    <td>发料日期/公斤</td>
+                    <td>发料日期/公斤</td>
+                    <td>发料日期/公斤</td>
+                    <td>批次饲料耗用量（公斤）</td>
+                </tr>
+                <tr>
+                    <td>教槽料</td>
+                    <td>@Model.GetFeed("教槽料", 0)</td>
+                    <td>@Model.GetFeed("教槽料", 1)</td>
+                    <td>@Model.GetFeed("教槽料", 2)</td>
+                    <td>@Model.GetFeed("教槽料", 3)</td>
+                    <td>@Model.GetFeed("教槽料", 4)</td>
+                    <td>@Model.GetFeed("教槽料", 5)</td>
+                    <td>@Model.GetFeedWeight("教槽料")</td>
+                </tr>
+                <tr>
+                    <td>保育前期料</td>
+                    <td>@Model.GetFeed("保前料", 0)</td>
+                    <td>@Model.GetFeed("保前料", 1)</td>
+                    <td>@Model.GetFeed("保前料", 2)</td>
+                    <td>@Model.GetFeed("保前料", 3)</td>
+                    <td>@Model.GetFeed("保前料", 4)</td>
+                    <td>@Model.GetFeed("保前料", 5)</td>
+                    <td>@Model.GetFeedWeight("保前料")</td>
+                </tr>
+                <tr>
+                    <td>保育后期料</td>
+                    <td>@Model.GetFeed("保后料", 0)</td>
+                    <td>@Model.GetFeed("保后料", 1)</td>
+                    <td>@Model.GetFeed("保后料", 2)</td>
+                    <td>@Model.GetFeed("保后料", 3)</td>
+                    <td>@Model.GetFeed("保后料", 4)</td>
+                    <td>@Model.GetFeed("保后料", 5)</td>
+                    <td>@Model.GetFeedWeight("保后料")</td>
+                </tr>
+                <tr>
+                    <td>小猪料</td>
+                    <td>@Model.GetFeed("小猪料", 0)</td>
+                    <td>@Model.GetFeed("小猪料", 1)</td>
+                    <td>@Model.GetFeed("小猪料", 2)</td>
+                    <td>@Model.GetFeed("小猪料", 3)</td>
+                    <td>@Model.GetFeed("小猪料", 4)</td>
+                    <td>@Model.GetFeed("小猪料", 5)</td>
+                    <td>@Model.GetFeedWeight("小猪料")</td>
+                </tr>
+                <tr>
+                    <td>中猪料</td>
+                    <td>@Model.GetFeed("中猪料", 0)</td>
+                    <td>@Model.GetFeed("中猪料", 1)</td>
+                    <td>@Model.GetFeed("中猪料", 2)</td>
+                    <td>@Model.GetFeed("中猪料", 3)</td>
+                    <td>@Model.GetFeed("中猪料", 4)</td>
+                    <td>@Model.GetFeed("中猪料", 5)</td>
+                    <td>@Model.GetFeedWeight("中猪料")</td>
+                </tr>
+                <tr>
+                    <td>中猪料</td>
+                    <td>@Model.GetFeed("中猪料", 6)</td>
+                    <td>@Model.GetFeed("中猪料", 7)</td>
+                    <td>@Model.GetFeed("中猪料", 8)</td>
+                    <td>@Model.GetFeed("中猪料", 9)</td>
+                    <td>@Model.GetFeed("中猪料", 10)</td>
+                    <td>@Model.GetFeed("中猪料", 11)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>大猪料</td>
+                    <td>@Model.GetFeed("大猪料", 0)</td>
+                    <td>@Model.GetFeed("大猪料", 1)</td>
+                    <td>@Model.GetFeed("大猪料", 2)</td>
+                    <td>@Model.GetFeed("大猪料", 3)</td>
+                    <td>@Model.GetFeed("大猪料", 4)</td>
+                    <td>@Model.GetFeed("大猪料", 5)</td>
+                    <td>@Model.GetFeedWeight("大猪料")</td>
+                </tr>
+                <tr>
+                    <td>大猪料</td>
+                    <td>@Model.GetFeed("大猪料", 6)</td>
+                    <td>@Model.GetFeed("大猪料", 7)</td>
+                    <td>@Model.GetFeed("大猪料", 8)</td>
+                    <td>@Model.GetFeed("大猪料", 9)</td>
+                    <td>@Model.GetFeed("大猪料", 10)</td>
+                    <td>@Model.GetFeed("大猪料", 11)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>大猪料</td>
+                    <td>@Model.GetFeed("大猪料", 12)</td>
+                    <td>@Model.GetFeed("大猪料", 13)</td>
+                    <td>@Model.GetFeed("大猪料", 14)</td>
+                    <td>@Model.GetFeed("大猪料", 15)</td>
+                    <td>@Model.GetFeed("大猪料", 16)</td>
+                    <td>@Model.GetFeed("大猪料", 17)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="4" style="vertical-align:middle;">疫苗</td>
+                    <td>疫苗计划</td>
+                    <td>第一针</td>
+                    <td>第二针</td>
+                    <td>第三针</td>
+                    <td>第四针</td>
+                    <td>第五针</td>
+                    <td>第六针</td>
+                    <td>第七针</td>
+                    <td>第八针</td>
+                </tr>
+                <tr>
+                    <td>疫苗品种</td>
+                    <td>@VaccineName(Model.GetInjection(0))</td>
+                    <td>@VaccineName(Model.GetInjection(1))</td>
+                    <td>@VaccineName(Model.GetInjection(2))</td>
+                    <td>@VaccineName(Model.GetInjection(3))</td>
+                    <td>@VaccineName(Model.GetInjection(4))</td>
+                    <td>@VaccineName(Model.GetInjection(5))</td>
+                    <td>@VaccineName(Model.GetInjection(6))</td>
+                    <td>@VaccineName(Model.GetInjection(7))</td>
+                </tr>
+                <tr>
+                    <td>计划时间</td>
+                    <td>@VaccineDate_Plan(Model.GetInjection(0))</td>
+                    <td>@VaccineDate_Plan(Model.GetInjection(1))</td>
+                    <td>@VaccineDate_Plan(Model.GetInjection(2))</td>
+                    <td>@VaccineDate_Plan(Model.GetInjection(3))</td>
+                    <td>@VaccineDate_Plan(Model.GetInjection(4))</td>
+                    <td>@VaccineDate_Plan(Model.GetInjection(5))</td>
+                    <td>@VaccineDate_Plan(Model.GetInjection(6))</td>
+                    <td>@VaccineDate_Plan(Model.GetInjection(7))</td>
+                </tr>
+                <tr>
+                    <td>注射时间</td>
+                    <td>@VaccineDate(Model.GetInjection(0))</td>
+                    <td>@VaccineDate(Model.GetInjection(1))</td>
+                    <td>@VaccineDate(Model.GetInjection(2))</td>
+                    <td>@VaccineDate(Model.GetInjection(3))</td>
+                    <td>@VaccineDate(Model.GetInjection(4))</td>
+                    <td>@VaccineDate(Model.GetInjection(5))</td>
+                    <td>@VaccineDate(Model.GetInjection(6))</td>
+                    <td>@VaccineDate(Model.GetInjection(7))</td>
+                </tr>
+                <tr>
+                    <td rowspan="11" style="vertical-align:middle;">销售记录</td>
+                    <td>日期</td>
+                    <td>重量/头</td>
+                    <td>重量/公斤</td>
+                    <td>日期</td>
+                    <td>重量/头</td>
+                    <td>重量/公斤</td>
+                    <td rowspan="11" style="vertical-align:middle;">死亡记录</td>
+                    <td>日期</td>
+                    <td>重量/头</td>
+                </tr>
+                <tr><!--1 -->
+                    <td>@SalesDate(Model.GetSale(0))</td>
+                    <td>@SalesNum(Model.GetSale(0))</td>
+                    <td>@SalesWeight(Model.GetSale(0))</td>
+                    <td>@SalesDate(Model.GetSale(9))</td>
+                    <td>@SalesNum(Model.GetSale(9))</td>
+                    <td>@SalesWeight(Model.GetSale(9))</td>
+                    <td>@DeathDate(Model.GetDeath(0))</td>
+                    <td>@DeathNum(Model.GetDeath(0))</td>
+                </tr>
+                <tr><!--2 -->
+                    <td>@SalesDate(Model.GetSale(1))</td>
+                    <td>@SalesNum(Model.GetSale(1))</td>
+                    <td>@SalesWeight(Model.GetSale(1))</td>
+                    <td>@SalesDate(Model.GetSale(10))</td>
+                    <td>@SalesNum(Model.GetSale(10))</td>
+                    <td>@SalesWeight(Model.GetSale(10))</td>
+                    <td>@DeathDate(Model.GetDeath(1))</td>
+                    <td>@DeathNum(Model.GetDeath(1))</td>
+                </tr>
+                <tr><!--3 -->
+                    <td>@SalesDate(Model.GetSale(2))</td>
+                    <td>@SalesNum(Model.GetSale(2))</td>
+                    <td>@SalesWeight(Model.GetSale(2))</td>
+                    <td>@SalesDate(Model.GetSale(11))</td>
+                    <td>@SalesNum(Model.GetSale(11))</td>
+                    <td>@SalesWeight(Model.GetSale(11))</td>
+                    <td>@DeathDate(Model.GetDeath(2))</td>
+                    <td>@DeathNum(Model.GetDeath(2))</td>
+                </tr>
+                <tr><!--4 -->
+                    <td>@SalesDate(Model.GetSale(3))</td>
+                    <td>@SalesNum(Model.GetSale(3))</td>
+                    <td>@SalesWeight(Model.GetSale(3))</td>
+                    <td>@SalesDate(Model.GetSale(12))</td>
+                    <td>@SalesNum(Model.GetSale(12))</td>
+                    <td>@SalesWeight(Model.GetSale(12))</td>
+                    <td>@DeathDate(Model.GetDeath(3))</td>
+                    <td>@DeathNum(Model.GetDeath(3))</td>
+                </tr>
+                <tr><!--5 -->
+                    <td>@SalesDate(Model.GetSale(4))</td>
+                    <td>@SalesNum(Model.GetSale(4))</td>
+                    <td>@SalesWeight(Model.GetSale(4))</td>
+                    <td>@SalesDate(Model.GetSale(13))</td>
+                    <td>@SalesNum(Model.GetSale(13))</td>
+                    <td>@SalesWeight(Model.GetSale(13))</td>
+                    <td>@DeathDate(Model.GetDeath(4))</td>
+                    <td>@DeathNum(Model.GetDeath(4))</td>
+                </tr>
+                <tr><!--6 -->
+                    <td>@SalesDate(Model.GetSale(5))</td>
+                    <td>@SalesNum(Model.GetSale(5))</td>
+                    <td>@SalesWeight(Model.GetSale(5))</td>
+                    <td>@SalesDate(Model.GetSale(14))</td>
+                    <td>@SalesNum(Model.GetSale(14))</td>
+                    <td>@SalesWeight(Model.GetSale(14))</td>
+                    <td>@DeathDate(Model.GetDeath(5))</td>
+                    <td>@DeathNum(Model.GetDeath(5))</td>
+                </tr>
+                <tr><!--7 -->
+                    <td>@SalesDate(Model.GetSale(6))</td>
+                    <td>@SalesNum(Model.GetSale(6))</td>
+                    <td>@SalesWeight(Model.GetSale(6))</td>
+                    <td>@SalesDate(Model.GetSale(15))</td>
+                    <td>@SalesNum(Model.GetSale(15))</td>
+                    <td>@SalesWeight(Model.GetSale(15))</td>
+                    <td>@DeathDate(Model.GetDeath(6))</td>
+                    <td>@DeathNum(Model.GetDeath(6))</td>
+                </tr>
+                <tr><!--8 -->
+                    <td>@SalesDate(Model.GetSale(7))</td>
+                    <td>@SalesNum(Model.GetSale(7))</td>
+                    <td>@SalesWeight(Model.GetSale(7))</td>
+                    <td>@SalesDate(Model.GetSale(16))</td>
+                    <td>@SalesNum(Model.GetSale(16))</td>
+                    <td>@SalesWeight(Model.GetSale(16))</td>
+                    <td>@DeathDate(Model.GetDeath(7))</td>
+                    <td>@DeathNum(Model.GetDeath(7))</td>
+                </tr>
+                <tr><!--9 -->
+                    <td>@SalesDate(Model.GetSale(8))</td>
+                    <td>@SalesNum(Model.GetSale(8))</td>
+                    <td>@SalesWeight(Model.GetSale(8))</td>
+                    <td>@SalesDate(Model.GetSale(17))</td>
+                    <td>@SalesNum(Model.GetSale(17))</td>
+                    <td>@SalesWeight(Model.GetSale(17))</td>
+                    <td>@DeathDate(Model.GetDeath(8))</td>
+                    <td>@DeathNum(Model.GetDeath(8))</td>
+                </tr>
+                <tr>
+                    <!--10 -->
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>总计</td>
+                    <td>@Model.salesNum</td>
+                    <td>@Model.salesWeight</td>
+                    <td>总计</td>
+                    <td>@Model.deathNum</td>
+                </tr>
+                <tr>
+                    <td rowspan="4" style="vertical-align:middle;">结算情况</td>
+                    <td>合同结算金额</td>
+                    <td>头平金额</td>
+                    <td>全程料比</td>
+                    <td>3.2还原</td>
+                    <td>3.5还原</td>
+                    <td>津贴</td>
+                    <td>成活率奖</td>
+                    <td colspan="2">备注</td>
+                </tr>
+                <tr>
+                    <td>@Model.checkout.pactAmount</td>
+                    <td>@Model.checkout.ArgAmount</td>
+                    <td>@Model.checkout.ratioAll</td>
+                    <td>@Model.checkout.ratio</td>
+                    <td>@Model.checkout.ratio2</td>
+                    <td>@Model.checkout.allowance</td>
+                    <td>@Model.checkout.bonus</td>
+                    <td rowspan="5" colspan="2" >@Model.checkout.description</td>
+                </tr>
+                <tr>
+                    <td>总药费</td>
+                    <td>头平药费</td>
+                    <td>分值</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>@Model.checkout.drugCost</td>
+                    <td>@string.Format("{0:f2}",Model.checkout.drugCost/Model.grantNum)</td>
+                    <td>@Model.checkout.score</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="vertical-align:middle;">批次概要</td>
+                    <td>调入数量</td>
+                    <td>出栏数量</td>
+                    <td>死亡数量</td>
+                    <td>成活率</td>
+                    <td>头平出栏重量</td>
+                    <td>饲养天数</td>
+                    <td>清栏时间</td>
+                </tr>
+                <tr>
+                    <td>@Model.grantNum</td>
+                    <td>@Model.salesNum</td>
+                    <td>@Model.deathNum</td>
+                    <td>@string.Format("{0:p2}",Model.liveRate)</td>
+                    <td>@string.Format("{0:f2}", Model.salesWeight/Model.salesNum)</td>
+                    <td>@Model.liveDays</td>
+                    <td>@string.Format("{0:yyyy/MM/dd}",Model.closeDate)</td>
+                </tr>
+                <tr>
+                    <td colspan="2">合计收入</td>
+                    <td colspan="8">@Model.checkout.amount</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="10" style="text-align:right;">
+                        制表人: @ViewBag.userName
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿@model Farm.Authority.DataContext.tbUser
+@{
+       var db = new Farm.AppCommon.BaseRepository().GetEntities<Farm.Raisers.DataContext.tbStructure>(p=>p.typeID==1);
+}
+
+<div style="padding:3px 0;">
+
+<form action="/User/Update" method="post">
+
+
+        <div class="fitem">  
+            <label>帐号：</label>  
+            @Html.TextBoxFor(model => model.userID, new {@Class="easyui-validatebox",@readonly="readonly",@style="width:50px;" })
+
+            <label>姓名：</label>  
+            @Html.TextBoxFor(model => model.userName, new {@Class="easyui-validatebox",@style="width:50px;" })
+
+            <label>权限：</label>  
+            @Html.DropDownList("roleID", ViewModelHelper.GetRoleGroup(Model.roleID))
+        </div>  
+
+  
+        <div>
+        权限范围:
+
+        @foreach(var m in db)
+       {
+        <input id="@Model.ID@m.ID" type="checkbox" name="pur" value="@m.ID" />
+        <label for="@Model.ID@m.ID" style="margin-right:3px;">@m.name</label>
+       }
+
+        @Html.HiddenFor(m => m.purviewStr)
+        </div>
+
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.userPassword)
+        @Html.HiddenFor(model => model.logTimes)
+        @Html.HiddenFor(model => model.lastLogTime)   
+        @Html.HiddenFor(model => model.lastLogIP)
+
+       
+
+        <div style="text-align:right;padding-right:30px">
+		<a href="javascript:void(0)" class="easyui-linkbutton save" iconCls="icon-save" plain="true" >保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton cancel" iconCls="icon-cancel" plain="true">取消</a>
+	    </div>
+
+</form>
+
+       <script>
+           $(function () {
+               var str = "@Model.purviewStr";
+               var s = str.split(',');
+               for (var i = 0; i < s.length; i++) {
+                   var id = "@Model.ID" + s[i];
+
+                   //alert(id);
+                   var x = document.getElementById(id);
+                   $(x).attr('checked', 'checked');
+               }
+
+           });
+       
+       </script>
+</div>

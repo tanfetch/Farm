@@ -1,0 +1,70 @@
+﻿
+<div style="padding:30px">
+
+<div id="ftitle" class="ftitle">加入养户</div>  
+<form action="/Raiser/Update" id="fm_newraiser" method="post">
+
+    <div class="fitem">  
+        <label>编号：</label>  
+        <input name="raiserID" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>姓名：</label>  
+        <input name="name" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>服务点：</label>  
+        @Html.DropDownList("structureID", ViewModelHelper.GetAuthoryFieldItems())
+    </div> 
+    <div class="fitem">  
+        <label>初始批次：</label>  
+        <input name="batch" class="easyui-numberbox" data-options="required:true,min:0">  
+    </div> 
+    <div class="fitem">  
+        <label>电话：</label>  
+        <input name="telephone" class="easyui-validatebox" data-options="required:false">  
+    </div> 
+    <div class="fitem">  
+        <label>地址：</label>  
+        <input name="address" class="easyui-validatebox" data-options="required:false">  
+    </div> 
+    <div class="fitem">  
+        <label>身份证：</label>  
+        <input name="IDCard" class="easyui-validatebox" data-options="required:false">  
+    </div> 
+
+
+    @Html.Hidden("ID",0)
+    @Html.Hidden("isDisabled",false)
+    
+    <div class="fitem" style="margin:30px 0;">  
+    <label></label>  
+    <a href="javascript:void(0)" class="easyui-linkbutton save" iconCls="icon-save" plain="false" onclick="saveNewRaiser()" >保存</a>
+    </div>
+
+</form>
+<script>
+    function saveNewRaiser() {
+        var fm = $('#fm_newraiser');
+        fm.ajaxSubmit({
+            beforeSubmit: function () {
+                return fm.form('validate');
+            },
+            success: function (data) {
+                if (data.success) {
+                    fm.form('reset');
+                    showSuccess(data.message);
+                }
+                else {
+                    showError(data.message);
+                }
+            }
+        });
+    }
+    function resetNewRaiser() {
+        $('#fm_newraiser').form('reset');
+    }
+</script>
+
+
+</div>

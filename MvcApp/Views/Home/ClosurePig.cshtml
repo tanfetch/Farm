@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MvcApp.Controllers.AreaCollectModel>
+@{
+
+    <fieldset>
+    <legend>清栏待结的养户（@Model.Sum(p=>p.value)）</legend>
+    @foreach (var item in Model)
+    {
+         <a href="javascript:void(0)" 
+            onclick="newMainPanel('/Checkout/ClosurePig?areaID_0=@item.areaID','待结列表','icon-livepigs')"
+            class="easyui-linkbutton" data-options="plain:true" style="width:80px;">
+        <span>@item.areaName</span><span>:</span><span>@item.value</span>
+        </a>
+    }
+    </fieldset>
+}

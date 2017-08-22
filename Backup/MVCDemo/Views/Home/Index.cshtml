@@ -1,0 +1,47 @@
+﻿@using Farm.Raisers.DataContext
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="easyui-layout" data-options="fit:true">
+
+<div data-options="region:'west',title:'',split:false,collapsible:false" style="width:0px;padding:0px; border:0;">
+    
+</div>
+
+<div data-options="region:'center',title:''" style="padding:30px 10px; border:0; height:300px; width:400px;">
+
+
+
+<div id="homePageTab" class="easyui-tabs" style="width:430px; " data-options="tabPosition:'top'">  
+
+    <div title="Test" data-options="" style="padding:10px"></div>
+    <div title="Test" data-options="href:'Home/Article2?view=Test'" style="padding:10px"></div>
+    <div title="Test" data-options="href:'Home/Article2?view=Test'" style="padding:10px"></div>
+    <div title="Test" data-options="href:'Home/Article2?view=Test'" style="padding:10px"></div>
+    <div title="Test" data-options="href:'Home/Article2?view=Test'" style="padding:10px"></div>
+    <div title="发料" data-options="href:'Home/temp?view=FeedShort'" style="padding:10px"></div>
+    <div title="超期" data-options="href:'Home/temp?view=FeedExceed'" style="padding:10px"></div>
+    <div title="待结" data-options="href:'Home/temp?view=ClosurePig'" style="padding:10px"></div>
+    <div title="疫苗" data-options="href:'Home/temp?view=VaccineShort'" style="padding:10px"></div>
+</div>  
+
+
+
+<script>
+/*
+    $(function () {
+        var tabs = $('#homePageTab').tabs().tabs('tabs');
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].panel('options').tab.unbind().bind('mouseenter', { index: i }, function (e) {
+                $('#homePageTab').tabs('select', e.data.index);
+            });
+        }
+    });
+*/
+</script>
+
+</div>
+
+</div>

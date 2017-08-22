@@ -1,0 +1,106 @@
+﻿@model Farm.Raisers.DataContext.GrantFeed
+
+@{
+    Layout = null;
+    var db = new Farm.Raisers.DataContext.FarmRepository();
+    var Pig = db.GetEntitie<Farm.Raisers.DataContext.LivePig>(p => p.ID == Model.PigID);
+
+    
+}
+
+
+
+<style type="text/css" media="print">
+    .noprint{display : none }
+</style>
+
+<script type="text/javascript">
+
+    function pagesetup_null() {
+        try {
+            var RegWsh = new ActiveXObject("WScript.Shell");
+            hkey_key = "header";
+            RegWsh.RegWrite(hkey_root + hkey_path + hkey_key, "");
+            hkey_key = "footer";
+            RegWsh.RegWrite(hkey_root + hkey_path + hkey_key, "");
+        } catch (e) {
+        }
+    }
+
+    function win_print() {
+        //pagesetup_null();
+        window.print();
+    }
+
+</script>
+
+
+    <div align="center" style="width:210mm; margin-top:3em;">
+    <table id="T1" style="width:92%; border:0px;" cellspacing="0"><tr><td>
+    
+    <div align="center" style="font-size:x-large;">每 日 饲 料 投 喂 表</div>
+    <div align="right" style="font-size:small;">
+    发料人：@Model.referPerson
+    &nbsp;
+    发料日期：@Model.referTime.ToShortDateString()
+    </div>
+        <table align="center" 
+            style="width:100%;border-collapse:collapse; border:2px solid #000000;font-size:medium">
+            <tr>
+                <td colspan="7" align="left" style="border:1px solid #000000;">
+                    养户：@Model.raiserName（@Model.raiserID）|
+                    批次：@Pig.batch |
+                    调入日期：@string.Format("{0:d}",Pig.grantDate) |
+                    实时日龄：@Pig.GetDayOld(Model.referTime) |
+                    实时存栏：@Model.realNum |
+                    始重：@string.Format("{0:f}", Pig.NormalWeight(Model.realFeedDays-1))
+                    </td>
+            </tr>
+            
+            <tr>
+            <td colspan="7" style="border:1px solid #000000;" align="left">
+                 本次发料：@Model.GetFeedsDetail()
+                 可用至：@string.Format("{0:d}",Pig.GetDateByDays(Model.realFeedDays+Model.addDays-1))
+            </td>
+            </tr>
+            <tr>
+                <td colspan="7" align="center" style="border:1px solid #000000;">
+                    本 次 发 料 按 下 表 投 喂
+                </td>
+            </tr>
+           
+            <tr>
+            <td style="border:1px solid #000000;">日期</td>
+            <td style="border:1px solid #000000;">日龄</td>
+            <td style="border:1px solid #000000;">饲料用量（公斤/包）</td>
+            <td style="border:1px solid #000000;">余料（公斤/包）</td>
+            <td style="border:1px solid #000000;">增重</td>
+            <td style="border:1px solid #000000;">标重</td>
+            <td style="border:1px solid #000000;">备注</td>
+            </tr>
+            @for (int i = Model.fromDays; i < Model.fromDays + Model.addDays; i++)
+            {
+            <tr>
+            <td style="border:1px solid #000000;">@string.Format("{0:d}",Pig.GetDateByDays(i + Model.delayDaysSum))</td>
+            <td style="border:1px solid #000000;">@(i + Model.delayDaysSum)</td>
+            <td style="border:1px solid #000000; text-align:left;">@Model.FeedByDay(i,i)</td>
+            <td style="border:1px solid #000000; text-align:left;">@Model.FeedByDay(i + 1, Model.fromDays + Model.addDays-1)</td>
+            <td style="border:1px solid #000000;">@string.Format("{0:f}",Model.WeightIncPreDay(i))</td>
+            <td style="border:1px solid #000000;">@string.Format("{0:f}",Pig.NormalWeight(i+Model.delayDaysSum))</td>
+            <td style="border:1px solid #000000;"></td>
+            </tr>
+            }
+           
+ 
+        </table>
+
+        </td></tr></table>
+
+        <div class="noprint text-center" style=" margin:30px;">
+        <p>
+        <button id="Button2" type="button" class="btn btn-large btn-primary"
+        onclick="javascript:win_print();"><i class="icon icon-color icon-print "></i> 打印</button>
+        </p>
+        </div>
+        
+    </div>

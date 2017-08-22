@@ -1,0 +1,135 @@
+﻿<div class="easyui-tabs" style="height:auto;" fit="true">  
+
+<div title="发料记录" style="margin:0px;">
+    <table id="dg_feed" class="easyui-datagrid" toolbar="#toolbar_feed" >  
+        <thead data-options="frozen:true">
+            <tr>
+                <th field="raiserID"     sortable="true" width="60"  >编号</th>  
+                <th field="raiserName"   sortable="true" width="60" >养户</th>  
+                <th field="areaName"     sortable="true" >服务点</th> 
+            </tr>
+        </thead>
+        <thead>  
+            <tr>  
+            <th field="addDays"    width="60"  >发料天数</th>  
+            <th field="delayDays"    width="60"  >延期</th>  
+            <th field="feedDayold" formatter="formatFeedDayOld" width="80" >发料日龄</th>  
+            <th field="realyDayold" formatter="formatrealyDayOld"  width="80" >采食日龄</th>  
+            <th field="realNum" width="60"  >实时存栏</th>  
+            <th field="checkState" formatter="formatCheck" width="60"  >审核状态</th>  
+            <th field="referPerson" width="60" >发料人</th>  
+            <th field="referTime" formatter="dateTimeFormatter" sortable="true" width="120">发料时间</th>  
+            <th field="feedsDetail" width="150" >饲料</th>  
+            
+            </tr>  
+        </thead>  
+    </table>  
+    <script>
+        function formatFeedDayOld(val, row) {
+            return row.fromDays + ' ~ ' + (row.fromDays + row.addDays - 1);
+        }
+        function formatrealyDayOld(val, row) {
+            return row.realFeedDays + ' ~ ' + (row.realFeedDays + row.addDays - 1);
+        }
+        function formatCheck(val, row) {
+            if (val > 0)
+                return '生效';
+            else
+                return '<font style="color:red">未审核</font>';
+        }
+        function f_checkok() {
+            var row = $('#dg_feed').datagrid('getSelected');
+            if (row) {
+                var index = $('#dg_feed').datagrid('getRowIndex', row);
+                $.post("/Feed/Check",
+                    {
+                        id: row.ID,
+                        value: 1
+                    },
+                    function (data) {
+                        if (data.success) {
+                            row.checkState = 1;
+                            $('#dg_feed').datagrid('updateRow', { index: index, row: row });
+                            showSuccess(data.message);
+                        }
+                        else {
+                            showError(data.message);
+                        }
+                    }
+                );
+            }
+        }
+    </script>
+
+    <div id="toolbar_feed">  
+        <div>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" 
+                onclick="f_newFeed()">增加</a>
+            <a href="javascript:void(0)" select id="feed-checkok" class="easyui-linkbutton" iconCls="icon-check_ok" plain="true" 
+                onclick="f_checkok()">审核</a> 
+            <a href="javascript:void(0)" select id="feed-print" class="easyui-linkbutton" iconCls="icon-print" plain="true" 
+                onclick="f_Report()">发料表</a> 
+            <a href="javascript:void(0)" select id="feed-del" class="easyui-linkbutton" iconCls="icon-remove" plain="true" 
+                onclick="destroyRow('#dg_feed','@Url.Content("~/Feed/Delete")')">删除</a> 
+        </div> 
+
+        <script>
+            function f_newFeed() {
+                newMainPanel('/Feed/?show=Create', '发料', 'icon-brick_add');
+            }
+            function f_Report() {
+                var row = $('#dg_feed').datagrid('getSelected');
+                if (row) {
+                    var url = '/Feed/FeedReport?id=' + row.ID;
+                    window.open(url);
+                }
+            }
+        </script>
+
+        <div style="margin:3px;">
+            <form id="fm_feedfilter">
+            <span style="margin:0 5px">区域
+                @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new { @style = "width:auto;" }) 
+            </span>
+            <span style="margin:0 5px">编号
+                @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:50px;" })
+            </span>
+            <span style="margin:0 5px">养户
+                @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">发料人
+                @Html.TextBox("referPerson_4", Request["referPerson_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">发料日期
+                @Html.TextBox("referTime_1", Request["referTime_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+                @Html.TextBox("referTime_2", Request["referTime_2"], new { @class = "easyui-datebox", @style = "width:90px;" })
+            </span>
+
+            <span style="margin:0 5px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" 
+                    onclick="doSearch('#fm_feedfilter','#dg_feed')">查找</a>
+            </span>
+            </form>
+        </div>
+    </div>  
+    <script type="text/javascript">
+
+        $(function () {
+            $('#dg_feed').datagrid({
+                url: '/Feed/List',
+                onSelect: function (rowIndex, rowData) {
+                    updateButton('#feed-del', !rowData.canDel);
+                    updateButton('#feed-checkok', rowData.checkState!=0);
+                    updateButton('#feed-print', rowData.checkState == 0);
+                }
+            });
+            $('#dg_feed').datagrid('detailView', '/Feed/Detail?show=Edit');
+        });
+
+
+    </script>
+
+
+</div>
+</div>

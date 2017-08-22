@@ -1,0 +1,9 @@
+F:\Farm\Farm.Controller\bin\Debug\Farm.Controller.dll
+F:\Farm\Farm.Controller\bin\Debug\Farm.Controller.pdb
+F:\Farm\Farm.Controller\bin\Debug\AppCommon.dll
+F:\Farm\Farm.Controller\bin\Debug\AppCommon.pdb
+F:\Farm\Farm.Controller\obj\Debug\ResolveAssemblyReference.cache
+F:\Farm\Farm.Controller\obj\Debug\Farm.Controller.dll
+F:\Farm\Farm.Controller\obj\Debug\Farm.Controller.pdb
+F:\Farm\Farm.Controller\bin\Debug\Farm.Authority.dll
+F:\Farm\Farm.Controller\bin\Debug\Farm.Authority.pdb

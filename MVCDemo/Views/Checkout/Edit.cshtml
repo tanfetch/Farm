@@ -1,0 +1,32 @@
+﻿@model DataAccess.Repository.Pact
+
+<div style="padding:10px;">
+
+<form action="/Sales/Update" method="post">
+
+    <table>
+    <tr>
+        <td> <label>签约日期：</label></td>  
+        <td style="">@Html.TextBoxFor(model => model.pactDate, new { @Class = "easyui-datebox", @required = "true",
+                @Value=string.Format("{0:d}",Model.pactDate) })</td>
+    </tr>
+    <tr>
+        <td> <label>签约数量：</label></td>  
+        <td style="">@Html.TextBoxFor(model => model.pactNum, new { @Class = "easyui-numberbox", @required = "true"})</td>
+    </tr>
+    </table>
+
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.RID)
+    
+    <div style="text-align:right;padding-right:30px">
+    <a href="javascript:void(0)" class="easyui-linkbutton save" iconCls="icon-save" plain="true" >保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton cancel" iconCls="icon-cancel" plain="true">取消</a>
+    </div>
+
+</form>
+<script>
+
+
+</script>
+</div>

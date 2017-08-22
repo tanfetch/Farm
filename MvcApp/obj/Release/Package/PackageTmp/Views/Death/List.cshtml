@@ -1,0 +1,107 @@
+﻿<div class="easyui-tabs" style="height:auto;" fit="true">  
+
+<div title="死亡记录" style="margin:0px;">
+    <table id="dg_death" class="easyui-datagrid" toolbar="#toolbar_death" >  
+        <thead data-options="frozen:true">
+            <tr>
+                <th field="raiserID"     sortable="true" width="60"  >编号</th>  
+                <th field="raiserName"   sortable="true" width="60" >养户</th>  
+                <th field="areaName"     sortable="true" >服务点</th> 
+            </tr>
+        </thead>
+        <thead>  
+            <tr>  
+            <th field="deathDate" formatter="dateFormatter" sortable="true" width="80" >死亡日期</th>  
+            <th field="deathNum" width="60"    >死亡数量</th>  
+            <th field="technician"  width="60"    >技术员</th>  
+            <th field="source"  width="200"    >来源</th>  
+            <th field="description" width="250"     >备注</th>  
+
+            </tr>  
+        </thead>  
+    </table>  
+    <div id="toolbar_death">  
+        <div>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" 
+                onclick="d_newDeath()">增加</a>
+            <a href="javascript:void(0)" select id="death-del" class="easyui-linkbutton" iconCls="icon-remove" plain="true" 
+                onclick="destroyRow('#dg_death','@Url.Content("~/Death/Delete")')">删除</a> 
+        </div> 
+        <div>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" 
+                    onclick="loadDeathStatistics()">统计</a>
+            <span id="deathStatistics"></span>
+
+                <script>
+                    function loadDeathStatistics() {
+                        $.ajax({
+                            url: '/Death/List?t=Statistics',
+                            data: $('#dg_death').datagrid('options').queryParams,
+                            cache: false,
+                            success: function (data) {
+                                $('#deathStatistics').html(data);
+                            }
+                        });
+                    }
+                </script>
+        </div>
+
+        <script>
+            function d_newDeath() {
+                newMainPanel('/Death/Update?rspType=view', '死亡', 'icon-hourglass-delete');
+            }
+        </script>
+
+        <div style="margin:3px;">
+            <form id="fm_deathfilter">
+            <span style="margin:0 5px">区域
+                @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new { @style = "width:auto;" }) 
+            </span>
+            <span style="margin:0 5px">编号
+                @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:50px;" })
+            </span>
+            <span style="margin:0 5px">养户
+                @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">技术员
+                @Html.TextBox("technician_4", Request["technician_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">来源
+                @Html.TextBox("source_4", Request["source_4"], new { @style = "width:100px;" })
+            </span>
+            <span style="margin:0 5px">死亡日期
+                @Html.TextBox("deathDate_1", Request["deathDate_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+                @Html.TextBox("deathDate_2", Request["deathDate_2"], new { @class = "easyui-datebox", @style = "width:90px;" })
+            </span>
+
+            <span style="margin:0 5px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" 
+                    onclick="doSearch('#fm_deathfilter','#dg_death')">查找</a>
+            </span>
+            </form>
+        </div>
+    </div>  
+    <script type="text/javascript">
+
+        $(function () {
+            var data = getFormJson('#fm_deathfilter');
+            $('#dg_death').datagrid({
+                url: '/Death/List',
+                queryParams: data,
+                onSelect: function (rowIndex, rowData) {
+                    updateButton('#death-del',!rowData.canDel);
+                },
+                onLoadSuccess: function () {
+                    loadDeathStatistics();
+                }
+            });
+            $('#dg_death').datagrid('detailView', '/Death/Edit?rspType=view');
+        });
+
+
+    </script>
+
+
+</div>
+</div>

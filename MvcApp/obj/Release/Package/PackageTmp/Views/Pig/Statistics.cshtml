@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Farm.Raisers.DataContext.LivePig>
+
+<span>养户数：</span><span style="color:brown;">@Model.Count() 户</span>
+<span>&nbsp;｜&nbsp;</span>
+<span>存栏：</span><span style="color:brown;">@Model.Sum(p=>p.extantNum) 头</span>
+<span>&nbsp;｜&nbsp;</span>
+<span>销售：</span><span style="color:brown;">@Model.Sum(p=>p.salesNum) 头</span>
+<span>&nbsp;｜&nbsp;</span>
+<span>死亡：</span><span style="color:brown;">@Model.Sum(p=>p.deathNum) 头</span>
+<span>&nbsp;｜&nbsp;</span>
+<span>成活率：</span><span style="color:brown;">@string.Format("{0:p}",Model.Average(p=>p.liveRate))</span>

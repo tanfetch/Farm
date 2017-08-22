@@ -1,0 +1,42 @@
+﻿@model DataAccess.Repository.Death
+
+<div style="padding:10px;">
+
+<form action="/Death/Update" method="post">
+
+    <table>
+    <tr>
+        <td> <label>死亡日期：</label></td>  
+        <td style="">
+        @Html.TextBoxFor(model => model.deathDate, new { @Class = "easyui-datebox", @required = "true",
+                                                                      @Value = string.Format("{0:d}", Model.deathDate)})
+        </td>
+    </tr>
+    <tr>
+        <td> <label>死亡数量：</label></td>  
+        <td style="">@Html.TextBoxFor(model => model.deathNum, new { @Class = "easyui-numberbox", @required = "true", @readonly = "readonly" })</td>
+    </tr>
+    <tr>
+        <td> <label>备注：</label></td>  
+        <td style="">@Html.TextAreaFor(model => model.description, new { @placeholder = "填写备注信息" })</td>
+    </tr>
+    </table>
+
+    
+    @Html.HiddenFor(model => model.raiserID)
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.PigID)
+    @Html.HiddenFor(model => model.referPerson)
+    @Html.HiddenFor(model => model.referTime)
+    
+    <div style="text-align:right;padding-right:30px">
+    <a href="javascript:void(0)" class="easyui-linkbutton save" iconCls="icon-save" plain="true" >保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton cancel" iconCls="icon-cancel" plain="true">取消</a>
+    </div>
+
+</form>
+<script>
+
+
+</script>
+</div>

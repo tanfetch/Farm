@@ -1,0 +1,92 @@
+﻿@using Farm.Raisers.DataContext
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="easyui-layout" data-options="fit:true">
+
+<div data-options="region:'west',title:'',split:false,collapsible:false" style="width:0px;padding:0px; border:0;">
+    
+</div>
+
+<div data-options="region:'center',title:''" style="padding:30px 10px; border:0;">
+@{
+    var db = new Farm.AppCommon.BaseRepository();
+    var contractedRaiser = db.GetCount<Pact>(p => p.statusFlag == 0);
+    var feedShort = db.GetCount<LivePig>(p => p.feedSurplusDays < 1);
+    var feedExceed = db.GetCount<LivePig>(p => p.grantDate <= DateTime.Today.AddDays(-150));
+    var closurePig = db.GetCount<ClosurePig>(p=>true);
+}
+
+<div id="p1" title="签约待调的养户( @contractedRaiser )" style="width:380px;padding:10px;"></div>
+<div style=" margin:10px;"></div>
+<div id="p2" title="需发料的养户( @feedShort )" style="width:380px;padding:10px;"></div>
+<div style=" margin:10px;"></div>
+<div id="p3" title="饲养天数达150天的养户( @feedExceed )" style="width:380px;padding:10px;"></div>
+<div style=" margin:10px;"></div>
+<div id="p4" title="清栏待结的养户( @closurePig )" style="width:380px;padding:10px;"></div>
+
+<script>
+
+$('#p1').panel({
+    href: 'Home/panel?view=ContractedRaiser',
+    collapsible: true,
+    //collapsed: true,
+    tools: [
+			{
+			    iconCls: 'icon-search',
+			    handler: function () {
+			        newMainPanel('/Pact/List?statusFlag_0=0', '合同信息', 'icon-paper');
+			    }
+			}, '-'
+          ]
+});
+
+$('#p2').panel({
+    href: 'Home/panel?view=FeedShort',
+    collapsible: true,
+    //collapsed: true,
+    tools: [
+				{
+				    iconCls: 'icon-search',
+				    handler: function () {
+				        newMainPanel('/Pig/List?feedSurplusDays_2=0', '在养列表', 'icon-livepigs');
+				    }
+				}, '-'
+              ]
+});
+
+$('#p3').panel({
+    href: 'Home/panel?view=FeedExceed',
+    collapsible: true,
+    //collapsed: true,
+    tools: [
+				{
+				    iconCls: 'icon-search',
+				    handler: function () {
+				        newMainPanel('/Pig/List?grantDate_2=@DateTime.Today.AddDays(-150)', '在养列表', 'icon-livepigs');
+				    }
+				}, '-'
+              ]
+});
+
+$('#p4').panel({
+    href: 'Home/panel?view=ClosurePig',
+    collapsible: true,
+    //collapsed: true,
+    tools: [
+				{
+				    iconCls: 'icon-search',
+				    handler: function () {
+				        newMainPanel('/Pig/List?extantNum_0=0', '在养列表', 'icon-livepigs');
+				    }
+				}, '-'
+              ]
+});
+
+</script>
+
+</div>
+
+</div>

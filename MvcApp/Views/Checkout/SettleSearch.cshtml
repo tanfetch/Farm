@@ -1,0 +1,37 @@
+﻿<div style="padding:30px">
+
+    <div class="ftitle">历史查询</div>  
+    <form method="post" id="fm_settleSearch">
+
+        <div class="fitem">  
+            <label>养户编号</label>
+            @Html.TextBox("raiserNo_0", Request["raiserNo_0"], new { @style = "width:100px;" })
+        </div>
+    
+        <div class="fitem">  
+            <label>养户姓名</label>
+            @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:100px;" })
+        </div>
+
+
+
+        <div class="fitem" style="margin:30px 0;">  
+        <label></label>  
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="false" onclick="dosort(this)" > 查 询 </a>
+        </div>
+    </form>
+
+</div>  
+
+<script>
+    function dosort(obj) {
+        var fm = $(obj).parents('form');
+        var query = fm.serialize();
+        console.log(fm.serialize());
+        newMainPanel('/Checkout/Settle?rspType=view&a=list&' + query, '历史记录', 'icon-checkout');
+
+    }
+
+
+
+</script>

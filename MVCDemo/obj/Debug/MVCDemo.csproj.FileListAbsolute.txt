@@ -1,0 +1,11 @@
+F:\Farm\MVCDemo\bin\MVCDemo.dll
+F:\Farm\MVCDemo\bin\MVCDemo.pdb
+F:\Farm\MVCDemo\bin\AppCommon.dll
+F:\Farm\MVCDemo\bin\AppCommon.pdb
+F:\Farm\MVCDemo\obj\Debug\MVCDemo.dll
+F:\Farm\MVCDemo\obj\Debug\MVCDemo.pdb
+F:\Farm\MVCDemo\bin\Farm.Authority.dll
+F:\Farm\MVCDemo\bin\Farm.Authority.pdb
+F:\Farm\MVCDemo\bin\Farm.Raisers.dll
+F:\Farm\MVCDemo\bin\Farm.Raisers.pdb
+F:\Farm\MVCDemo\obj\Debug\MVCDemo.csprojResolveAssemblyReference.cache

@@ -1,0 +1,109 @@
+﻿
+<div style="padding:30px">
+
+<div id="ftitle" class="ftitle">结算</div>  
+
+    <div id="checkoutinfobar"></div>
+
+<form action="/Checkout/Update" id="fm_newcheckout" method="post">
+
+    <div class="fitem">  
+        <label>编号：</label>  
+        <input id="newcheckoutkey" name="raiserID" value="@Request["key"]" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>结算金额：</label>  
+        <input name="amount" class="easyui-numberbox" data-options="required:true, precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label>头平结算金额：</label>  
+        <input name="ArgAmount" class="easyui-numberbox" data-options="required:true,min:0, precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label>合同结算金额：</label>  
+        <input name="pactAmount" class="easyui-numberbox" data-options="required:true, precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label>全程料肉比：</label>  
+        <input name="ratioAll" class="easyui-numberbox" data-options="required:true,min:0, precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label>3.2还原料肉比：</label>  
+        <input name="ratio" class="easyui-numberbox" data-options="required:true,min:0, precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label>3.5还原料肉比：</label>  
+        <input name="ratio2" class="easyui-numberbox" data-options="required:true,min:0, precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label>寒暑津贴：</label>  
+        <input name="allowance" class="easyui-numberbox" data-options="required:true,min:0, precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label>成活率奖：</label>  
+        <input name="bonus" class="easyui-numberbox" data-options="required:true,min:0, precision:2">  
+    </div>
+    <div class="fitem">  
+        <label>药费：</label>  
+        <input name="drugCost" class="easyui-numberbox" data-options="required:true,min:0, precision:2">  
+    </div>
+    <div class="fitem">  
+        <label>分值：</label>  
+        <input name="score" class="easyui-numberbox" data-options="required:true,min:0">  
+    </div>
+    <div class="fitem">  
+        <label></label>  
+        <textarea name="description" placeholder = "填写备注信息"></textarea>  
+    </div> 
+
+    <div class="fitem" style="margin:30px 0;">  
+    <label></label>  
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="false" onclick="saveNewCheckout()" >保存</a>
+    </div>
+
+</form>
+<script>
+    function saveNewCheckout() {
+        var fm = $('#fm_newcheckout');
+        fm.ajaxSubmit({
+            beforeSubmit: function () {
+                return fm.form('validate');
+            },
+            success: function (data) {
+                if (data.success) {
+                    fm.form('reset');
+                    showSuccess(data.message);
+                }
+                else {
+                    showError(data.message);
+                }
+            }
+        });
+    }
+
+    function showInfoForCheckout() {
+        $('#checkoutinfobar').html('');
+        var key = $('#newcheckoutkey').val();
+        if (key == "")
+            return;
+        $.ajax({
+            url: '/Checkout/Update?view=piginfo&raiserID=' + key,
+            success: function (data) {
+                $('#checkoutinfobar').html(data);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        showInfoForCheckout();
+
+        $('#newcheckoutkey').change(function () {
+            showInfoForCheckout();
+        });
+
+    });
+
+</script>
+
+
+</div>

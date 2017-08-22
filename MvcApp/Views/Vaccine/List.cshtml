@@ -1,0 +1,163 @@
+﻿<div class="easyui-tabs" style="height:auto; "  fit="true">  
+
+<div title="疫苗任务" style="margin:0px;">
+    <table id="dg_vaccine" class="easyui-datagrid" toolbar="#toolbar_vaccine" >  
+        <thead data-options="frozen:true">
+            <tr>
+                <th field="raiserID"     sortable="true" width="60"  >编号</th>  
+                <th field="raiserName"   sortable="true" width="60" >养户</th>  
+                <th field="areaName"     sortable="true" width="60">服务点</th> 
+            </tr>
+        </thead>
+        <thead>  
+            <tr>  
+                <th field="vaccineName" width="80">疫苗</th>  
+                <th field="injectDate" formatter="formatterInjectDate" width="80" sortable="true">拟注射日期</th>   
+                <th field="technician" width="60">技术员</th>  
+                <th field="grantDate"  formatter="dateFormatter" width="80">调入日期</th> 
+                <th field="grantNum" width="60">调入数量</th> 
+                <th field="extantNum" width="60">存栏</th> 
+                <th field="dayOld" width="60">当前日龄</th> 
+                <th field="source" width="200">来源</th> 
+                <th field="opt" formatter="formatVaccineOpt">操作</th>
+                <!--
+                <th field="vaccines" formatter="formatVaccines">疫苗</th>  
+                    -->
+            </tr>  
+        </thead>  
+    </table>  
+    
+    <script>
+        function formatterInjectDate(val, row) {
+            if(row.hasOverdue)
+                return '<span style="color:red;">' + dateFormatter(val) + '</span>';
+            return dateFormatter(val);
+        }
+        function formatVaccines(val, row) {
+            var s = '';
+            $.each(val, function (index,item) {
+                s = s + '<td style="width:150px;">' + item.name + '('
+                    + dateFormatter(item.reviseInjectionDate) + ')</td>';
+            });
+            return '<table style="width:600px;"><tr>' + s + '</tr></table>';
+        }
+
+        function formatVaccineOpt(val, row) {
+
+            var s = $('<div>').html(
+                $('<a>').attr({ 'title': '确认注射', 'rowID': row.raiserID, 'onclick': 'newVaccine(this)' })
+                .linkbutton({
+                    iconCls: 'icon-add',
+                    plain: true
+                })
+            );
+            return s.html();
+        }
+
+        function newVaccine(target) {
+            var key = $(target).attr('rowID');
+            var url = '/Vaccine/Update?rspType=view&key=' + key;
+            newMainPanel(url, '疫苗', 'icon-pill_add');
+        }
+
+    </script>
+    <div id="toolbar_vaccine">  
+
+        <div style="margin:3px;">
+            <form id="fm_vaccinefilter">
+            <span style="margin:0 5px">区域
+                @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new { @style = "width:auto;" }) 
+            </span>
+            <span style="margin:0 5px">编号
+                @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:50px;" })
+            </span>
+            <span style="margin:0 5px">养户
+                @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">技术员
+                @Html.TextBox("technician_4", Request["technician_4"], new { @style = "width:60px;" })
+            </span>
+            
+            <span style="margin:0 5px">注射日期
+                @Html.TextBox("injectDate_1", Request["injectDate_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+                @Html.TextBox("injectDate_2", Request["injectDate_2"], new { @class = "easyui-datebox", @style = "width:90px;" })
+            </span>
+      
+            <span style="margin:0 5px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" 
+                    onclick="doSearch('#fm_vaccinefilter','#dg_vaccine')">查找</a>
+            </span>
+            </form>
+        </div>
+    </div>  
+    <script type="text/javascript">
+
+        $(function () {
+            var data = getFormJson('#fm_vaccinefilter');
+            $('#dg_vaccine').datagrid({
+                url: '/Vaccine/List',
+                queryParams: data,
+                //remoteSort: false,
+                //loadFilter: pagerFilter,
+                sortName: 'injectDate',
+                sortOrder: 'desc',
+
+            });
+        
+                //$('#dg_vaccine').datagrid({ loadFilter: pagerFilter });
+
+        });
+
+        function getData() {
+            var rows = [];
+            for (var i = 1; i <= 800; i++) {
+                var amount = Math.floor(Math.random() * 1000);
+                var price = Math.floor(Math.random() * 1000);
+                rows.push({
+                    inv: 'Inv No ' + i,
+                    date: $.fn.datebox.defaults.formatter(new Date()),
+                    name: 'Name ' + i,
+                    amount: amount,
+                    price: price,
+                    cost: amount * price,
+                    note: 'Note ' + i
+                });
+            }
+            return rows;
+        }
+
+        function pagerFilter(data) {
+            if (typeof data.length == 'number' && typeof data.splice == 'function') {    // is array
+                data = {
+                    total: data.length,
+                    rows: data
+                }
+            }
+            var dg = $(this);
+            var opts = dg.datagrid('options');
+            var pager = dg.datagrid('getPager');
+            pager.pagination({
+                onSelectPage: function (pageNum, pageSize) {
+                    opts.pageNumber = pageNum;
+                    opts.pageSize = pageSize;
+                    pager.pagination('refresh', {
+                        pageNumber: pageNum,
+                        pageSize: pageSize
+                    });
+                    dg.datagrid('loadData', data);
+                }
+            });
+            if (!data.originalRows) {
+                data.originalRows = (data.rows);
+            }
+            var start = (opts.pageNumber - 1) * parseInt(opts.pageSize);
+            var end = start + parseInt(opts.pageSize);
+            data.rows = (data.originalRows.slice(start, end));
+            return data;
+        }
+
+        
+    </script>
+</div>
+</div>

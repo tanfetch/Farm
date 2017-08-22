@@ -1,0 +1,64 @@
+﻿
+<div class="easyui-layout" data-options="fit:true">
+
+     <div data-options="region:'center',title:'',border:false">
+
+    <table id="areagroupdg">
+
+        <thead> 
+
+        <tr>
+
+            <th width="60px" sortable="true" data-options="field:'areaName',align:'center'">区域</th>
+            <th width="50px" sortable="true" data-options="field:'raiserNum',align:'center'">养户数</th>
+            <th width="50px" sortable="true" data-options="field:'idleRaiserNum',align:'center'">空闲数</th>
+            <th width="50px" sortable="true" data-options="field:'contractedRaiserNum',align:'center'">待调数</th>
+            <th width="60px" sortable="true" data-options="field:'liveBatchNum',align:'center'">在养数</th>
+            <th width="70px" sortable="true" data-options="field:'liveRateExtant',align:'center',formatter:formatPercent">存栏成活率</th>
+            <th width="70px" sortable="true" data-options="field:'liveRate',align:'center',formatter:formatPercent">批次成活率</th>
+            <th width="90px" sortable="true" data-options="field:'ratio',align:'center',formatter:formatFloat">全程料肉比</th>
+            <th width="90px" sortable="true" data-options="field:'ratio32',align:'center',formatter:formatFloat">3.2还原料肉比</th>
+            <th width="70px" sortable="true" data-options="field:'grantNum',align:'center'">调入数</th>
+            <th width="70px" sortable="true" data-options="field:'salesNum',align:'center'">销售数</th>
+            <th width="70px" sortable="true" data-options="field:'deathNum',align:'center'">死亡数</th>
+            <th width="70px" sortable="true" data-options="field:'extantNum',align:'center'">当前存栏</th>
+        </tr>
+        </thead>  
+    </table>
+
+    <script>
+        function formatFloat(val, row) {
+            if(val)
+                return val.toFixed(2);
+            return '-';
+        }
+        function formatPercent(val, row) {
+            if(val)
+                return ((val * 100).toFixed(2)) + '%';
+            return '-';
+        }
+
+        $(document).ready(function () { 
+
+            $('#areagroupdg').datagrid({
+                url: '/Home/AreaGroup',
+                border:false,
+                showFooter: true,
+                fit: true,
+                fitColumns: true,
+                pagination: false,
+                remoteSort: false
+            });
+
+        });
+    </script>
+
+    </div>
+
+    <div data-options="region:'south',title:'',border:false" style="height:25px;">
+        <div id="areagroupdgTool" style="padding:3px 10px;color:brown;font-size:12px;text-align:right;">
+        注：本汇总为@(DateTime.Today.Year)年1月1日起的实时数据。
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,127 @@
+﻿
+<div style="padding:30px">
+
+<div id="ftitle" class="ftitle">销售</div>  
+
+    <div id="salesinfobar"></div>
+
+<form action="/Sales/Update" id="fm_newsales" method="post">
+
+    <div class="fitem">  
+        <label>编号：</label>  
+        <input id="newsaleskey" name="raiserID" value="@Request["key"]" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>销售日期：</label>  
+        <input name="salesDate" class="easyui-datebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>买主：</label>  
+        <input id="customer" name="customer" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>销售员：</label>  
+        <input id="salesperson" name="salesperson" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>销售方式：</label>  
+        @Html.DropDownList("salesmethods", ViewModelHelper.GetSalesMannerItems("内销", false)
+            , new { @style = "width:auto;" })
+    </div> 
+    <div class="fitem">  
+        <label>等级：</label>  
+        @Html.DropDownList("grade", ViewModelHelper.GetSalesGradeItems("正品", false)
+            , new { @style = "width:auto;" })
+    </div> 
+    <div class="fitem">  
+        <label>销售数量：</label>  
+        <input name="salesNum" class="easyui-numberbox" data-options="required:true,min:1">  
+    </div> 
+    <div class="fitem">  
+        <label>发运重量：</label>  
+        <input name="salesWeight" class="easyui-numberbox" data-options="required:true,min:0, precision:2"
+             onchange="$('#deliveryWeight').numberbox('setValue',$(this).val())">  
+    </div> 
+    <div class="fitem">  
+        <label>到岸重量：</label>  
+        <input id="deliveryWeight" name="deliveryWeight" class="easyui-numberbox" data-options="required:true,min:0, precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label>金额：</label>  
+        <input name="amount" class="easyui-numberbox" data-options="required:true,min:0, precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label></label>  
+        <textarea name="description" placeholder = "填写备注信息"></textarea>  
+    </div> 
+
+    <div class="fitem" style="margin:30px 0;">  
+    <label></label>  
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="false" onclick="saveNewSales()" >保存</a>
+    </div>
+
+</form>
+
+
+<script>
+    function saveNewSales() {
+        var fm = $('#fm_newsales');
+        fm.ajaxSubmit({
+            beforeSubmit: function () {
+                return fm.form('validate');
+            },
+            success: function (data) {
+                if (data.success) {
+                    fm.form('reset');
+                    showSuccess(data.message);
+                }
+                else {
+                    showError(data.message);
+                }
+            }
+        });
+    }
+
+    function showInfoForSales() {
+        $('#salesinfobar').html('');
+        var key = $('#newsaleskey').val();
+        if (key == "")
+            return;
+        $.ajax({
+            url: '/Sales/Update?view=piginfo&raiserID=' + key,
+            success: function (data) {
+                $('#salesinfobar').html(data);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        showInfoForSales();
+
+        $('#newsaleskey').change(function () {
+            showInfoForSales();
+        });
+
+        $.ajax({
+            url: "/JS/JsonList",
+            data: { id: 'salesperson' },
+            cache: false,
+            success: function (data) {
+                $('#salesperson').autocomplete(data, {minChars: 1, max: 10,multiple:true});
+            }
+        });
+
+        $.ajax({
+            url: "/JS/JsonList",
+            data: { id: 'customer' },
+            cache: false,
+            success: function (data) {
+                $('#customer').autocomplete(data, { minChars: 1, max: 10 });
+            }
+        });
+
+   });
+</script>
+
+
+</div>

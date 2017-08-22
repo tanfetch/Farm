@@ -1,0 +1,129 @@
+﻿
+<div style="padding:30px">
+
+<div id="ftitle" class="ftitle">调入</div>  
+<form id="fm_newpig" method="post">
+<div style="float:left; width:270px;">
+    <div class="fitem">  
+        <label>养户编号：</label>  
+        <input name="raiserID" value="@Request["key"]" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>调运员：</label>  
+        <input id="transportMan" name="transportMan" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>采购员：</label>  
+        <input id="purchaseMan" name="purchaseMan" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>指派技术员：</label>  
+        <input id="technician" name="technician" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>来源猪场：</label>  
+        <input id="source" name="source" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>调运司机：</label>  
+        <input name="transportDriver" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>调运车牌：</label>  
+        <input name="transportCar" class="easyui-validatebox" data-options="required:true">  
+    </div> 
+</div>
+<div style="float:left;">
+    <div class="fitem">  
+        <label>调入日期：</label>  
+        <input name="grantDate" class="easyui-datebox" data-options="required:true">  
+    </div> 
+    <div class="fitem">  
+        <label>调入头数：</label>  
+        <input id="grantNum" onchange="getAvgWeight()" name="grantNum" class="easyui-numberbox" data-options="required:true,min:1">  
+    </div> 
+    <div class="fitem">  
+        <label>购入重量：</label>  
+        <input id="grantWeight" onchange="getAvgWeight()" name="grantWeight" class="easyui-numberbox" data-options="required:true,min:0,precision:2">  
+        <span id="avgweight"></span>
+    </div>
+    <div class="fitem">  
+        <label>送达重量：</label>  
+        <input name="deliveryWeight" class="easyui-numberbox" data-options="required:true,min:0,precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label>调入日龄：</label>  
+        <input name="grantDayOld" class="easyui-numberbox" data-options="required:true,min:0">  
+    </div>  
+    <div class="fitem">  
+        <label>总金额：</label>  
+        <input name="totalAmount" class="easyui-numberbox" data-options="required:true,min:0,precision:2">  
+    </div> 
+    <div class="fitem">  
+        <label></label>  
+        <textarea name="description" placeholder = "填写备注信息"></textarea>  
+    </div> 
+
+</div>
+<div style="clear:both;"></div>
+
+    <div class="fitem" style="margin:30px 0;">  
+    <label></label>  
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="false" onclick="saveNewPig()" >保存</a>
+    </div>
+
+</form>
+
+ <script src="@Url.Content("~/Content/js/jquery.autocomplete.js")" type="text/javascript"></script>
+
+<script>
+    function saveNewPig() {
+        var fm = $('#fm_newpig');
+        fm.ajaxSubmit({
+            url: 'Pig/Update',
+            beforeSubmit: function () {
+                return fm.form('validate');
+            },
+            success: function (data) {
+                if (data.success) {
+                    showSuccess(data.message);
+                    fm.form('reset');
+                }
+                else {
+                    showError(data.message);
+                }
+            }
+        });
+    }
+
+    function getAvgWeight() {
+        var avg; var data;
+        if ($("#grantNum").val() <= 0 || $("#grantWeight").val() <= 0) {
+            avg = 0;
+            data = "";
+        }
+        else {
+            avg = $("#grantWeight").val() / $("#grantNum").val();
+            data = "头均重:" + avg.toFixed(2);
+        }
+
+        $("#avgweight").html(data);
+        return avg;
+    }
+
+    $.get("/View/AutoComplete", { id: 'technician' }, function (data) {
+        $('#technician').autocomplete(data);
+    });
+    $.get("/View/AutoComplete", { id: 'source' }, function (data) {
+        $('#source').autocomplete(data, { minChars: 1, max: 10 });
+    });
+    $.get("/View/AutoComplete", { id: 'transportMan' }, function (data) {
+        $('#transportMan').autocomplete(data, { minChars: 1, max: 10 });
+    });
+    $.get("/View/AutoComplete", { id: 'purchaseMan' }, function (data) {
+        $('#purchaseMan').autocomplete(data, { minChars: 1, max: 10 });
+    });
+</script>
+
+
+</div>

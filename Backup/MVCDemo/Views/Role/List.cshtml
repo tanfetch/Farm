@@ -1,0 +1,244 @@
+﻿<div class="easyui-tabs" style="height:auto;" fit="true">  
+
+    <div title="权限" style="margin:0px;">
+
+    <table id="dg_rolegroup" class="easyui-datagrid" onClickCell="onClickCell"
+            url="@Url.Content("~/Role/List")"  toolbar="#toolbar_rolegroup" border="false" sortOrder="desc"
+            style="">  
+        <thead>  
+            <tr>
+            <th field="name" width="100">权限组</th> 
+            <th field="description" width="250">说明</th> 
+            <th field="userNum" width="60" align="center">组用户数</th>  
+            <th field="disabled" width="50" formatter="formatStatus" align="center">启用</th>    
+            </tr>  
+        </thead>  
+    </table>  
+    <div id="toolbar_rolegroup">  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" 
+                onclick="newRoleGroup()">增加</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" 
+          onclick="destroyRow('#dg_rolegroup','@Url.Content("~/Role/Delete")')">删除</a>  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-set" plain="true" 
+          onclick="updateRolesDialog()">设置权限</a>  
+    </div>  
+
+ 
+
+    <script>
+        $(function () {
+            $('#dg_rolegroup').datagrid('detailView', '/Role/Update?go=Edit');
+            $('#dg_rolegroup').datagrid({
+                onSelect: function (rowIndex, rowData) {
+                    //updateRolesDialog();
+                }
+            });
+        });
+
+        function formatStatus(val, row,index) {
+            if (val == false) {
+                return '<input type="checkbox" checked="checked" rowID="' + row.ID + '"rowIndex="'+ index +  '" onchange="CheckDisable(this)" />';
+            } else {
+                return '<input type="checkbox" rowID="' + row.ID + '"rowIndex="'+ index +  '" onchange="CheckDisable(this)" />';
+            }
+        }
+
+        function CheckDisable(target) {
+            var x = $(target).prop("checked");
+            var n = parseInt($(target).attr("rowIndex"));
+            $.post("/Role/ToggleInvalid",
+                {
+                    id: $(target).attr("rowID"),
+                    value: $(target).prop("checked")==false
+                },
+                function (data) {
+                    if (data.success) {
+                        showSuccess(data.message);
+                    }
+                    else {
+                        $('#dg_rolegroup').datagrid('refreshRow', n);
+                        showError(data.message);
+                    }
+                }
+            );
+        }
+    </script>
+
+    <div id="dlg_roleedit" class="easyui-dialog" style="width:400px;height:400px;padding:0px;" title="权限设置" 
+            closed="true" buttons="#dlg_roleedit-buttons" toolbar="#dlg_roleedit-toolbar"
+            data-options="modal:true" iconCls="icon-set">  
+        <div class="easyui-layout"  data-options="fit:true">
+     
+            <table id="dg_roles" class="easyui-datagrid" 
+                    border="false"  fit="true"
+                    >  
+  
+            </table>  
+
+
+        </div>
+     <div id="dlg_roleedit-toolbar" >
+        
+        <table cellpadding="0" cellspacing="0" style="width:100%">
+            <tr>
+                <td style="text-align:left;padding-left:3px">
+                    <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true" iconCls="icon-tip" onclick="showAllvalidRoles()" title="所有权限"></a>
+                    <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true" iconCls="icon-invalid" onclick="showIsvalidRoles()" title="已拥有的权限"></a>
+                    <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true" iconCls="icon-remove" onclick="showNovalidRoles()" title="未分配的权限"></a>
+                    
+                </td>
+                <td style="text-align:right;padding-right:3px">
+                    <input class="easyui-searchbox" data-options="prompt:'查找',searcher:doSearchActions" style="width:130px"></input>
+                </td>
+            </tr>
+        </table>
+        <script>
+            function showIsvalidRoles() {
+                $('#dg_roles').datagrid({ queryParams: { isValid_0: true} });
+            }
+            function showNovalidRoles() {
+                $('#dg_roles').datagrid({ queryParams: { isValid_0: false} });
+            }
+            function showAllvalidRoles() {
+                $('#dg_roles').datagrid({ queryParams: { isValid_0: ''} });
+            }
+            function doSearchActions(value) {
+                $('#dg_roles').datagrid({ queryParams: { description_4: value} });
+            }
+        </script>
+    </div>
+    <div id="dlg_roleedit-buttons">  
+        <table cellpadding="0" cellspacing="0" style="width:100%">
+            <tr>
+
+                <td style="text-align:right;padding-right:3px">
+                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveRoles()">保存</a>  
+                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_roleedit').dialog('close')">取消</a>  
+                </td>
+            </tr>
+        </table>
+        
+    </div>    
+
+    <script>
+
+        function updateRolesDialog() {
+            var row = $('#dg_rolegroup').datagrid('getSelected');
+            if (row) {
+
+                $('#dlg_roleedit').dialog({ title: '设置权限-' + row.name });
+                $('#dlg_roleedit').dialog('open');
+
+                $('#dg_roles').datagrid({
+                    url: '/Role/UpdateRoles?id=' + row.ID + "&random=" + Math.random(),
+                    method: 'GET',
+                    selectOnCheck: false,
+                    checkOnSelect: false,
+                    singleSelect: true,
+                    pagination: false,
+                    queryParams: {},
+                    sortName: 'controllerName',
+                    sortOrder: 'desc',
+                    columns: [[
+                        { field: 'ck', checkbox: true, title: 'Code' },
+                        //{ field: 'actionMark', title: 'Name', width: 100 },
+                        { field: 'description', title: '权限描述', width: 300 }
+                    ]],
+                    rowStyler: function (index, row) {
+                        //$('#dg_roles').datagrid('highlightRow', index);
+                    },
+                    onLoadSuccess: function (data) {
+                        if (data) {
+                            $.each(data.rows, function (index, item) {
+                                if (item.isValid) {
+                                    $('#dg_roles').datagrid('checkRow', index);
+                                }
+                            });
+                            $('#dg_roles').datagrid('scrollTo', 0);
+                        }
+                    }
+                });
+            }
+        }
+
+        function saveRoles() {
+            var role = $('#dg_rolegroup').datagrid('getSelected');
+            if (!role)
+                return;
+
+            var id = role.ID;
+            var rows = $('#dg_roles').datagrid('getChecked');
+            var jsonData = JSON.stringify({ id: id, roles: rows });
+
+            $.ajax({
+                url: '/Role/UpdateRoles',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                type: 'POST',
+                data: jsonData,
+                success: function (data) {
+                    showSuccess(data.message);
+                    $('#dlg_roleedit').dialog('close');
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown + ':' + errorThrown + XMLHttpRequest.responseText);
+                }
+            });
+        }
+    </script>
+
+
+
+    </div> 
+
+
+
+    <div id="dlg_newrolegroup" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px" title="新建" 
+                closed="true" buttons="#tb_newrolegroup" data-options="modal:true" iconCls="icon-add">  
+
+        <div id="ftitle" class="ftitle">增加权限组</div>  
+        <form id="fm_creatrolegroup" method="post" > 
+            <div class="fitem">  
+                <label>名称：</label>  
+                <input name="name" class="easyui-validatebox" data-options="required:false,delay:5000">  
+            </div>  
+            <div class="fitem">  
+                <label>描述：</label>  
+                <input name="description" class="easyui-validatebox">  
+            </div>  
+
+        </form> 
+    </div>
+    <div id="tb_newrolegroup">  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveRoleGroup()">保存</a>  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_newrolegroup').dialog('close')">取消</a>  
+    </div> 
+
+    <script>
+        function newRoleGroup() {
+            $('#dlg_newrolegroup').dialog('open');
+        }
+
+        function saveRoleGroup() {
+            $('#fm_creatrolegroup').ajaxSubmit({
+                url: '/Role/Update',
+                success: function (data) {
+                    if (data.success) {
+                        $('#dlg_newrolegroup').dialog('close');
+                        $('#fm_creatrolegroup').form('clear');
+                        $('#dg_rolegroup').datagrid('reload');
+                        showSuccess(data.message);
+                    }
+                    else {
+                        showError(data.message);
+                    }
+                }
+            });
+        }
+
+    </script>
+
+    </div>
+    
+
+</div>

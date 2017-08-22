@@ -1,0 +1,169 @@
+﻿
+
+
+<div id="ftitle" class="ftitle" style=" margin:30px 30px 0 30px;">疫苗确认</div>  
+
+
+<div class="easyui-layout" data-options="fit:true">
+            <div data-options="region:'west',split:true" style="width:250px;padding:10px; border:0;">
+                <form id="fm_newvaccine" method="post">
+                    <div class="fitem">  
+                        <label>编号：</label>  
+                        <input id="v_raiserID" name="raiserID" style="width:60px;" onchange="previewVaccine()" value="@Request["key"]" class="easyui-validatebox" data-options="required:true">  
+                    </div> 
+                    <div class="fitem">  
+                        <label>疫苗：</label>  
+                        <input id="vaccineID" name="vaccineID" class="easyui-combobox" style="width:100px;" 
+                        data-options="min:1,max:100,required:true">  
+                    </div> 
+                    <div class="fitem">  
+                        <label>实注射日期：</label>  
+                        <input id="realyInjectionDate" name="realyInjectionDate" class="easyui-datebox" style="width:100px;" 
+                        data-options="required:true,min:0,precision:0">  
+                    </div> 
+                    
+                    <div class="fitem" style="margin:30px 0;">  
+                    <label></label>  
+                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="false" onclick="saveNewVaccine()" >保存</a>
+                    </div>
+                </form>
+            </div>
+       
+            <div data-options="region:'center'" style="padding:10px 30px;width:300px; border:0;">
+                <div id="vaccineinfo" style="margin:10px 0; font-weight:bold;"></div>
+                <table id="dg_vaccineplan" class="easyui-datagrid" style="width:400px;"
+                data-options="title: '疫苗方案',pagination: false,border: true,height: 'auto',loadMsg: '',fit: false">
+                    <thead>  
+                        <tr>  
+                        <th field="name" width="80" >疫苗</th>  
+                        <th field="planInjectionDate" formatter="dateFormatter">方案日期</th>  
+                        <th field="reviseInjectionDate" formatter="dateFormatter">计划注射日期</th>  
+                        <th field="realyInjectionDate" formatter="dateFormatter">实际注射日期</th>  
+                        <th field="op" formatter="formatVaccineOp" >撤消</th>  
+                        </tr>  
+                    </thead> 
+                </table>  
+            </div>
+
+        </div>
+   
+
+<script>
+
+    function saveNewVaccine() {
+        var fm = $('#fm_newvaccine');
+        fm.ajaxSubmit({
+            url: '/Vaccine/Update',
+            beforeSubmit: function () {
+                return fm.form('validate');
+            },
+            success: function (data) {
+                var id = $('#raiserID').val();
+                if (data.success) {
+                    previewVaccine();
+                    showSuccess(data.message);
+                }
+                else {
+                    showError(data.message);
+                }
+            }
+        });
+    }
+
+    $(function () {
+        if ($('#v_raiserID').val() != "") {
+            $('#v_raiserID').change();
+        }
+    });
+
+    function formatVaccineItem(row) {
+        var s = '<span style="font-weight:bold">' + row.name + '</span><br/>' +
+                    '<span style="color:#888">计划注射日期:' + dateFormatter(row.reviseInjectionDate) + '</span>';
+        return s;
+    }
+
+    function formatVaccineOp(val, rows) {
+        if (!rows.realyInjectionDate)
+            return '';
+
+        var s = $('<div>').html(
+            $('<a>').attr({ 'title': '撤消注射', 'rowID': rows.injectionID, 'onclick': 'undoVaccine(this)' })
+            .linkbutton({
+                iconCls: 'icon-remove',
+                plain: true
+            })
+        );
+        return s.html();
+        
+    }
+
+    function undoVaccine(target) {
+        var id = $(target).attr('rowID');
+        $.messager.confirm('删除', '是否撤消当前注射记录?', function (r) {
+            if (r) {
+                $.ajax({
+                    url: '/Vaccine/UndoInjection',
+                    data: { id: id },
+                    type: 'POST',
+                    success: function (data) {
+                        if (data.success) {
+                            previewVaccine();
+                            showSuccess(data.message);
+                        }
+                        else {
+                            showError(data.message);
+                        }
+                    },
+                    error: function (data) {
+                        alert('failed when undo vaccine');
+                    }
+                });
+            }
+        });   
+    }
+
+
+    function previewVaccine() {
+
+        if ($('#v_raiserID').val() == "") {
+            return false;
+        }
+
+        var fm = $('#fm_newvaccine');
+        fm.ajaxSubmit({
+            url: '/Vaccine/Update?go=preview',
+            type: 'GET',
+            success: function (data) {
+                if (!data.success) {
+                    showError('没有对应的疫苗方案');
+                    return;
+                }
+
+                $('#vaccineID').combobox({
+                    data: data.plan,
+                    valueField: 'ID',
+                    textField: 'name',
+                    panelWidth: 160,
+                    panelHeight: 'auto',
+                    editable: false,
+                    formatter: formatVaccineItem
+                });
+
+                if (data.plan.length > 0) {
+                    $('#vaccineID').combobox('setValue', data.plan[0].ID);
+                    $('#realyInjectionDate').datebox('setValue', dateFormatter(data.plan[0].reviseInjectionDate));
+                }
+
+                $('#dg_vaccineplan').datagrid({
+                    data: data.planAll,
+                    title: '疫苗方案-' + data.planName
+                });
+
+                $('#vaccineinfo').text('养户：' + data.areaName + ' ' + data.raiserName);
+
+            }
+        });
+    }
+
+</script>
+

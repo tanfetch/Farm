@@ -1,0 +1,176 @@
+﻿
+
+    <div id="ftitle" class="ftitle" style=" margin:30px 30px 0 30px;">发料</div>  
+
+    <div class="easyui-layout" data-options="fit:true">
+            <div data-options="region:'west',split:true" style="width:250px;padding:10px; border:0;">
+                <form id="fm_newfeed" method="post">
+                    <div class="fitem">  
+                        <label>编号：</label>  
+                        <input id="f_raiserID" name="raiserID" style="width:60px;" onchange="onFeedRaiserKeyChange()" value="@Request["key"]" class="easyui-validatebox" data-options="required:true">  
+                    </div> 
+                    <div class="fitem">  
+                        <label>发料天数：</label>  
+                        <input id="add" name="addDays" class="easyui-numberspinner" style="width:80px;" 
+                        data-options="min:1,max:100,required:false,onChange:onAddChange">  
+                    </div> 
+                    <div class="fitem">  
+                        <label>延期：</label>  
+                        <input id="delay" name="delayDays" class="easyui-numberspinner" style="width:80px;" 
+                        data-options="required:false,min:0,precision:0,onChange:onDelayChange">  
+                    </div> 
+                    
+                    <div class="fitem" style="margin:30px 0;">  
+                    <label></label>  
+                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="false" onclick="saveNewFeed()" >发料</a>
+                    </div>
+                </form>
+            </div>
+
+            <div data-options="region:'center'" style="padding:10px 30px;width:300px; border:0;">
+                <div id="grantfeedinfobar"></div>
+                <div id="raiserinfo" style="margin:10px 0; font-weight:bold;"></div>
+                <table id="dg_preview" style="width:300px;"></table>  
+                <div id="feedinfo" style="margin:10px 0;"></div>
+            </div>
+
+    </div>
+
+
+<script>
+
+    var feedresult;
+    function saveNewFeed() {
+        var fm = $('#fm_newfeed');
+        fm.ajaxSubmit({
+            url: '/Feed/Update',
+            beforeSubmit: function () {
+                return fm.form('validate');
+            },
+            success: function (data) {
+                var id = $('#f_raiserID').val();
+                if (data.success) {
+                    showSuccess(data.message);
+                    if (feedresult.check) {
+                        $.messager.confirm('发料', '需要打印发料表吗？', function (r) {
+                            if (r) {
+                                window.open('/Feed/FeedReport/?raiserID=' + id);
+                            }
+                        });
+                    }
+
+                    $('#f_raiserID').val('');
+                    $('#add').numberspinner('setValue', '');
+                    $('#delay').numberspinner('setValue', '');
+                    $('#dg_preview').html('');
+
+                    feedresult = '';
+                }
+                else {
+                    showError(data.message);
+                }
+            }
+        });
+    }
+
+    $(function () {
+        if ($('#f_raiserID').val() != "") {
+            $('#f_raiserID').change();
+        }
+    });
+
+    function onFeedRaiserKeyChange() {
+        previewFeed();
+        showInfoForGrantFeed();
+    }
+
+    function onAddChange() {
+        $('#add').spinner('disable');
+        previewFeed();
+    }
+
+    function onDelayChange() {
+        $('#delay').spinner('disable');
+        previewFeed();
+    }
+
+    function previewFeed() {
+
+        if ($('#f_raiserID').val() == "") {
+            return false;
+        }
+
+        var fm = $('#fm_newfeed');
+        fm.ajaxSubmit({
+            url: '/Feed/Update',
+            data: {go:'preview',random: Math.random()},
+            type: 'POST',
+            success: function (data) {
+                feedresult = data;
+                if (!data.success) {
+                    showError(data.message);
+                    return;
+                }
+
+                if ($('#add').numberspinner('getValue') != data.add) {
+                    $('#add').numberspinner('setValue', data.add);
+                }
+                if ($('#delay').numberspinner('getValue') != data.delay || $('#delay').numberspinner('getValue') == '') {
+                    $('#delay').numberspinner('setValue', data.delay);
+                }
+
+                $('#add').spinner('enable');
+                $('#delay').spinner('enable');
+
+                $('#dg_preview').datagrid({
+                    data: data.feeds,
+                    pagination: false,
+                    border: true,
+                    height: 'auto',
+                    //fitColumns: true,
+                    fit: false,
+                    loadMsg: '',
+                    title: '本次发料',
+                    columns: [[
+                        { field: 'name', title: '饲料', width: 60
+                        },
+                        { field: 'nValue', title: '包数', width: 40, align: 'right',
+                            formatter: function (val, row) { return val.toFixed(0); }
+                        },
+                        { field: 'wValue', title: '重量', width: 70, align: 'right',
+                            formatter: function (val, row) { return val.toFixed(2); }
+                        },
+                        { field: 'exceed', title: '超', width: 40, align: 'right',
+                            formatter: function (val, row) { return val.toFixed(2); }
+                        },
+                        { field: 'weight', title: '增重', align: 'right',
+                            formatter: function (val, row) { return val.toFixed(2); }
+                        }
+                    ]]
+                });
+
+                //$('#raiserinfo').text('养户：' + data.areaName + ' ' + data.raiserName);
+                var feedinfo = data.feedinfo;
+                if (!data.check)
+                    feedinfo = feedinfo + '<font style="color:red"> [需审核]</font>';
+                $('#feedinfo').html(feedinfo);
+            }
+        });
+    }
+
+    function showInfoForGrantFeed() {
+        $('#grantfeedinfobar').html('');
+        var key = $('#f_raiserID').val();
+        if (key == "")
+            return;
+        $.ajax({
+            url: '/Feed/Update?view=piginfo&raiserID=' + key,
+            success: function (data) {
+                $('#grantfeedinfobar').html(data);
+            }
+        });
+    }
+
+</script>
+
+

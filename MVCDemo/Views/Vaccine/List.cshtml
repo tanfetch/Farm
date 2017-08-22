@@ -1,0 +1,76 @@
+﻿<div class="easyui-tabs" style="height:auto; "  fit="true">  
+
+<div title="疫苗任务" style="margin:0px;">
+    <table id="dg_vaccine" class="easyui-datagrid" toolbar="#toolbar_vaccine" >  
+        <thead data-options="frozen:true">
+            <tr>
+                <th field="raiserID"     sortable="true" width="60"  >编号</th>  
+                <th field="raiserName"   sortable="true" width="60" >养户</th>  
+                <th field="areaName"     sortable="true" width="60">服务点</th> 
+            </tr>
+        </thead>
+        <thead>  
+            <tr>  
+            <th field="vaccineName" width="80">疫苗</th>  
+            <th field="reviseInjectionDate" formatter="formatterInjectDate" width="80">拟注射日期</th>   
+            <th field="technician" width="60">技术员</th>  
+            </tr>  
+        </thead>  
+    </table>  
+    <script>
+        function formatterInjectDate(val, row) {
+            if(row.hasOverdue)
+                return '<span style="color:red;">' + dateFormatter(val) + '</span>';
+            return dateFormatter(val);
+        }
+    </script>
+    <div id="toolbar_vaccine">  
+
+        <div style="margin:3px;">
+            <form id="fm_vaccinefilter">
+            <span style="margin:0 5px">区域
+                @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new { @style = "width:auto;" }) 
+            </span>
+            <span style="margin:0 5px">编号
+                @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:50px;" })
+            </span>
+            <span style="margin:0 5px">养户
+                @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">技术员
+                @Html.TextBox("technician_4", Request["technician_4"], new { @style = "width:60px;" })
+            </span>
+            <!--
+            <span style="margin:0 5px">注射日期
+                @Html.TextBox("reviseInjectionDate_1", Request["reviseInjectionDate_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+                @Html.TextBox("reviseInjectionDate_2", Request["reviseInjectionDate_2"], new { @class = "easyui-datebox", @style = "width:90px;" })
+            </span>
+            -->
+            <span style="margin:0 5px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" 
+                    onclick="doSearch('#fm_vaccinefilter','#dg_vaccine')">查找</a>
+            </span>
+            </form>
+        </div>
+    </div>  
+    <script type="text/javascript">
+
+        $(function () {
+            var data = getFormJson('#fm_pigfilter');
+            $('#dg_vaccine').datagrid({
+                url: '/Vaccine/List',
+                queryParams: data,
+                onSelect: function (rowIndex, rowData) {
+                    //updateButton('#vaccine-del',!rowData.canDel);
+                }
+            });
+            //$('#dg_vaccine').datagrid('detailView', '/Death/Detail?show=Edit');
+        });
+
+
+    </script>
+
+
+</div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model Farm.Raisers.DataContext.Raiser
+
+<div style="padding:10px;">
+
+<form action="/Raiser/Update" method="post">
+
+    <table>
+    <tr>
+        <td> <label>编号：</label></td>  
+        <td style="width:200px;">@Html.TextBoxFor(model => model.raiserID, new {@Class="easyui-validatebox",@required="true"})</td>
+        <td> <label>姓名：</label></td>  
+        <td style="width:200px;">@Html.TextBoxFor(model => model.name, new { @Class = "easyui-validatebox", @required = "true" })</td>
+    </tr>
+    <tr>
+        <td>初始批次：</td> 
+        <td>@Html.TextBoxFor(model => model.batch, new { @Class = "easyui-numberbox", @required = "true", @min = "0" }) </td>  
+        <td><label>电话：</label> </td> 
+        <td>@Html.TextBoxFor(model => model.telephone, new { @Class = "easyui-validatebox" }) </td>  
+    </tr>
+    <tr>
+        <td><label>身份证：</label> </td> 
+        <td>@Html.TextBoxFor(model => model.IDCard, new { @Class = "easyui-validatebox" }) </td>  
+        <td><label>地址：</label> </td> 
+        <td>@Html.TextBoxFor(model => model.address, new { @Class = "easyui-validatebox",@style="width:180px;" }) </td>  
+
+    </tr>
+    </table>
+
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.StructureID)
+    @Html.HiddenFor(model => model.isDisabled)
+    
+    <div style="text-align:right;padding-right:30px">
+    <a href="javascript:void(0)" class="easyui-linkbutton save" iconCls="icon-save" plain="true" >保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton cancel" iconCls="icon-cancel" plain="true">取消</a>
+    </div>
+
+</form>
+<script>
+
+
+</script>
+</div>

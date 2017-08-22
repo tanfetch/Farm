@@ -1,0 +1,46 @@
+﻿@model DataAccess.Repository.Users
+@{
+       var db = new  DataAccess.Repository.RepositoryArea<DataAccess.Repository.Structure>().GetEntities(p=>p.typeID==1);
+}
+
+<div style="padding:3px 0;">
+
+<form action="/User/Update" method="post">
+
+
+        <div class="fitem">  
+            <label>帐号：</label>  
+            @Html.TextBoxFor(model => model.userID, new {@Class="easyui-validatebox",@readonly="readonly",@style="width:50px;" })
+
+            <label>姓名：</label>  
+            @Html.TextBoxFor(model => model.userName, new {@Class="easyui-validatebox",@style="width:50px;" })
+
+            <label>权限：</label>  
+            @Html.DropDownList("roleGroupID", ViewModelHelper.GetRoleGroup(Model.roleGroupID))
+        </div>  
+
+
+        @foreach(var m in db)
+       {
+        <input id="@m.ID" type="checkbox" name="pur" checked="checked" value="@m.ID" /><label for="@m.ID">@m.name</label>
+       }
+ 
+
+        @Html.HiddenFor(model => model.ID, new { @name="id"})
+        @Html.HiddenFor(model => model.userPassword)
+        @Html.HiddenFor(model => model.logTimes)
+        @Html.HiddenFor(model => model.lastLogTime)   
+        @Html.HiddenFor(model => model.lastLogIP)
+
+       
+
+        <div style="text-align:right;padding-right:30px">
+		<a href="javascript:void(0)" class="easyui-linkbutton save" iconCls="icon-save" plain="true" >保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton cancel" iconCls="icon-cancel" plain="true">取消</a>
+	    </div>
+
+        <input type="submit" value="submit" />
+
+</form>
+
+</div>

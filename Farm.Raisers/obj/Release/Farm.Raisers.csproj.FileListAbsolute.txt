@@ -1,0 +1,10 @@
+F:\Farm\Farm.Raisers\bin\Release\Farm.Raisers.dll.config
+F:\Farm\Farm.Raisers\bin\Release\Farm.Raisers.dll
+F:\Farm\Farm.Raisers\bin\Release\Farm.Raisers.pdb
+F:\Farm\Farm.Raisers\bin\Release\AppCommon.dll
+F:\Farm\Farm.Raisers\bin\Release\Farm.Authority.dll
+F:\Farm\Farm.Raisers\bin\Release\AppCommon.pdb
+F:\Farm\Farm.Raisers\bin\Release\Farm.Authority.pdb
+F:\Farm\Farm.Raisers\obj\Release\Farm.Raisers.csprojResolveAssemblyReference.cache
+F:\Farm\Farm.Raisers\obj\Release\Farm.Raisers.dll
+F:\Farm\Farm.Raisers\obj\Release\Farm.Raisers.pdb

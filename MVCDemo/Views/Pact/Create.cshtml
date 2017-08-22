@@ -1,0 +1,51 @@
+﻿
+<div style="padding:30px">
+
+<div id="ftitle" class="ftitle">签约</div>  
+<form action="/Pact/Update" id="fm_newpact" method="post">
+
+    <div class="fitem">  
+        <label>编号：</label>  
+        <input name="raiserID" value="@Request["key"]" class="easyui-validatebox" data-options="required:false">  
+    </div> 
+    <div class="fitem">  
+        <label>签约日期：</label>  
+        <input name="pactDate" class="easyui-datebox" data-options="required:false">  
+    </div> 
+    <div class="fitem">  
+        <label>签约数量：</label>  
+        <input name="pactNum" class="easyui-numberbox" data-options="required:false,min:1">  
+    </div> 
+
+    <div class="fitem" style="margin:30px 0;">  
+    <label></label>  
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="false" onclick="saveNewPact()" >保存</a>
+    </div>
+
+</form>
+<script>
+    function saveNewPact() {
+        var fm = $('#fm_newpact');
+        fm.ajaxSubmit({
+            beforeSubmit: function () {
+                return fm.form('validate');
+            },
+            success: function (data) {
+                if (data.success) {
+                    fm.form('reset');
+                    showSuccess(data.message);
+                }
+                else {
+                    showError(data.message);
+                }
+            },
+            error: function (data, t) {
+                alert("error:[" + t + "]" + data.responseText);
+            }
+        });
+    }
+
+</script>
+
+
+</div>

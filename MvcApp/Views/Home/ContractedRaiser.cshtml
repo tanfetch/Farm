@@ -1,0 +1,16 @@
+﻿@model IEnumerable<MvcApp.Controllers.AreaCollectModel>
+
+@{
+
+    <fieldset>
+    <legend>签约待调的养户（@Model.Sum(p=>p.value)）</legend>
+    @foreach (var item in Model)
+    {
+        <a href="javascript:void(0)" onclick="newMainPanel('/Pact/List?areaID_0=@item.areaID','合同信息','icon-paper')"
+             class="easyui-linkbutton" data-options="plain:true" style="width:80px;">
+        <span>@item.areaName</span><span>:</span><span>@item.value</span>
+        </a>
+    }
+    </fieldset>
+  
+}

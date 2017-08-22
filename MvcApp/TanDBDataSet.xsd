@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TanDBDataSet" targetNamespace="http://tempuri.org/TanDBDataSet.xsd" xmlns:mstns="http://tempuri.org/TanDBDataSet.xsd" xmlns="http://tempuri.org/TanDBDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PigTableAdapter" GeneratorDataComponentClassName="PigTableAdapter" Name="Pig" UserDataComponentName="PigTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Web.config)" DbObjectName="WellFulDBV4_T.dbo.Pig" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ID, RID, PID, technician, grantDate, grantDayOld, source, grantNum, grantWeight, deliveryWeight, totalAmount, transportMan, purchaseMan, transportCar, transportDriver, description, pactDate, pactNum, raiserID, raiserName, areaID, areaName, dayOld, salesNum, deathNum, feedGrantToDayOld, feedDelayDays, lastSalesDate, lastDeathDate, lastGrantFeedDate, batch, weightByNum, priceByNum, priceByWeight, lossWeight, lossRate, extantNum, liveRate, feedUsedToDays, statusFlag, feedDays, clearDate, feedSurplusDays FROM dbo.Pig</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID" DataSetColumn="ID" />
+              <Mapping SourceColumn="RID" DataSetColumn="RID" />
+              <Mapping SourceColumn="PID" DataSetColumn="PID" />
+              <Mapping SourceColumn="technician" DataSetColumn="technician" />
+              <Mapping SourceColumn="grantDate" DataSetColumn="grantDate" />
+              <Mapping SourceColumn="grantDayOld" DataSetColumn="grantDayOld" />
+              <Mapping SourceColumn="source" DataSetColumn="source" />
+              <Mapping SourceColumn="grantNum" DataSetColumn="grantNum" />
+              <Mapping SourceColumn="grantWeight" DataSetColumn="grantWeight" />
+              <Mapping SourceColumn="deliveryWeight" DataSetColumn="deliveryWeight" />
+              <Mapping SourceColumn="totalAmount" DataSetColumn="totalAmount" />
+              <Mapping SourceColumn="transportMan" DataSetColumn="transportMan" />
+              <Mapping SourceColumn="purchaseMan" DataSetColumn="purchaseMan" />
+              <Mapping SourceColumn="transportCar" DataSetColumn="transportCar" />
+              <Mapping SourceColumn="transportDriver" DataSetColumn="transportDriver" />
+              <Mapping SourceColumn="description" DataSetColumn="description" />
+              <Mapping SourceColumn="pactDate" DataSetColumn="pactDate" />
+              <Mapping SourceColumn="pactNum" DataSetColumn="pactNum" />
+              <Mapping SourceColumn="raiserID" DataSetColumn="raiserID" />
+              <Mapping SourceColumn="raiserName" DataSetColumn="raiserName" />
+              <Mapping SourceColumn="areaID" DataSetColumn="areaID" />
+              <Mapping SourceColumn="areaName" DataSetColumn="areaName" />
+              <Mapping SourceColumn="dayOld" DataSetColumn="dayOld" />
+              <Mapping SourceColumn="salesNum" DataSetColumn="salesNum" />
+              <Mapping SourceColumn="deathNum" DataSetColumn="deathNum" />
+              <Mapping SourceColumn="feedGrantToDayOld" DataSetColumn="feedGrantToDayOld" />
+              <Mapping SourceColumn="feedDelayDays" DataSetColumn="feedDelayDays" />
+              <Mapping SourceColumn="lastSalesDate" DataSetColumn="lastSalesDate" />
+              <Mapping SourceColumn="lastDeathDate" DataSetColumn="lastDeathDate" />
+              <Mapping SourceColumn="lastGrantFeedDate" DataSetColumn="lastGrantFeedDate" />
+              <Mapping SourceColumn="batch" DataSetColumn="batch" />
+              <Mapping SourceColumn="weightByNum" DataSetColumn="weightByNum" />
+              <Mapping SourceColumn="priceByNum" DataSetColumn="priceByNum" />
+              <Mapping SourceColumn="priceByWeight" DataSetColumn="priceByWeight" />
+              <Mapping SourceColumn="lossWeight" DataSetColumn="lossWeight" />
+              <Mapping SourceColumn="lossRate" DataSetColumn="lossRate" />
+              <Mapping SourceColumn="extantNum" DataSetColumn="extantNum" />
+              <Mapping SourceColumn="liveRate" DataSetColumn="liveRate" />
+              <Mapping SourceColumn="feedUsedToDays" DataSetColumn="feedUsedToDays" />
+              <Mapping SourceColumn="statusFlag" DataSetColumn="statusFlag" />
+              <Mapping SourceColumn="feedDays" DataSetColumn="feedDays" />
+              <Mapping SourceColumn="clearDate" DataSetColumn="clearDate" />
+              <Mapping SourceColumn="feedSurplusDays" DataSetColumn="feedSurplusDays" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TanDBDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="TanDBDataSet" msprop:Generator_UserDSName="TanDBDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Pig" msprop:Generator_TableClassName="PigDataTable" msprop:Generator_TableVarName="tablePig" msprop:Generator_TablePropName="Pig" msprop:Generator_RowDeletingName="PigRowDeleting" msprop:Generator_RowChangingName="PigRowChanging" msprop:Generator_RowEvHandlerName="PigRowChangeEventHandler" msprop:Generator_RowDeletedName="PigRowDeleted" msprop:Generator_UserTableName="Pig" msprop:Generator_RowChangedName="PigRowChanged" msprop:Generator_RowEvArgName="PigRowChangeEvent" msprop:Generator_RowClassName="PigRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="RID" msprop:Generator_ColumnVarNameInTable="columnRID" msprop:Generator_ColumnPropNameInRow="RID" msprop:Generator_ColumnPropNameInTable="RIDColumn" msprop:Generator_UserColumnName="RID" type="xs:int" />
+              <xs:element name="PID" msprop:Generator_ColumnVarNameInTable="columnPID" msprop:Generator_ColumnPropNameInRow="PID" msprop:Generator_ColumnPropNameInTable="PIDColumn" msprop:Generator_UserColumnName="PID" type="xs:int" />
+              <xs:element name="technician" msprop:Generator_ColumnVarNameInTable="columntechnician" msprop:Generator_ColumnPropNameInRow="technician" msprop:Generator_ColumnPropNameInTable="technicianColumn" msprop:Generator_UserColumnName="technician">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="grantDate" msprop:Generator_ColumnVarNameInTable="columngrantDate" msprop:Generator_ColumnPropNameInRow="grantDate" msprop:Generator_ColumnPropNameInTable="grantDateColumn" msprop:Generator_UserColumnName="grantDate" type="xs:dateTime" />
+              <xs:element name="grantDayOld" msprop:Generator_ColumnVarNameInTable="columngrantDayOld" msprop:Generator_ColumnPropNameInRow="grantDayOld" msprop:Generator_ColumnPropNameInTable="grantDayOldColumn" msprop:Generator_UserColumnName="grantDayOld" type="xs:int" />
+              <xs:element name="source" msprop:Generator_ColumnVarNameInTable="columnsource" msprop:Generator_ColumnPropNameInRow="source" msprop:Generator_ColumnPropNameInTable="sourceColumn" msprop:Generator_UserColumnName="source">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="grantNum" msprop:Generator_ColumnVarNameInTable="columngrantNum" msprop:Generator_ColumnPropNameInRow="grantNum" msprop:Generator_ColumnPropNameInTable="grantNumColumn" msprop:Generator_UserColumnName="grantNum" type="xs:int" />
+              <xs:element name="grantWeight" msprop:Generator_ColumnVarNameInTable="columngrantWeight" msprop:Generator_ColumnPropNameInRow="grantWeight" msprop:Generator_ColumnPropNameInTable="grantWeightColumn" msprop:Generator_UserColumnName="grantWeight" type="xs:double" />
+              <xs:element name="deliveryWeight" msprop:Generator_ColumnVarNameInTable="columndeliveryWeight" msprop:Generator_ColumnPropNameInRow="deliveryWeight" msprop:Generator_ColumnPropNameInTable="deliveryWeightColumn" msprop:Generator_UserColumnName="deliveryWeight" type="xs:double" />
+              <xs:element name="totalAmount" msprop:Generator_ColumnVarNameInTable="columntotalAmount" msprop:Generator_ColumnPropNameInRow="totalAmount" msprop:Generator_ColumnPropNameInTable="totalAmountColumn" msprop:Generator_UserColumnName="totalAmount" type="xs:double" />
+              <xs:element name="transportMan" msprop:Generator_ColumnVarNameInTable="columntransportMan" msprop:Generator_ColumnPropNameInRow="transportMan" msprop:Generator_ColumnPropNameInTable="transportManColumn" msprop:Generator_UserColumnName="transportMan">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="purchaseMan" msprop:Generator_ColumnVarNameInTable="columnpurchaseMan" msprop:Generator_ColumnPropNameInRow="purchaseMan" msprop:Generator_ColumnPropNameInTable="purchaseManColumn" msprop:Generator_UserColumnName="purchaseMan">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="transportCar" msprop:Generator_ColumnVarNameInTable="columntransportCar" msprop:Generator_ColumnPropNameInRow="transportCar" msprop:Generator_ColumnPropNameInTable="transportCarColumn" msprop:Generator_UserColumnName="transportCar">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="transportDriver" msprop:Generator_ColumnVarNameInTable="columntransportDriver" msprop:Generator_ColumnPropNameInRow="transportDriver" msprop:Generator_ColumnPropNameInTable="transportDriverColumn" msprop:Generator_UserColumnName="transportDriver">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="description" msprop:Generator_ColumnVarNameInTable="columndescription" msprop:Generator_ColumnPropNameInRow="description" msprop:Generator_ColumnPropNameInTable="descriptionColumn" msprop:Generator_UserColumnName="description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pactDate" msprop:Generator_ColumnVarNameInTable="columnpactDate" msprop:Generator_ColumnPropNameInRow="pactDate" msprop:Generator_ColumnPropNameInTable="pactDateColumn" msprop:Generator_UserColumnName="pactDate" type="xs:dateTime" />
+              <xs:element name="pactNum" msprop:Generator_ColumnVarNameInTable="columnpactNum" msprop:Generator_ColumnPropNameInRow="pactNum" msprop:Generator_ColumnPropNameInTable="pactNumColumn" msprop:Generator_UserColumnName="pactNum" type="xs:int" />
+              <xs:element name="raiserID" msprop:Generator_ColumnVarNameInTable="columnraiserID" msprop:Generator_ColumnPropNameInRow="raiserID" msprop:Generator_ColumnPropNameInTable="raiserIDColumn" msprop:Generator_UserColumnName="raiserID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="raiserName" msprop:Generator_ColumnVarNameInTable="columnraiserName" msprop:Generator_ColumnPropNameInRow="raiserName" msprop:Generator_ColumnPropNameInTable="raiserNameColumn" msprop:Generator_UserColumnName="raiserName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="areaID" msprop:Generator_ColumnVarNameInTable="columnareaID" msprop:Generator_ColumnPropNameInRow="areaID" msprop:Generator_ColumnPropNameInTable="areaIDColumn" msprop:Generator_UserColumnName="areaID" type="xs:int" />
+              <xs:element name="areaName" msprop:Generator_ColumnVarNameInTable="columnareaName" msprop:Generator_ColumnPropNameInRow="areaName" msprop:Generator_ColumnPropNameInTable="areaNameColumn" msprop:Generator_UserColumnName="areaName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="dayOld" msprop:Generator_ColumnVarNameInTable="columndayOld" msprop:Generator_ColumnPropNameInRow="dayOld" msprop:Generator_ColumnPropNameInTable="dayOldColumn" msprop:Generator_UserColumnName="dayOld" type="xs:int" />
+              <xs:element name="salesNum" msprop:Generator_ColumnVarNameInTable="columnsalesNum" msprop:Generator_ColumnPropNameInRow="salesNum" msprop:Generator_ColumnPropNameInTable="salesNumColumn" msprop:Generator_UserColumnName="salesNum" type="xs:int" />
+              <xs:element name="deathNum" msprop:Generator_ColumnVarNameInTable="columndeathNum" msprop:Generator_ColumnPropNameInRow="deathNum" msprop:Generator_ColumnPropNameInTable="deathNumColumn" msprop:Generator_UserColumnName="deathNum" type="xs:int" />
+              <xs:element name="feedGrantToDayOld" msprop:Generator_ColumnVarNameInTable="columnfeedGrantToDayOld" msprop:Generator_ColumnPropNameInRow="feedGrantToDayOld" msprop:Generator_ColumnPropNameInTable="feedGrantToDayOldColumn" msprop:Generator_UserColumnName="feedGrantToDayOld" type="xs:int" />
+              <xs:element name="feedDelayDays" msprop:Generator_ColumnVarNameInTable="columnfeedDelayDays" msprop:Generator_ColumnPropNameInRow="feedDelayDays" msprop:Generator_ColumnPropNameInTable="feedDelayDaysColumn" msprop:Generator_UserColumnName="feedDelayDays" type="xs:int" />
+              <xs:element name="lastSalesDate" msprop:Generator_ColumnVarNameInTable="columnlastSalesDate" msprop:Generator_ColumnPropNameInRow="lastSalesDate" msprop:Generator_ColumnPropNameInTable="lastSalesDateColumn" msprop:Generator_UserColumnName="lastSalesDate" type="xs:dateTime" />
+              <xs:element name="lastDeathDate" msprop:Generator_ColumnVarNameInTable="columnlastDeathDate" msprop:Generator_ColumnPropNameInRow="lastDeathDate" msprop:Generator_ColumnPropNameInTable="lastDeathDateColumn" msprop:Generator_UserColumnName="lastDeathDate" type="xs:dateTime" />
+              <xs:element name="lastGrantFeedDate" msprop:Generator_ColumnVarNameInTable="columnlastGrantFeedDate" msprop:Generator_ColumnPropNameInRow="lastGrantFeedDate" msprop:Generator_ColumnPropNameInTable="lastGrantFeedDateColumn" msprop:Generator_UserColumnName="lastGrantFeedDate" type="xs:dateTime" />
+              <xs:element name="batch" msprop:Generator_ColumnVarNameInTable="columnbatch" msprop:Generator_ColumnPropNameInRow="batch" msprop:Generator_ColumnPropNameInTable="batchColumn" msprop:Generator_UserColumnName="batch" type="xs:int" />
+              <xs:element name="weightByNum" msprop:Generator_ColumnVarNameInTable="columnweightByNum" msprop:Generator_ColumnPropNameInRow="weightByNum" msprop:Generator_ColumnPropNameInTable="weightByNumColumn" msprop:Generator_UserColumnName="weightByNum" type="xs:double" />
+              <xs:element name="priceByNum" msprop:Generator_ColumnVarNameInTable="columnpriceByNum" msprop:Generator_ColumnPropNameInRow="priceByNum" msprop:Generator_ColumnPropNameInTable="priceByNumColumn" msprop:Generator_UserColumnName="priceByNum" type="xs:double" />
+              <xs:element name="priceByWeight" msprop:Generator_ColumnVarNameInTable="columnpriceByWeight" msprop:Generator_ColumnPropNameInRow="priceByWeight" msprop:Generator_ColumnPropNameInTable="priceByWeightColumn" msprop:Generator_UserColumnName="priceByWeight" type="xs:double" />
+              <xs:element name="lossWeight" msprop:Generator_ColumnVarNameInTable="columnlossWeight" msprop:Generator_ColumnPropNameInRow="lossWeight" msprop:Generator_ColumnPropNameInTable="lossWeightColumn" msprop:Generator_UserColumnName="lossWeight" type="xs:double" />
+              <xs:element name="lossRate" msprop:Generator_ColumnVarNameInTable="columnlossRate" msprop:Generator_ColumnPropNameInRow="lossRate" msprop:Generator_ColumnPropNameInTable="lossRateColumn" msprop:Generator_UserColumnName="lossRate" type="xs:double" />
+              <xs:element name="extantNum" msprop:Generator_ColumnVarNameInTable="columnextantNum" msprop:Generator_ColumnPropNameInRow="extantNum" msprop:Generator_ColumnPropNameInTable="extantNumColumn" msprop:Generator_UserColumnName="extantNum" type="xs:int" />
+              <xs:element name="liveRate" msprop:Generator_ColumnVarNameInTable="columnliveRate" msprop:Generator_ColumnPropNameInRow="liveRate" msprop:Generator_ColumnPropNameInTable="liveRateColumn" msprop:Generator_UserColumnName="liveRate" type="xs:decimal" />
+              <xs:element name="feedUsedToDays" msprop:Generator_ColumnVarNameInTable="columnfeedUsedToDays" msprop:Generator_ColumnPropNameInRow="feedUsedToDays" msprop:Generator_ColumnPropNameInTable="feedUsedToDaysColumn" msprop:Generator_UserColumnName="feedUsedToDays" type="xs:int" />
+              <xs:element name="statusFlag" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnstatusFlag" msprop:Generator_ColumnPropNameInRow="statusFlag" msprop:Generator_ColumnPropNameInTable="statusFlagColumn" msprop:Generator_UserColumnName="statusFlag" type="xs:int" minOccurs="0" />
+              <xs:element name="feedDays" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfeedDays" msprop:Generator_ColumnPropNameInRow="feedDays" msprop:Generator_ColumnPropNameInTable="feedDaysColumn" msprop:Generator_UserColumnName="feedDays" type="xs:int" minOccurs="0" />
+              <xs:element name="clearDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnclearDate" msprop:Generator_ColumnPropNameInRow="clearDate" msprop:Generator_ColumnPropNameInTable="clearDateColumn" msprop:Generator_UserColumnName="clearDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="feedSurplusDays" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfeedSurplusDays" msprop:Generator_ColumnPropNameInRow="feedSurplusDays" msprop:Generator_ColumnPropNameInTable="feedSurplusDaysColumn" msprop:Generator_UserColumnName="feedSurplusDays" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

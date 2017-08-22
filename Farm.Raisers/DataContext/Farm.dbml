@@ -1,0 +1,618 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WellFulDBV4" Class="FarmDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\MSSQLSERVER2;Initial Catalog=WellFulDBV4;Integrated Security=True" SettingsObjectName="Farm.Raisers.Properties.Settings" SettingsPropertyName="WellFulDBV4ConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbCheckout" Member="tbCheckout">
+    <Type Name="tbCheckout">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PigID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ArgAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="pactAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ratioAll" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ratio" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ratio2" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="allowance" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="bonus" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="drugCost" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="score" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="referPerson" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="referTime" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Association Name="tbPig_tbCheckout" Member="tbPig" ThisKey="PigID" OtherKey="ID" Type="tbPig" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbDeath" Member="tbDeath">
+    <Type Name="tbDeath">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PigID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deathNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deathDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="referPerson" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="referTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="tbPig_tbDeath" Member="tbPig" ThisKey="PigID" OtherKey="ID" Type="tbPig" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbInjection" Member="tbInjection">
+    <Type Name="tbInjection">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PigID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vaccineID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="injectionDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Association Name="tbPig_tbInjection" Member="tbPig" ThisKey="PigID" OtherKey="ID" Type="tbPig" IsForeignKey="true" />
+      <Association Name="tbVaccine_tbInjection" Member="tbVaccine" ThisKey="vaccineID" OtherKey="ID" Type="tbVaccine" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbPact" Member="tbPact">
+    <Type Name="tbPact">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pactDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pactNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tbPact_tbPig" Member="tbPig" ThisKey="ID" OtherKey="PID" Type="tbPig" />
+      <Association Name="tbRaiser_tbPact" Member="tbRaiser" ThisKey="RID" OtherKey="ID" Type="tbRaiser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbPig" Member="tbPig">
+    <Type Name="tbPig">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="grantDayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="grantWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="deliveryWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="totalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="transportMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="purchaseMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportCar" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportDriver" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Association Name="tbPig_tbCheckout" Member="tbCheckout" ThisKey="ID" OtherKey="PigID" Type="tbCheckout" />
+      <Association Name="tbPig_tbDeath" Member="tbDeath" ThisKey="ID" OtherKey="PigID" Type="tbDeath" />
+      <Association Name="tbPig_tbInjection" Member="tbInjection" ThisKey="ID" OtherKey="PigID" Type="tbInjection" />
+      <Association Name="tbPig_tbFeedGrant" Member="tbFeedGrant" ThisKey="ID" OtherKey="PigID" Type="tbFeedGrant" />
+      <Association Name="tbPig_tbSales" Member="tbSales" ThisKey="ID" OtherKey="PigID" Type="tbSales" />
+      <Association Name="tbPact_tbPig" Member="tbPact" ThisKey="PID" OtherKey="ID" Type="tbPact" IsForeignKey="true" />
+      <Association Name="tbRaiser_tbPig" Member="tbRaiser" ThisKey="RID" OtherKey="ID" Type="tbRaiser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbRaiser" Member="tbRaiser">
+    <Type Name="tbRaiser">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="structureID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="telephone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IDCard" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="batch" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isDisabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Field" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="tbRaiser_tbPact" Member="tbPact" ThisKey="ID" OtherKey="RID" Type="tbPact" />
+      <Association Name="tbRaiser_tbPig" Member="tbPig" ThisKey="ID" OtherKey="RID" Type="tbPig" />
+      <Association Name="tbStructure_tbRaiser" Member="tbStructure" ThisKey="structureID" OtherKey="ID" Type="tbStructure" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbStructure" Member="tbStructure">
+    <Type Name="tbStructure">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fatherID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="typeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="tbStructure_tbRaiser" Member="tbRaiser" ThisKey="ID" OtherKey="structureID" Type="tbRaiser" />
+      <Association Name="tbStructure_tbStructure" Member="tbStructure2" ThisKey="ID" OtherKey="fatherID" Type="tbStructure" />
+      <Association Name="tbStructure_Purview" Member="Purview" ThisKey="ID" OtherKey="areaID" Type="Purview" />
+      <Association Name="tbStructure_tbStructure" Member="tbStructure1" ThisKey="fatherID" OtherKey="ID" Type="tbStructure" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbVaccine" Member="tbVaccine">
+    <Type Name="tbVaccine">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="planID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="day" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="tbVaccine_tbInjection" Member="tbInjection" ThisKey="ID" OtherKey="vaccineID" Type="tbInjection" />
+      <Association Name="tbVaccinePlan_tbVaccine" Member="tbVaccinePlan" ThisKey="planID" OtherKey="ID" Type="tbVaccinePlan" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbVaccinePlan" Member="tbVaccinePlan">
+    <Type Name="tbVaccinePlan">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="applyDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="disabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="tbVaccinePlan_tbVaccine" Member="tbVaccine" ThisKey="ID" OtherKey="planID" Type="tbVaccine" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Checkout" Member="Checkout">
+    <Type Name="Checkout">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PigID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ArgAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="pactAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ratioAll" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ratio" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ratio2" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="allowance" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="bonus" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="drugCost" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="score" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="referPerson" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="referTime" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="purchaseMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Death" Member="Death">
+    <Type Name="Death">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PigID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deathNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deathDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="referPerson" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="referTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LivePig" Member="LivePig">
+    <Type Name="LivePig">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="grantDayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="grantWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="deliveryWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="totalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="transportMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="purchaseMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportCar" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportDriver" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="pactDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pactNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="batch" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="salesNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deathNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="weightByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="priceByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="priceByWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lossWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lossRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lastSalesDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastDeathDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastGrantFeedDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="liveRate" Type="System.Decimal" DbType="Decimal(24,12) NOT NULL" CanBeNull="false" />
+      <Column Name="dayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedGrantToDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedDelayDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedSurplusDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedUsedToDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="extantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pact" Member="Pact">
+    <Type Name="Pact">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pactDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pactNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="statusFlag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="batch" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Raiser" Member="Raiser">
+    <Type Name="Raiser">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StructureID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="telephone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IDCard" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="batch" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isDisabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="checkoutBatch" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pactBatch" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="extantBatch" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salseNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="totalBatch" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="statusFlag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RoleGroup" Member="RoleGroup">
+    <Type Name="RoleGroup">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="disabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="role" Type="System.Data.Linq.Binary" DbType="VarBinary(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Structure" Member="Structure">
+    <Type Name="Structure">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fatherID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="typeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="Users">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="userID" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="userName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="userPassword" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="roleGroupID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="logTimes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="lastLogTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastLogIP" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="roleName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Purview" Member="Purview">
+    <Type Name="Purview">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tbStructure_Purview" Member="tbStructure" ThisKey="areaID" OtherKey="ID" Type="tbStructure" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClosurePig" Member="ClosurePig">
+    <Type Name="ClosurePig">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="grantDayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="grantWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="deliveryWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="totalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="transportMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="purchaseMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportCar" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportDriver" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="pactDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pactNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="batch" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="salesNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deathNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="weightByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="priceByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="priceByWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lossWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lossRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lastSalesDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastDeathDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastGrantFeedDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="closure" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="extantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="liveRate" Type="System.Decimal" DbType="Decimal(24,12) NOT NULL" CanBeNull="false" />
+      <Column Name="dayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedGrantToDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedDelayDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedSurplusDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedUsedToDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="closeDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sales" Member="Sales">
+    <Type Name="Sales">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PigID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salesDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="customer" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="salesperson" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="salesmethods" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grade" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="salesNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salesWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="deliveryWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="priceByWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="weightByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VaccineTask" Member="VaccineTask">
+    <Type Name="VaccineTask">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="grantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="extantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="injectDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="vaccineName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClosedPig" Member="ClosedPig">
+    <Type Name="ClosedPig">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="grantDayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="grantWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="deliveryWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="totalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="transportMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="purchaseMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportCar" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportDriver" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="pactDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pactNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="batch" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="salesNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deathNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="weightByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="priceByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="priceByWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lossWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lossRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lastSalesDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastDeathDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastGrantFeedDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="closure" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="checkoutDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="liveRate" Type="System.Decimal" DbType="Decimal(24,12) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbFeedGrant" Member="tbFeedGrant">
+    <Type Name="tbFeedGrant">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PigID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fromDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="addDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="delayDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="realNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="orgWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="checkState" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="referTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="checkTime" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="referPerson" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="checkPerson" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="feeds" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Association Name="tbPig_tbFeedGrant" Member="tbPig" ThisKey="PigID" OtherKey="ID" Type="tbPig" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GrantFeed" Member="GrantFeed">
+    <Type Name="GrantFeed">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PigID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fromDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="addDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="delayDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="realNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="orgWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="checkState" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="referTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="checkTime" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="referPerson" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="checkPerson" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="feeds" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="grantDayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="delayDaysSum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="realFeedDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbSales" Member="tbSales">
+    <Type Name="tbSales">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PigID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salesDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="customer" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="salesperson" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="salesmethods" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grade" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="salesNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salesWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="deliveryWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="tbPig_tbSales" Member="tbPig" ThisKey="PigID" OtherKey="ID" Type="tbPig" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SettledBatch" Member="SettledBatch">
+    <Type Name="SettledBatch">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="grantDayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="grantWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="deliveryWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="totalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="transportMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="purchaseMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportCar" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportDriver" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="pactDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pactNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="raiserNo" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="regionID" Member="areaID" Storage="_regionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="regionID2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="batch" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="salesNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deathNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="weightByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="priceByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="priceByWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lossWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lossRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="liveRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lastSalesDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastDeathDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastGrantFeedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="settleDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="closeDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="liveDays" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pig" Member="Pig">
+    <Type Name="Pig">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="grantDayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="grantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="grantWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="deliveryWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="totalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="transportMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="purchaseMan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportCar" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="transportDriver" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="pactDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pactNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salesWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="salesNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deathNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedGrantToDayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedDelayDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="lastSalesDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastDeathDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="lastGrantFeedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="batch" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="weightByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="priceByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="priceByWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lossWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lossRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="extantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="liveRate" Type="System.Decimal" DbType="Decimal(24,12) NOT NULL" CanBeNull="false" />
+      <Column Name="feedUsedToDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="statusFlag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feedDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="clearDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="feedSurplusDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.ProductionReport" Method="ProductionReport">
+    <Parameter Name="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="orgDate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="endDate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="ProductionReportResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="raiserID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="raiserName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="areaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="areaID2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="batch" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="grantDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="grantDayOld" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="technician" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="weightByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="grantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="orgExtantNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deathNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salesNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salesWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="deathNumAll" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salesNumAll" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salesWeightAll" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="vaccineName1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="vaccineName2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="vaccineName3" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="vaccineName4" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="vaccineName5" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="injectionDate1" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="injectionDate2" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="injectionDate3" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="injectionDate4" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="injectionDate5" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="salesWeightByNum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="salesWeightByNumAll" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="endExtantNum" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="liveRate" Type="System.Decimal" DbType="Decimal(24,12) NOT NULL" CanBeNull="false" />
+      <Column Name="orgDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="endDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

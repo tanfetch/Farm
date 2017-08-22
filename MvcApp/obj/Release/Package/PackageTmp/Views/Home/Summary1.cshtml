@@ -1,0 +1,32 @@
+﻿
+
+
+<div style="line-height:18px;">
+        <div>
+        系统中共有养户 
+        <a href="javascript:void(0)" onclick="newMainPanel('/Raiser/List?rspType=view','养户信息','icon-person')">
+            @ViewData["养户总数"]</a> 户，其中：
+        </div>
+
+        <div>签约待调 
+        <a href="javascript:void(0)" onclick="newMainPanel('/Pact/List?statusFlag_0=0','合同信息','icon-paper')">
+            @ViewData["签约待调"]</a> 
+        户
+        </div>
+        
+        <div>
+            空闲 <a href="javascript:void(0)">@ViewData["空闲养户数"]</a> 户
+        </div>
+        
+        <div>
+            在养 <a href="javascript:void(0)" onclick="newMainPanel('/Pig/List?rspType=view','在养列表','icon-livepigs')">
+            @ViewData["在养数"]</a> 户
+        </div>
+
+        <div>
+            待结 <a href="javascript:void(0)" onclick="newMainPanel('/Checkout/ClosurePig?rspType=view','待结列表','icon-livepigs')">
+            @ViewData["待结数"]</a> 户
+        </div>
+    
+
+</div>

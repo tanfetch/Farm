@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MvcApp.Controllers.AreaCollectModel>
+@{
+
+    <fieldset>
+    <legend>需要发料的养户（@Model.Sum(p=>p.value)）</legend>
+    @foreach (var item in Model)
+    {
+        <a href="javascript:void(0)" 
+            onclick="newMainPanel('/Pig/List?feedSurplusDays_2=1&areaID_0=@item.areaID','在养列表','icon-livepigs')"
+            class="easyui-linkbutton" data-options="plain:true" style="width:80px;">
+        <span>@item.areaName</span><span>:</span><span>@item.value</span>
+        </a>
+    }
+    </fieldset>
+}

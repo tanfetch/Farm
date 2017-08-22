@@ -1,0 +1,24 @@
+﻿@using Farm.AppCommon
+@using Farm.Raisers.DataContext
+
+
+@{
+    
+    var db = new BaseRepository();
+    var structures = db.GetEntities<tbStructure>(p => p.typeID == 1);
+    var contractedRaiser = db.GetCount<Pact>(p => p.statusFlag == 0);
+    <fieldset>
+    <legend>签约待调的养户（@contractedRaiser）</legend>
+    @foreach (var item in structures)
+    {
+        var text = item.name;
+        var value = db.GetCount<Pact>(p => p.areaID == item.ID && p.statusFlag == 0);
+
+        <a href="javascript:void(0)" onclick="newMainPanel('/Pact/List?areaID_0=@item.ID','合同信息','icon-paper')"
+             class="easyui-linkbutton" data-options="plain:true" style="width:80px;">
+        <span>@text</span><span>:</span><span>@value</span>
+        </a>
+    }
+    </fieldset>
+  
+}

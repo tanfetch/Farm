@@ -1,0 +1,62 @@
+﻿<div style="padding:30px">
+
+    <div class="ftitle">生成报表</div>  
+    <form method="post" action="/Report/Production">
+       <!-- 
+           <div class="fitem">  
+            <label>区域：</label>  
+            @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new {@style="width:auto;" }) 
+        </div>
+        
+        <div class="fitem">  
+            <label>编号</label>
+            @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:60px;" })
+        </div>
+    
+        <div class="fitem">  
+            <label>养户</label>
+            @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+        </div>
+        -->
+        <div class="fitem">  
+            <label>日期区间 </label>
+            @Html.TextBox("orgDate", string.Format("{0:d}",DateTime.Today.AddDays(-7)), new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+            @Html.TextBox("endDate", string.Format("{0:d}",DateTime.Today), new { @class = "easyui-datebox", @style = "width:90px;" })
+        </div>
+
+        <div class="fitem" style="margin:30px 0;">  
+        <label></label>  
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="false" onclick="doproduction(this)" >生成</a>
+        </div>
+
+    </form>
+
+</div>  
+
+<script>
+    function doproduction(obj) {
+        var fm = $(obj).parents('form');
+
+        fm.ajaxSubmit({
+            url: "/Report/Production",
+            beforeSubmit: function () {
+                return true;
+                //return fm.form('validate');
+            },
+            success: function (data) {
+                var success = eval(data);
+                if (success) {
+                    newMainPanel('/Report/Index?rspType=view', '报表', 'icon-report');
+                }
+            },
+            error: function (response, newValue) {
+                //$form.find(":submit").removeAttr('disabled');
+                var msg = "(" + response.status + ")" + response.responseText;
+                alert(msg);
+            }
+        });
+
+    }
+
+</script>

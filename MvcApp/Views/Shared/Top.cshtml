@@ -1,0 +1,64 @@
+﻿<div class="" style="height:auto;" id="main-top">
+
+<div style="float:right;">
+@if(Farm.Authority.Users.Account.currentUser !=null)
+{
+    <span>@Farm.Authority.Users.Account.currentUser.userID </span> <span>|</span>
+    <span>@Farm.Authority.Users.Account.currentUser.userName </span> <span>|</span>
+
+    <span><a href="/Logon/"class="easyui-linkbutton" plain="true" >退出</a> </span> <span>|</span>
+    <span><a href="javascript:void(0)"class="easyui-linkbutton" plain="true" onclick="showChangePassword()">修改密码</a> </span> 
+}
+</div>
+
+
+<div id="dialogChangePassword" class="easyui-dialog" title="修改密码" style="width:350px;height:180px;"  
+        data-options="iconCls:'icon-save',modal:true,closed:true,buttons:'#changePasswordButton'">  
+    <form id="changePasswordform" method="post"  iconCls="icon-set" novalidate>  
+        <div class="fitem">
+            <label>原密码：</label>
+            <input type="password" name="userPassword0" class="easyui-validatebox" data-options="required:false" />
+        </div>
+        <div class="fitem">
+            <label>新密码：</label>
+            <input type="password" name="userPassword1" class="easyui-validatebox" data-options="required:false" />
+        </div>
+        <div class="fitem">
+            <label>再输一次：</label>
+            <input type="password" name="userPassword2" class="easyui-validatebox" data-options="required:false" />
+        </div>
+        <input type="hidden" name="ID" value="0" />
+
+        <div id="changePasswordButton">
+            <a href="javascript:void(0)" class="easyui-linkbutton submitbutton" iconcls="icon-ok">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dialogChangePassword').dialog('close')">取消</a>
+        </div> 
+
+    </form>   
+</div>  
+
+
+<script>
+    function showChangePassword() {
+        $('#changePasswordform').form('reset');
+        $('#dialogChangePassword').dialog('open');
+    }
+
+    function SaveUserPassword(){
+
+        $('#changePasswordform').ajaxSubmit({
+            url: '/Logon/ChangePassword',
+            success: function (data) {
+                if (!data.success) {
+                    showError(data.message);
+                }
+                else {
+                    showSuccess(data.message);
+                    $('#dialogChangePassword').dialog('close');
+                }
+            }
+        });
+    }
+</script>
+
+</div>

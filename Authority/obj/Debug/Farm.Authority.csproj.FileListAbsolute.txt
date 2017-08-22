@@ -1,0 +1,16 @@
+F:\Farm\Authority\bin\Debug\Farm.Authority.dll.config
+F:\Farm\Authority\bin\Debug\Farm.Authority.dll
+F:\Farm\Authority\bin\Debug\Farm.Authority.pdb
+F:\Farm\Authority\bin\Debug\AppCommon.dll
+F:\Farm\Authority\bin\Debug\AppCommon.pdb
+F:\Farm\Authority\obj\Debug\Farm.Authority.csprojResolveAssemblyReference.cache
+F:\Farm\Authority\obj\Debug\Farm.Authority.dll
+F:\Farm\Authority\obj\Debug\Farm.Authority.pdb
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Authority\bin\Debug\Farm.Authority.dll.config
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Authority\bin\Debug\Farm.Authority.dll
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Authority\bin\Debug\Farm.Authority.pdb
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Authority\bin\Debug\AppCommon.dll
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Authority\bin\Debug\AppCommon.pdb
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Authority\obj\Debug\Farm.Authority.csprojResolveAssemblyReference.cache
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Authority\obj\Debug\Farm.Authority.dll
+C:\Users\tan\Documents\Visual Studio 2013\Projects\Farm\Authority\obj\Debug\Farm.Authority.pdb

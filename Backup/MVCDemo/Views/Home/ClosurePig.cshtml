@@ -1,0 +1,22 @@
+﻿@using Farm.AppCommon
+@using Farm.Raisers.DataContext
+
+@{
+    var db = new BaseRepository();
+    var structures = db.GetEntities<tbStructure>(p => p.typeID == 1);
+    var closurePig = db.GetCount<ClosurePig>(p => true);
+    <fieldset>
+    <legend>清栏待结的养户（@closurePig）</legend>
+    @foreach (var item in structures)
+    {
+        var text = item.name;
+        var value = db.GetCount<ClosurePig>(p => p.areaID == item.ID);
+
+        <a href="javascript:void(0)" 
+            onclick="newMainPanel('/Pig/List?areaID_0=@item.ID','在养列表','icon-livepigs')"
+            class="easyui-linkbutton" data-options="plain:true" style="width:80px;">
+        <span>@text</span><span>:</span><span>@value</span>
+        </a>
+    }
+    </fieldset>
+}

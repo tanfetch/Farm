@@ -1,0 +1,54 @@
+﻿<div style="padding:30px">
+
+    <div class="ftitle">调入报表</div>  
+    <form method="post">
+        <div class="fitem">  
+            <label>区域：</label>  
+            @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new {@style="width:auto;" }) 
+        </div>
+        <!--
+        <div class="fitem">  
+            <label>编号</label>
+            @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:60px;" })
+        </div>
+    
+        <div class="fitem">  
+            <label>养户</label>
+            @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+        </div>
+        -->
+        <div class="fitem">  
+            <label>调入日期 </label>
+            @Html.TextBox("grantDate_1", Request["grantDate_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+            @Html.TextBox("grantDate_2", Request["grantDate_2"], new { @class = "easyui-datebox", @style = "width:90px;" })
+        </div>
+
+        <div class="fitem" style="margin:30px 0;">  
+        <label></label>  
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="false" onclick="dogrant(this)" >生成</a>
+        </div>
+    </form>
+
+</div>  
+
+<script>
+    function dogrant(obj) {
+        var fm = $(obj).parents('form');
+
+        fm.ajaxSubmit({
+            url: "/Report/Grant",
+            beforeSubmit: function () {
+                return true;
+                //return fm.form('validate');
+            },
+            success: function (data) {
+                var success = eval(data);
+                if (success) {
+                    newMainPanel('/Report/Index?rspType=Content', '报表', 'icon-report');
+                }
+            }
+        });
+    }
+
+</script>

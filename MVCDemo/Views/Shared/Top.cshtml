@@ -1,0 +1,11 @@
+﻿<div class="" style="height:auto;" id="main-top">
+@if(Farm.Authority.Users.Account.currentUser !=null)
+{
+    <span>@Farm.Authority.Users.Account.currentUser.userID </span> <span>|</span>
+    <span>@Farm.Authority.Users.Account.currentUser.userName </span> <span>|</span>
+
+    <span>@Html.ActionLink("退出", "Index", "Logon", null, null) </span> 
+}
+</div>
+
+

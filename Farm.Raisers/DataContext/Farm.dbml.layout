@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.5, 14.5" name="Farm">
+  <DataContextMoniker Name="/FarmDataContext" />
+  <nestedChildShapes>
+    <classShape Id="60ffa211-f2a9-4ca2-8d62-40c2a7e6e1c1" isExpanded="false" absoluteBounds="3.5, 11.125, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/tbCheckout" />
+      <nestedChildShapes>
+        <elementListCompartment Id="96aa62d7-0234-4124-bd2e-8f8ce79e6fc6" absoluteBounds="3.5150000000000006, 11.585, 1.9700000000000002, 3.112762451171875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3c511141-6c03-4e71-bf4d-0a6f744d5063" isExpanded="false" absoluteBounds="5.125, 9.875, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/tbDeath" />
+      <nestedChildShapes>
+        <elementListCompartment Id="42a3a077-33a0-45d1-bd7e-48dd730f8ae5" absoluteBounds="5.1400000000000006, 10.335, 1.9700000000000002, 1.5846048990885415" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f67188f3-e5c6-4581-aac2-b0bbc50bdd60" absoluteBounds="6.25, 6.75, 2, 1.5715458170572916">
+      <DataClassMoniker Name="/FarmDataContext/tbInjection" />
+      <nestedChildShapes>
+        <elementListCompartment Id="61dc2b2c-8133-4358-a73c-8fd63cfec4ae" absoluteBounds="6.2650000000000006, 7.2100000000000009, 1.9700000000000002, 1.0115458170572915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ed79b599-dbdd-42df-ab69-5e65933836d6" isExpanded="false" absoluteBounds="3.5, 6.25, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/tbPact" />
+      <nestedChildShapes>
+        <elementListCompartment Id="96de25c7-502c-4b6c-8f37-6de2745ca683" absoluteBounds="3.5149999999999997, 6.7100000000000009, 1.9700000000000002, 1.0115458170572915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="11837bab-5737-4f91-9849-831235ec778a" isExpanded="false" absoluteBounds="2.25, 7.25, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/tbPig" />
+      <nestedChildShapes>
+        <elementListCompartment Id="833bfc1a-856d-44c8-8e75-d8b0d6781a60" absoluteBounds="2.2650000000000006, 7.7100000000000009, 1.9700000000000002, 3.3037821451822915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="18766316-5f68-41b5-86af-0559f264a24a" isExpanded="false" absoluteBounds="1.375, 4.5, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/tbRaiser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3b2fe2f3-64af-4839-b966-51e190a336a1" absoluteBounds="1.3900000000000001, 4.9600000000000009, 1.9700000000000002, 2.1576639811197915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="db22e1fd-0070-4b7a-b305-b616b2b36048" isExpanded="false" absoluteBounds="0.5, 5.875, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/tbStructure" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3dd7722f-8c26-47ad-8d68-cfa6a8e4eb1b" absoluteBounds="0.515, 6.3350000000000009, 1.9700000000000002, 1.2025655110677083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="15af8a96-561a-49e0-b133-282db67c02cc" isExpanded="false" absoluteBounds="4.375, 4.875, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/tbVaccine" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5fd6ce52-a3e6-4958-a8e7-e716407fd431" absoluteBounds="4.3900000000000006, 5.335, 1.9700000000000002, 1.2025655110677083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="23833c98-a441-4a9e-bb76-9b65ab0bbee5" absoluteBounds="7.125, 3.875, 2, 1.7625655110677077">
+      <DataClassMoniker Name="/FarmDataContext/tbVaccinePlan" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ec1e38bf-be9b-4c9f-a0d9-d201f85dcab0" absoluteBounds="7.1400000000000006, 4.335, 1.9700000000000002, 1.2025655110677083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.875 : 7.7); (3.875 : 11.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/FarmDataContext/tbPig/tbPig_tbCheckout" />
+      <nodes>
+        <classShapeMoniker Id="11837bab-5737-4f91-9849-831235ec778a" />
+        <classShapeMoniker Id="60ffa211-f2a9-4ca2-8d62-40c2a7e6e1c1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.343749375 : 7.7); (3.343749375 : 10.1); (5.125 : 10.1)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/FarmDataContext/tbPig/tbPig_tbDeath" />
+      <nodes>
+        <classShapeMoniker Id="11837bab-5737-4f91-9849-831235ec778a" />
+        <classShapeMoniker Id="3c511141-6c03-4e71-bf4d-0a6f744d5063" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.25 : 7.4437475); (6.25 : 7.4437475)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/FarmDataContext/tbPig/tbPig_tbInjection" />
+      <nodes>
+        <classShapeMoniker Id="11837bab-5737-4f91-9849-831235ec778a" />
+        <classShapeMoniker Id="f67188f3-e5c6-4581-aac2-b0bbc50bdd60" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.875 : 6.7); (3.875 : 7.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/FarmDataContext/tbPact/tbPact_tbPig" />
+      <nodes>
+        <classShapeMoniker Id="ed79b599-dbdd-42df-ab69-5e65933836d6" />
+        <classShapeMoniker Id="11837bab-5737-4f91-9849-831235ec778a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.96875 : 4.95); (2.96875 : 6.54375); (3.5 : 6.54375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/FarmDataContext/tbRaiser/tbRaiser_tbPact" />
+      <nodes>
+        <classShapeMoniker Id="18766316-5f68-41b5-86af-0559f264a24a" />
+        <classShapeMoniker Id="ed79b599-dbdd-42df-ab69-5e65933836d6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.703125 : 4.95); (2.703125 : 7.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/FarmDataContext/tbRaiser/tbRaiser_tbPig" />
+      <nodes>
+        <classShapeMoniker Id="18766316-5f68-41b5-86af-0559f264a24a" />
+        <classShapeMoniker Id="11837bab-5737-4f91-9849-831235ec778a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.9375 : 5.875); (1.9375 : 4.95)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/FarmDataContext/tbStructure/tbStructure_tbRaiser" />
+      <nodes>
+        <classShapeMoniker Id="db22e1fd-0070-4b7a-b305-b616b2b36048" />
+        <classShapeMoniker Id="18766316-5f68-41b5-86af-0559f264a24a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.18419230769231 : 6.325); (1.18419230769231 : 6.575); (1.83084615384615 : 6.575); (1.83084615384615 : 6.325)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/FarmDataContext/tbStructure/tbStructure_tbStructure" />
+      <nodes>
+        <classShapeMoniker Id="db22e1fd-0070-4b7a-b305-b616b2b36048" />
+        <classShapeMoniker Id="db22e1fd-0070-4b7a-b305-b616b2b36048" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.8749975 : 5.325); (5.8749975 : 7.91389915852865); (6.25 : 7.91389915852865)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/FarmDataContext/tbVaccine/tbVaccine_tbInjection" />
+      <nodes>
+        <classShapeMoniker Id="15af8a96-561a-49e0-b133-282db67c02cc" />
+        <classShapeMoniker Id="f67188f3-e5c6-4581-aac2-b0bbc50bdd60" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.125 : 5.1); (6.375 : 5.1)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/FarmDataContext/tbVaccinePlan/tbVaccinePlan_tbVaccine" />
+      <nodes>
+        <classShapeMoniker Id="23833c98-a441-4a9e-bb76-9b65ab0bbee5" />
+        <classShapeMoniker Id="15af8a96-561a-49e0-b133-282db67c02cc" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="4a7b7246-4b01-41b2-88d8-a85d73517af6" isExpanded="false" absoluteBounds="10.125, 3.125, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/Checkout" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ffcd8667-9e56-47f7-abfe-064cea6af539" absoluteBounds="10.14, 3.585, 1.9700000000000002, 4.640920003255208" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="53f0354e-3d7e-4d97-944e-f3af6f4a0eb2" isExpanded="false" absoluteBounds="10.25, 4, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/Death" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bf5e9686-b1e1-4e93-84f2-f76cb4376ef7" absoluteBounds="10.265, 4.46, 1.9700000000000002, 2.7307230631510415" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6daace9d-1f1b-4ce1-b88d-7bbebf7ded7a" isExpanded="false" absoluteBounds="6.75, 13.75, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/LivePig" />
+      <nestedChildShapes>
+        <elementListCompartment Id="479af530-5458-4c7f-8d24-4cba0de99090" absoluteBounds="6.765, 14.21, 1.9700000000000002, 8.0792744954427071" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5cedb31a-1250-48de-9b5d-c46d8b26a8e9" isExpanded="false" absoluteBounds="10.25, 5.5, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/Pact" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8c4e3533-7291-447a-9870-6d2636cbf153" absoluteBounds="10.265, 5.96, 1.9700000000000002, 2.1576639811197915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e4a50691-7598-4cac-a3cb-824e7d623d56" isExpanded="false" absoluteBounds="10.5, 1.125, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/Raiser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f222ce85-43c8-409d-9785-c6602bc202a4" absoluteBounds="10.515, 1.585, 1.9700000000000002, 3.494801839192708" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b88b34b4-a02a-49b1-afc4-f09ce8df820a" isExpanded="false" absoluteBounds="10.125, 2.125, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/RoleGroup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="75c48e51-d810-4ece-9e45-42fc2136a4cf" absoluteBounds="10.14, 2.585, 1.9700000000000002, 1.2025655110677083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="451b80e0-8e62-49f4-9d85-6534d7194b26" isExpanded="false" absoluteBounds="10.125, 9.75, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/Structure" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3b18a178-4815-4c6a-9850-788956c41506" absoluteBounds="10.14, 10.21, 1.9700000000000002, 1.393585205078125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="87fce4ba-28ae-4b45-9bbc-a16f7f62196d" isExpanded="false" absoluteBounds="10.25, 8.875, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/Users" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6554fcd6-d14d-494c-8a61-037fd7e52cea" absoluteBounds="10.265, 9.335, 1.9700000000000002, 1.966644287109375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d0d1315a-a95f-42ed-abb1-c68467104d92" isExpanded="false" absoluteBounds="0.5, 8.875, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/Purview" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6098b1fd-8b4a-4216-8eb6-aedc9fbe9333" absoluteBounds="0.51500000000000057, 9.335, 1.9700000000000002, 0.820526123046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(0.779596153846154 : 6.325); (0.779596153846154 : 8.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/FarmDataContext/tbStructure/tbStructure_Purview" />
+      <nodes>
+        <classShapeMoniker Id="db22e1fd-0070-4b7a-b305-b616b2b36048" />
+        <classShapeMoniker Id="d0d1315a-a95f-42ed-abb1-c68467104d92" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="f5584665-902e-496c-bfae-259842bbe05d" isExpanded="false" absoluteBounds="6.625, 12.75, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/ClosurePig" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4974a8bc-0bd6-490a-8e6a-af5d07ac6946" absoluteBounds="6.6400000000000006, 13.21, 1.9700000000000002, 8.4613138834635411" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5438adfe-f161-4e90-a920-e3e9c9db4959" isExpanded="false" absoluteBounds="10.5, 4.875, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/Sales" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4846699e-f1c0-41b4-a71a-09f8576ceb25" absoluteBounds="10.515, 5.335, 1.9700000000000002, 3.685821533203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="65bf1690-e664-4476-82ad-80d3966083e8" isExpanded="false" absoluteBounds="13.625, 5.125, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/VaccineTask" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e4c9ddc7-a9b7-4e78-8942-e0f8dbadaf2f" absoluteBounds="13.64, 5.585, 1.9700000000000002, 2.7307230631510415" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0252dbdb-b53a-4129-86a4-54b9dc4be57f" isExpanded="false" absoluteBounds="13.625, 8.75, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/ClosedPig" />
+      <nestedChildShapes>
+        <elementListCompartment Id="67c33c6c-4f1f-4ba7-816a-aacfa5e63841" absoluteBounds="13.64, 9.21, 1.9700000000000002, 7.3151957194010411" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="767915c0-f772-49ed-99e9-3652990d3456" isExpanded="false" absoluteBounds="1.25, 10.625, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/tbFeedGrant" />
+      <nestedChildShapes>
+        <elementListCompartment Id="14e1a84c-af35-4fe5-8dee-f3cdd9d59821" absoluteBounds="1.2649999999999997, 11.085, 1.9700000000000002, 2.7307230631510415" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.90625 : 7.7); (2.90625 : 10.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/FarmDataContext/tbPig/tbPig_tbFeedGrant" />
+      <nodes>
+        <classShapeMoniker Id="11837bab-5737-4f91-9849-831235ec778a" />
+        <classShapeMoniker Id="767915c0-f772-49ed-99e9-3652990d3456" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="bf0d5e48-cfa6-4352-b35f-15cf6163b361" isExpanded="false" absoluteBounds="1.75, 13.625, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/GrantFeed" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8f41b6c2-3766-4a79-aa1a-adbf5787ebf1" absoluteBounds="1.7650000000000001, 14.085, 1.9700000000000002, 4.4499003092447911" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="05ca38c6-5360-4572-bd2c-cc285bb02d4e" isExpanded="false" absoluteBounds="5.375, 8.875, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/tbSales" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a9225733-8691-4ff9-b753-0906c5fdd946" absoluteBounds="5.39, 9.335, 1.9700000000000002, 2.539703369140625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.25 : 7.7); (4.625 : 8.075); (4.625 : 9.1); (5.375 : 9.1)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/FarmDataContext/tbPig/tbPig_tbSales" />
+      <nodes>
+        <classShapeMoniker Id="11837bab-5737-4f91-9849-831235ec778a" />
+        <classShapeMoniker Id="05ca38c6-5360-4572-bd2c-cc285bb02d4e" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="87f53dca-8963-4fea-8f82-9212be92151c" absoluteBounds="15.25, 3.125, 2, 8.0662154134114576">
+      <DataClassMoniker Name="/FarmDataContext/SettledBatch" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8dc335fe-6c80-4261-9a4e-3122aecd73af" absoluteBounds="15.265, 3.585, 1.9700000000000002, 7.506215413411458" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6b0b73f4-c312-4999-a35d-e49c8b605ead" isExpanded="false" absoluteBounds="13.125, 3.125, 2, 0.45">
+      <DataClassMoniker Name="/FarmDataContext/Pig" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a0bbb3ef-d920-4778-844c-21ca7149c6bf" absoluteBounds="13.14, 3.585, 1.9700000000000002, 8.6523335774739571" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

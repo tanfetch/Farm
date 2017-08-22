@@ -1,0 +1,8 @@
+F:\Farm\Authority\bin\Release\Farm.Authority.dll.config
+F:\Farm\Authority\bin\Release\Farm.Authority.dll
+F:\Farm\Authority\bin\Release\Farm.Authority.pdb
+F:\Farm\Authority\bin\Release\AppCommon.dll
+F:\Farm\Authority\bin\Release\AppCommon.pdb
+F:\Farm\Authority\obj\Release\Farm.Authority.csprojResolveAssemblyReference.cache
+F:\Farm\Authority\obj\Release\Farm.Authority.dll
+F:\Farm\Authority\obj\Release\Farm.Authority.pdb

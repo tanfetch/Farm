@@ -1,0 +1,26 @@
+﻿
+
+<div class="easyui-tabs" style="min-height:158px;" data-options="plain:false,border:false,fit:false"> 
+    <div id="s1-panel" style="padding:10px;" data-options="title:'养户',tools:'#s1-tools',href:'/Home/Summary1'"></div>
+</div>
+
+
+<div class="easyui-tabs" style="min-height:180px;" data-options="plain:false,border:false,fit:false"> 
+    <div id="s2-panel" style="padding:10px;" data-options="title:'本年度累计',tools:'#s2-tools',href:'/Home/Summary2'"></div>
+</div>
+
+
+<div class="easyui-tabs" style="min-height:150px;" data-options="plain:false,border:false,fit:false"> 
+    <div id="s3-panel" style="padding:10px;" data-options="title:'今天',tools:'#s3-tools',href:'/Home/Summary3'"></div>
+</div>
+
+
+<div id="s1-tools">
+    <a href="javascript:void(0)" class="icon-mini-refresh" onclick="$('#s1-panel').panel('refresh')"></a>
+</div>
+<div id="s2-tools">
+    <a href="javascript:void(0)" class="icon-mini-refresh" onclick="$('#s2-panel').panel('refresh')"></a>
+</div>
+<div id="s3-tools">
+    <a href="javascript:void(0)" class="icon-mini-refresh" onclick="$('#s3-panel').panel('refresh')"></a>
+</div>

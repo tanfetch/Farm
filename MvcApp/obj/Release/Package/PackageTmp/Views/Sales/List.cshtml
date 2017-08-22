@@ -1,0 +1,121 @@
+﻿<div class="easyui-tabs" style="height:auto;" fit="true">  
+
+<div title="销售记录" style="margin:0px;">
+    <table id="dg_sales" class="easyui-datagrid" toolbar="#toolbar_sales" >  
+        <thead data-options="frozen:true">
+            <tr>
+                <th field="raiserID"     sortable="true" width="60"  >编号</th>  
+                <th field="raiserName"         sortable="true" width="60" >养户</th>  
+                <th field="areaName"     sortable="true" >服务点</th> 
+            </tr>
+        </thead>
+        <thead>  
+            <tr>  
+            <th field="salesDate" formatter="dateFormatter" sortable="true"  width="80">销售日期</th>  
+            <th field="salesNum" width="60">销售数量</th>  
+            <th field="salesWeight" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="80">发运重量</th>  
+            <th field="deliveryWeight" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="80">到岸重量</th>
+            <th field="weightByNum" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="80">均重</th>
+            <th field="amount" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="80" >总金额</th>  
+            <th field="priceByWeight" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="60" >单价</th>  
+            <th field="salesmethods" width="60" >销售方式</th>  
+            <th field="grade" width="60" >等级</th>  
+            <th field="salesperson"  width="100">销售员</th> 
+            <th field="customer" width="60" >买主</th>  
+            <th field="description"     >备注</th>  
+
+            </tr>  
+        </thead>  
+    </table>  
+    <div id="toolbar_sales">  
+        <div>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" 
+                onclick="s_newSales()">增加</a>
+            <a href="javascript:void(0)" select id="sales-del" class="easyui-linkbutton" iconCls="icon-remove" plain="true" 
+                onclick="destroyRow('#dg_sales','@Url.Content("~/Sales/Delete")')">删除</a> 
+        </div> 
+        <div>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" 
+                    onclick="loadSalesStatistics()">统计</a>
+            <span id="salesStatistics"></span>
+
+                <script>
+                    function loadSalesStatistics() {
+                        $.ajax({
+                            url: '/Sales/List?t=Statistics',
+                            data: $('#dg_sales').datagrid('options').queryParams,
+                            cache: false,
+                            success: function (data) {
+                                $('#salesStatistics').html(data);
+                            }
+                        });
+                    }
+                </script>
+        </div>
+        <script>
+            function s_newSales() {
+                newMainPanel('/Sales/Update?rspType=view', '销售', 'icon-cart_add');
+            }
+        </script>
+
+        <div style="margin:3px;">
+            <form id="fm_salesfilter">
+
+            <span style="margin:0 5px">区域
+                @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new { @style = "width:auto;" }) 
+            </span>
+            <span style="margin:0 5px">编号
+                @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:50px;" })
+            </span>
+            <span style="margin:0 5px">养户
+                @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">销售员
+                @Html.TextBox("salesperson_4", Request["salesperson_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">方式
+                @Html.DropDownList("salesmethods_0", ViewModelHelper.GetSalesMannerItems(Request["salesmethods_0"], true)
+            , new { @style = "width:auto;" })
+            </span>
+            <span style="margin:0 5px">等级
+                @Html.DropDownList("grade_0", ViewModelHelper.GetSalesGradeItems(Request["grade_0"], true)
+            , new { @style = "width:auto;" })
+            </span>
+
+            <span style="margin:0 5px">销售日期
+                @Html.TextBox("salesDate_1", Request["salesDate_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+                @Html.TextBox("salesDate_2", Request["salesDate_2"], new { @class = "easyui-datebox", @style = "width:90px;" })
+            </span>
+
+            <span style="margin:0 5px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" 
+                    onclick="doSearch('#fm_salesfilter','#dg_sales')">查找</a>
+            </span>
+            </form>
+        </div>
+    </div>  
+    <script type="text/javascript">
+
+        $(function () {
+            var qdata = getFormJson('#fm_salesfilter');
+            $('#dg_sales').datagrid({
+                url: '/Sales/List',
+                queryParams: qdata,
+                onSelect: function (rowIndex, rowData) {
+                    updateButton('#sales-del',!rowData.canDel);
+                },
+                onLoadSuccess: function () {
+                    loadSalesStatistics();
+                }
+            });
+
+            $('#dg_sales').datagrid('detailView', '/Sales/Edit?rspType=view');
+        });
+
+
+    </script>
+
+
+</div>
+</div>

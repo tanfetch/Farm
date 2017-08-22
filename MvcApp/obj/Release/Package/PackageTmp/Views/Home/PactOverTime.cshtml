@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Farm.Raisers.DataContext.Pact>
+
+@if (Model.Count() == 0)
+{
+    Response.End();
+}
+
+<fieldset>
+    <legend>
+        <a href="javascript:void(0)" 
+            onclick="newMainPanel('/Pact/List?statusFlag_0=0&pactDate_2=@DateTime.Today.AddDays(-25)','合同信息','icon-paper')"
+            class="easyui-linkbutton" data-options="plain:true" style="margin:0 5px;">
+            <span>签约超过25天的养户</span>
+        </a>
+    </legend> 
+    <div style="">
+    @foreach (var item in Model.OrderBy(p=>p.pactDate))
+    {
+        <a href="javascript:void(0)" 
+            onclick="newMainPanel('/Pact/List?statusFlag_0=0&raiserID_0=@item.raiserID','合同信息','icon-paper')"
+            class="easyui-linkbutton" data-options="plain:true" style="margin:0 3px;">
+            <span>@item.raiserName</span>
+        </a>
+    }
+
+    </div>
+</fieldset>

@@ -1,0 +1,22 @@
+﻿@using Farm.AppCommon
+@using Farm.Raisers.DataContext
+
+@{
+    var db = new BaseRepository();
+    var structures = db.GetEntities<tbStructure>(p => p.typeID == 1);
+    var vaccineShort = VaccinePlan.GetPlans().ToList().Count(p => p.hasOverdue);
+    <fieldset>
+    <legend>有逾期未注射疫苗的养户（@vaccineShort）</legend>
+    @foreach (var item in structures)
+    {
+        var text = item.name;
+        var value = VaccinePlan.GetPlans().ToList().Count(p => p.areaID == item.ID && p.hasOverdue );
+
+        <a href="javascript:void(0)" 
+            onclick="newMainPanel('/Vaccine/List?areaID_0=@item.ID','疫苗任务','icon-livepigs')"
+            class="easyui-linkbutton" data-options="plain:true" style="width:80px;">
+        <span>@text</span><span>:</span><span>@value</span>
+        </a>
+    }
+    </fieldset>
+}

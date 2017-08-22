@@ -1,0 +1,37 @@
+﻿
+    <div id="homePageTab" class="easyui-tabs" style=" " data-options="tabPosition:'top',plain:true,border:false,fit:true"> 
+    
+         
+    <div title="待调">
+        <div class="easyui-panel" data-options="href:'/Home/ContractedRaiser',border:false,fit:true" style="padding:5px"></div>
+    </div>
+    <div title="发料">
+        <div class="easyui-panel" data-options="href:'/Home/FeedShort',border:false,fit:true" style="padding:5px"></div>
+    </div>
+    <div title="超期">
+        <div class="easyui-panel" data-options="href:'/Home/FeedExceed',border:false,fit:true" style="padding:5px"></div>
+    </div>
+    <div title="待结">
+        <div class="easyui-panel" data-options="href:'/Home/ClosurePig',border:false,fit:true" style="padding:5px"></div>
+    </div>
+    <div title="疫苗">
+        <div class="easyui-panel" data-options="href:'/Home/VaccineShort',border:false,fit:true" style="padding:5px"></div>
+    </div>
+        
+    </div>  
+
+<script>
+
+
+    $(function () {
+        var tabs = $('#homePageTab').tabs().tabs('tabs');
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].panel('options').tab.unbind().bind('mouseenter', { index: i }, function (e) {
+                $('#homePageTab').tabs('select', e.data.index);
+            });
+        }
+    });
+
+
+
+</script>

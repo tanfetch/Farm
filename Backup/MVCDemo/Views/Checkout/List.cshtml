@@ -1,0 +1,86 @@
+﻿<div class="easyui-tabs" style="height:auto;"fit="true">  
+
+<div title="结算记录" style="margin:0px;">
+    <table id="dg_checkout" class="easyui-datagrid" toolbar="#toolbar_checkout" >  
+        <thead data-options="frozen:true">
+            <tr>
+                <th field="raiserID"     sortable="true" width="60"  >编号</th>  
+                <th field="raiserName"   sortable="true" width="60" >养户</th>  
+                <th field="areaName"     sortable="true" >服务点</th> 
+            </tr>
+        </thead>
+        <thead>  
+            <tr>  
+            <th field="amount" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="70">金额</th>  
+            <th field="pactAmount" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="70">合同金额</th>  
+            <th field="ArgAmount" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="60">头平金额</th>
+            <th field="ratioAll" data-options="formatter:function(val,row){return val.toFixed(1);},align:'right'" width="60">全程</th>  
+            <th field="ratio" data-options="formatter:function(val,row){return val.toFixed(1);},align:'right'" width="60">3.2</th>  
+            <th field="ratio2" data-options="formatter:function(val,row){return val.toFixed(1);},align:'right'" width="60">3.5</th>  
+            <th field="allowance" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="60">津贴</th>  
+            <th field="bonus" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="60">成活率奖</th>  
+            <th field="drugCost" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="60">药费</th> 
+            <th field="score"  width="60">分值</th>   
+            <th field="referTime" formatter="dateFormatter" sortable="true" width="80">结算日期</th>  
+            <th field="referPerson"      width="60">结算人</th>  
+            <th field="description"     >备注</th>  
+
+            </tr>  
+        </thead>  
+    </table>  
+    <div id="toolbar_checkout">  
+        <div>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" 
+                onclick="c_newCheckout()">增加</a>
+            <a href="javascript:void(0)" select id="checkout-del" class="easyui-linkbutton" iconCls="icon-remove" plain="true" 
+                onclick="destroyRow('#dg_checkout','@Url.Content("~/Checkout/Delete")')">删除</a> 
+        </div> 
+
+        <script>
+            function c_newCheckout() {
+                newMainPanel('/Checkout/?show=Create', '结算', 'icon-checkout');
+            }
+        </script>
+
+        <div style="margin:3px;">
+            <form id="fm_checkoutfilter">
+            <span style="margin:0 5px">区域
+                @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new { @style = "width:auto;" }) 
+            </span>
+            <span style="margin:0 5px">编号
+                @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:50px;" })
+            </span>
+            <span style="margin:0 5px">养户
+                @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">结算日期
+                @Html.TextBox("referTime_1", Request["referTime_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+                @Html.TextBox("referTime_2", Request["referTime_2"], new { @class = "easyui-datebox", @style = "width:90px;" })
+            </span>
+
+            <span style="margin:0 5px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" 
+                    onclick="doSearch('#fm_checkoutfilter','#dg_checkout')">查找</a>
+            </span>
+            </form>
+        </div>
+    </div>  
+    <script type="text/javascript">
+
+        $(function () {
+            $('#dg_checkout').datagrid({
+                url: '/Checkout/List',
+                onSelect: function (rowIndex, rowData) {
+                    updateButton('#checkout-del',!rowData.canDel);
+                }
+            })
+            .datagrid('detailView', '/Checkout/Detail?show=Edit');
+        });
+
+
+    </script>
+
+
+</div>
+</div>

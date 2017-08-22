@@ -1,0 +1,94 @@
+﻿<div class="easyui-tabs" style="height:auto;"fit="true">  
+
+<div title="历史记录" style="margin:0px;">
+    <table id="dg_settle" class="easyui-datagrid" toolbar="#toolbar_settle" >  
+        <thead data-options="frozen:true">
+            <tr>
+                <th field="link" formatter="formatSettleDetailLink"></th>
+                <th field="raiserNo" sortable="true" width="60">编号</th>  
+                <th field="raiserName"   sortable="true" width="60" >养户</th>  
+                <th field="areaName"     sortable="true" >服务点</th> 
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th field="batch" width="60">批次</th>
+                <th field="pactDate" formatter="dateFormatter" sortable="true" width="80">签约日期</th>
+                <th field="grantDate" formatter="dateFormatter" sortable="true" width="80">调入日期</th>
+                <th field="grantNum" width="60">调入数量</th>
+                <th field="deathNum" width="60">死亡数量</th>
+                <th field="salesNum" width="60">销售数量</th>
+                <th field="liveRate" data-options="formatter:function(val,row){return ((val*100).toFixed(2))+'%';},align:'right'" width="60">成活率</th>
+                <th field="liveDays" width="60">饲养天数</th>
+                <th field="closeDate" formatter="dateFormatter" sortable="true" width="80">清栏日期</th>
+                <th field="settleDate" formatter="dateFormatter" sortable="true" width="80">结算日期</th>
+                <th field="purchaseMan" width="80">采购人</th>
+                <th field="transportMan" width="80">调运人</th>
+                <th field="transportCar" width="80">调运车辆</th>
+                <th field="source">来源</th>
+                <th field="description">备注</th>
+
+            </tr>
+        </thead>    
+    </table>  
+    <div id="toolbar_settle">
+
+
+        <div style="margin:3px;">
+            <form id="fm_settlefilter">
+                <span style="margin:0 5px">
+                    区域
+                    @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new { @style = "width:auto;" })
+                </span>
+                <span style="margin:0 5px">
+                    编号
+                    @Html.TextBox("raiserNo_0", Request["raiserNo_0"], new { @style = "width:50px;" })
+                </span>
+                <span style="margin:0 5px">
+                    养户
+                    @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+                </span>
+                <span style="margin:0 5px">
+                    结算日期
+                    @Html.TextBox("settleDate_1", Request["settleDate_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                    -
+                    @Html.TextBox("settleDate_2", Request["settleDate_2"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                </span>
+
+                <span style="margin:0 5px">
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-search" plain="true"
+                       onclick="doSearch('#fm_settlefilter', '#dg_settle')">查找</a>
+                </span>
+            </form>
+        </div>
+    </div>  
+    <script type="text/javascript">
+
+        $(function () {
+            var data = getFormJson('#fm_settlefilter');
+            $('#dg_settle').datagrid({
+                url: '/Checkout/Settle',
+                queryParams: data,
+                onSelect: function (rowIndex, rowData) {
+                    
+                }
+            });
+        });
+
+        function formatSettleDetailLink(val, row) {
+
+            var s = $('<div>').html(
+                $('<a>').attr({ href: '/checkout/settle?rspType=view&id=' + row.ID, target: '_blank' })
+                .linkbutton({
+                    iconCls: 'icon-report',
+                    text:'详细',
+                    plain: true
+                })
+            );
+            return s.html();
+        }
+
+    </script>
+
+</div>
+</div>

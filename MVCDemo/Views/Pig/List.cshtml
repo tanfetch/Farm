@@ -1,0 +1,156 @@
+﻿<div class="easyui-tabs" style="height:auto;" fit="true">  
+
+<div title="在养列表" style="margin:0px;">
+    <table id="dg_pigs" class="easyui-datagrid" toolbar="#toolbar_pigs" >  
+        <thead data-options="frozen:true">
+            <tr>
+                <th field="raiserID"     sortable="true" width="60"  >编号</th>  
+                <th field="raiserName"         sortable="true" width="60" >养户</th>  
+                <th field="areaName"     sortable="true" width="60">服务点</th> 
+            </tr>
+        </thead>
+        <thead>  
+            <tr>  
+            <th field="batch"    width="60" >批次</th>
+            <th field="dayOld"   width="60" >当前日龄</th>
+            <th field="extantNum"   width="60" >存栏</th>
+            <th field="feedDays" formatter="formatFeedDays"   width="60" >饲养天数</th>
+            <th field="feedSurplusDays"   width="60" >余料天数</th>
+            <th field="salesNum"   width="60" >销售数量</th>
+            <th field="deathNum"   width="60" >死亡数量</th>
+            <th field="liveRate" data-options="formatter:function(val,row){return ((val*100).toFixed(2))+'%';},align:'right'"  width="60" >成活率</th>
+            
+            <th field="grantDate" formatter="dateFormatter"  sortable="true"  width="80"  >调入日期</th> 
+            <th field="grantDayOld" width="60" >调入日龄</th>
+            <th field="grantNum" width="60" >调入数量</th>  
+            <th field="grantWeight" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="60" >调入重量</th>  
+            <th field="weightByNum" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'"  width="60" >头均重</th> 
+            <th field="deliveryWeight" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="60" >送达重量</th>  
+            
+            <th field="totalAmount" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="60" >总金额</th>  
+            <th field="priceByWeight" data-options="formatter:function(val,row){return val.toFixed(2);},align:'right'" width="60" >单价</th>  
+            <th field="technician"         width="60" >技术员</th>
+            <th field="purchaseMan"         width="60" >采购员</th>  
+            <th field="transportMan"         width="60" >调运员</th>  
+            <th field="transportDriver"         width="60" >调运司机</th>  
+            <th field="transportCar"         width="80" >调运车辆</th>  
+            <th field="source"         width="120" >来源</th>    
+            <th field="description"   width="200">备注</th>
+
+            </tr>  
+        </thead>  
+    </table>  
+    <div id="toolbar_pigs">  
+        <div>
+            <a href="javascript:void(0)" id="pig-new" class="easyui-linkbutton" iconCls="icon-add" plain="true" 
+                onclick="pi_newPig()">增加</a>
+            <a href="javascript:void(0)" id="pig-newpig" class="easyui-linkbutton" iconCls="icon-brick_add" plain="true" 
+                onclick="pi_grantFeed()" select>发料</a>
+            <a href="javascript:void(0)" id="pig-newpig" class="easyui-linkbutton" iconCls="icon-cart_add" plain="true" 
+                onclick="pi_sales()" select>销售</a>
+            <a href="javascript:void(0)" id="pig-newpig" class="easyui-linkbutton" iconCls="icon-hourglass-delete" plain="true" 
+                onclick="pi_death()" select>死亡</a>
+            <a href="javascript:void(0)" id="pig-newpig" class="easyui-linkbutton" iconCls="icon-pill_add" plain="true" 
+                onclick="pi_vaccin()" select>疫苗</a>
+            <a href="javascript:void(0)" select id="pig-del" class="easyui-linkbutton" iconCls="icon-remove" plain="true" 
+                onclick="destroyRow('#dg_pigs','@Url.Content("~/Pig/Delete")')">删除</a> 
+        </div> 
+        <script>
+            function pi_newPig() {
+                newMainPanel('/Pig/Update', '调入', 'icon-lorry_add');
+            }
+            function pi_grantFeed() {
+                var row = $('#dg_pigs').datagrid('getSelected');
+                if (row) {
+                    var url = '/Feed/Update?key=' + row.raiserID;
+                    newMainPanel(url, '发料', 'icon-brick_add');
+                }
+            }
+            function pi_sales() {
+                var row = $('#dg_pigs').datagrid('getSelected');
+                if (row) {
+                    var url = '/Sales/Update?key=' + row.raiserID;
+                    newMainPanel(url, '销售', 'icon-cart_add');
+                }
+            }
+            function pi_death() {
+                var row = $('#dg_pigs').datagrid('getSelected');
+                if (row) {
+                    var url = '/Death/Update?key=' + row.raiserID;
+                    newMainPanel(url, '死亡', 'icon-hourglass-delete');
+                }
+            }
+            function pi_vaccin() {
+                var row = $('#dg_pigs').datagrid('getSelected');
+                if (row) {
+                    var url = '/Vaccine/Update?key=' + row.raiserID;
+                    newMainPanel(url, '疫苗', 'icon-pill_add');
+                }
+            }
+        </script>
+
+        <div style="margin:3px;">
+            <form id="fm_pigfilter">
+            <span style="margin:0 5px">区域
+                @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new { @style = "width:auto;" }) 
+            </span>
+            <span style="margin:0 5px">编号
+                @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:50px;" })
+            </span>
+            <span style="margin:0 5px">养户
+                @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">成活率
+                @Html.TextBox("liveRate_1", Request["liveRate_1"], 
+                new { @class = "easyui-numberbox", @style = "width:30px;", @min = "0", @max = "1", @precision = "2" })
+                -
+                @Html.TextBox("liveRate_2", Request["liveRate_2"], 
+                new { @class = "easyui-numberbox", @style = "width:30px;", @min = "0", @max = "1", @precision = "2" }) 
+            </span>
+            <span style="margin:0 5px">调入日期
+                @Html.TextBox("grantDate_1", Request["grantDate_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+                @Html.TextBox("grantDate_2", Request["grantDate_2"], new { @class = "easyui-datebox", @style = "width:90px;" })
+            </span>
+            <span style="margin:0 5px">技术员
+                @Html.TextBox("technician_4", Request["technician_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">来源
+                @Html.TextBox("source_4", Request["source_4"], new { @style = "width:100px;" })
+            </span>
+
+            @Html.Hidden("feedSurplusDays_2", Request["feedSurplusDays_2"])
+            <span style="margin:0 5px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" 
+                    onclick="doSearch('#fm_pigfilter','#dg_pigs')">查找</a>
+            </span>
+            </form>
+        </div>
+
+    </div>  
+    <script type="text/javascript">
+
+        $(function () {
+            var data = getFormJson('#fm_pigfilter');
+            $('#dg_pigs').datagrid({
+                url: '/Pig/List',
+                queryParams: data
+            });
+            $('#dg_pigs').datagrid('detailView', '/Pig/Detail?show=Edit');
+        });
+
+        function formatFeedDays(val, row) {
+            var d = new Date();
+            var pd = new Date(parseInt(row.grantDate.replace("/Date(", "").replace(")/", ""))).format("yyyy-MM-dd");
+            var today = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
+            return dateDiff('D', pd, today);
+        }
+
+   
+
+
+    </script>
+
+
+</div>
+</div>

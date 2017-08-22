@@ -1,0 +1,53 @@
+﻿<div style="padding:30px">
+
+    <div class="ftitle">销售报表</div>  
+    <form method="post" id="fm_salesReport">
+        <div class="fitem">  
+            <label>区域：</label>  
+            @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new {@style="width:auto;" }) 
+        </div>
+        <!--
+        <div class="fitem">  
+            <label>编号</label>
+            @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:60px;" })
+        </div>
+    
+        <div class="fitem">  
+            <label>养户</label>
+            @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+        </div>
+        -->
+        <div class="fitem">  
+            <label>销售日期 </label>
+            @Html.TextBox("salesDate_1", Request["salesDate_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+            @Html.TextBox("salesDate_2", Request["salesDate_2"], new { @class = "easyui-datebox", @style = "width:90px;" })
+        </div>
+
+        <div class="fitem" style="margin:30px 0;">  
+        <label></label>  
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="false" onclick="dosales(this)" >生成</a>
+        </div>
+    </form>
+
+</div>  
+
+<script>
+    function dosales(obj) {
+        var fm = $(obj).parents('form');
+        fm.ajaxSubmit({
+            url: "/Report/Sales?r=" + Math.random(),
+            beforeSubmit: function () {
+                return true;
+                //return fm.form('validate');
+            },
+            success: function (data) {
+                var success = eval(data);
+                if (success) {
+                    newMainPanel('/Report/?show=Index', '报表', 'icon-report');
+                }
+            }
+        });
+    }
+
+</script>

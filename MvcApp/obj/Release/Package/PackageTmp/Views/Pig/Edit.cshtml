@@ -1,0 +1,75 @@
+﻿@model Farm.Raisers.DataContext.tbPig
+<div style="padding:10px;">
+
+<fieldset style="width:660px;padding:10px;">
+    <legend>修改调入信息</legend>
+
+<form action="/Pig/Edit" method="post">
+
+    <table>
+    <tr>
+        <td style="width:60px;"> <label>调入日期：</label></td>  
+        <td style="width:150px;">@Html.TextBoxFor(model => model.grantDate, new { @Class = "easyui-datebox",@style="width:80px;",
+                @Value=string.Format("{0:d}",Model.grantDate) })</td>
+
+        <td style="width:60px;"> <label>调入日龄：</label></td>  
+        <td style="width:150px;">@Html.TextBoxFor(model => model.grantDayOld, new { @Class = "easyui-numberbox",@style="width:60px;",
+                @precision=0})</td>
+
+        <td style="width:60px;"> <label>调入头数：</label></td>  
+        <td style="width:150px;">@Html.TextBoxFor(model => model.grantNum, new { @Class = "easyui-numberbox",@style="width:60px;",
+                @precision=0})</td>
+    </tr>
+    <tr>
+        <td> <label>购入重量：</label></td>  
+        <td>@Html.TextBoxFor(model => model.grantWeight, new { @Class = "easyui-numberbox",@style="width:60px;",@precision=2})</td>
+
+        <td> <label>送达重量：</label></td>  
+        <td>@Html.TextBoxFor(model => model.deliveryWeight, new { @Class = "easyui-numberbox",@style="width:60px;",
+                @precision=2})</td>
+
+        <td> <label>总金额：</label></td>  
+        <td>@Html.TextBoxFor(model => model.totalAmount, new { @Class = "easyui-numberbox",@style="width:60px;",
+                    @precision=2})</td>
+    </tr>
+    <tr>
+        <td> <label>技术员：</label></td>  
+        <td>@Html.TextBoxFor(model => model.technician, new { @style="width:80px;"})</td>
+
+        <td> <label>采购员：</label></td>  
+        <td>@Html.TextBoxFor(model => model.purchaseMan, new { @style="width:80px;"})</td>
+
+        <td> <label>调运员：</label></td>  
+        <td>@Html.TextBoxFor(model => model.transportMan, new { @style="width:80px;"})</td>
+    </tr>
+
+    <tr>
+        <td> <label>调运司机：</label></td>  
+        <td>@Html.TextBoxFor(model => model.transportDriver, new { @style="width:80px;"})</td>
+
+        <td> <label>调运车牌：</label></td>  
+        <td>@Html.TextBoxFor(model => model.transportCar, new { @style="width:80px;"})</td>
+
+        <td> <label>来源猪场：</label></td>  
+        <td>@Html.TextBoxFor(model => model.source, new { @style="width:130px;"})</td>
+    </tr>
+    <tr>
+        <td> <label>备注：</label></td>  
+        <td colspan="5">@Html.TextAreaFor(model => model.description)</td>
+    </tr>
+    </table>
+
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.RID)
+    @Html.HiddenFor(model => model.PID)
+    
+    <div style="text-align:right;padding-right:30px">
+    <a href="javascript:void(0)" class="easyui-linkbutton save" iconCls="icon-save" plain="true" >保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton cancel" iconCls="icon-cancel" plain="true">取消</a>
+    </div>
+
+</form>
+
+</fieldset>
+
+</div>

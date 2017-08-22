@@ -1,0 +1,74 @@
+﻿@using Farm.Raisers.DataContext
+
+@{
+    var db = new Farm.AppCommon.BaseRepository();   
+ }
+<div style="line-height:20px;">
+    <div>
+        <span>系统中共有养户</span>
+        <span style="color:brown;margin:3px;">@(db.GetCount<Raiser>(p=>true)) </span>
+        <span>户，其中：</span>
+    </div>
+
+    <div style="margin-left:10px;">
+        <span>已签约</span>
+        <span style="color:brown;margin:3px;">@(db.GetCount<Raiser>(p=>p.statusFlag==1)) </span>
+        <span>户</span>
+    </div>
+
+    <div style="margin-left:10px;">
+        <span>饲养中</span>
+        <span style="color:brown;margin:3px;">@(db.GetCount<Raiser>(p=>p.statusFlag==2)) </span>
+        <span>户</span>
+    </div>
+
+    <p></p>
+    <div>
+        <span>目前在养</span>
+        <span style="color:brown;margin:3px;">@(db.GetCount<LivePig>(p=>true)) </span>
+        <span>批</span>
+    </div>
+
+    <p></p>
+    <div>
+        <span>累计调入</span>
+        <span style="color:brown;margin:3px;">@(db.GetCount<Pig>(p=>true)) </span>
+        <span>批</span>
+    </div>
+
+    <div style="margin-left:10px;">
+        <span>综合成活率</span>
+        <span style="color:brown;margin:3px;">@(string.Format("{0:p}",db.GetEntities<Pig>().Average(p=>p.liveRate))) </span>
+    </div>
+
+    <div style="margin-left:10px;">
+        <span>累计销售</span>
+        <span style="color:brown;margin:3px;">@(db.GetEntities<tbSales>().Sum(p=>p.salesNum)) </span>
+        <span>头</span>
+    </div>
+
+</div>
+
+<!--
+    概要信息内容：
+系统中共有养户多少户（超链到养户列表）
+其中签约待调多少户（超链到待调列表）
+空闲多少户
+在养多少户（超链到在养列表）
+待结多少户（超链到待结列表）
+本年度累计：
+调入多少头
+销售多少头
+死亡多少头
+批次成活率
+在养成活率
+3.5还原料肉比
+全程料肉比
+
+今天：
+调入多少头（超链到当天调入的在养列表）
+销售多少头（超链到当天的销售列表）
+死亡多少头（超链到当天的死亡列表）
+发料多少包（超链到当天的发料列表）
+疫苗注射多少户（超链到当天的疫苗列表）。
+-->

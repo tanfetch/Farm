@@ -1,0 +1,42 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    //System.Threading.Thread.Sleep(10000);
+    
+    }
+
+
+<form id="testfm" method="post" action="/Home/Test">
+
+<input name="sort" value="@ViewBag.text" />
+
+<input type="submit" value="submit" />
+
+</form>
+<script>
+
+    $(document).ready(function () {
+
+        $('#testfm').submit(function () {
+            $(this).ajaxSubmit({
+                dataType: 'json',
+                contentType: 'json',
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (data, t) {
+                    alert("error:[" + t + "]" + data.responseText);
+                }
+            });
+
+            return false;
+        });
+
+    });
+
+
+</script>

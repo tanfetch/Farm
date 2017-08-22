@@ -1,0 +1,25 @@
+﻿@using Farm.Raisers.DataContext
+
+@{
+    var key = Request["raiserID"];
+    var db = new FarmRepository();
+    var pig = db.GetEntitie<ClosurePig>(p => p.raiserID == key);
+    if (pig == null)
+    {
+        return;
+    }
+}
+
+<span>养户：</span><span style="color:brown;">@pig.raiserName</span>
+<span>&nbsp;｜&nbsp;</span>
+<span>区域：</span><span style="color:brown;">@pig.areaName</span>
+<span>&nbsp;｜&nbsp;</span>
+<span>技术员：</span><span style="color:brown;">@pig.technician</span>
+<span>&nbsp;｜&nbsp;</span>
+<span>销售头数：</span><span style="color:brown;">@pig.salesNum</span>
+<span>&nbsp;｜&nbsp;</span>
+<span>死亡头数：</span><span style="color:brown;">@pig.deathNum</span>
+<span>&nbsp;｜&nbsp;</span>
+<span>成活率：</span><span style="color:brown;">@string.Format("{0:p}",pig.liveRate)</span>
+<span>&nbsp;｜&nbsp;</span>
+<span>来源：</span><span style="color:brown;">@pig.source</span>

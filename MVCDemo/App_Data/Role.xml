@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<role text="权限" >
+  
+  <role text="全部权限" >
+    
+    <role text="管理" >
+      <role text="权限管理" id="1"/>
+      <role text="用户管理" id="2"/>
+    </role>
+
+    <role text="养户" >
+      <role text="养户信息" id="21"/>
+      <role text="合同信息" id="22"/>
+    </role>
+
+    <role text="生产" >
+      <role text="调入相关" id="31"/>
+      <role text="发料" id="32"/>
+      <role text="发料审核" id="33"/>
+      <role text="销售" id="34"/>
+      <role text="死亡" id="35"/>
+      <role text="结算" id="36"/>
+      <role text="疫苗确认" id="37"/>
+    </role>
+
+    <role text="统计" >
+      <role text="报表" id="41"/>
+      <role text="查询" id="42"/>
+    </role>
+    
+  </role>
+
+</role>

@@ -1,0 +1,17 @@
+﻿
+
+
+<div style="line-height:18px;">
+
+        调入头数： <a href="javascript:void(0)" onclick="newMainPanel('/Pig/List?rspType=view&grantDate_1=@DateTime.Today','在养列表','icon-livepigs')">
+            @ViewData["今天调入头数"]</a><br />
+        销售头数： <a href="javascript:void(0)" onclick="newMainPanel('/Sales/List?rspType=view&salesDate_1=@DateTime.Today','销售记录','icon-cart')">
+            @ViewData["今天销售头数"]</a> <br />
+        死亡头数： <a href="javascript:void(0)" onclick="newMainPanel('/Death/List?rspType=view&deathDate_1=@DateTime.Today','死亡记录','icon-hourglass')">
+            @ViewData["今天死亡头数"]</a> <br />
+        发料包数： <a href="javascript:void(0)" onclick="newMainPanel('/Feed/List?rspType=view&referTime_1=@DateTime.Today','发料记录','icon-feed_record')">
+            @ViewData["今天发料包数"]</a> <br />
+        疫苗注射： <a href="javascript:void(0)" onclick="newMainPanel('/Vaccine/List?rspType=view&injectDate_1=@DateTime.Today&injectDate_2=@DateTime.Today','疫苗任务','icon-checkout')">
+            @ViewData["今天疫苗注射户数"]</a> <br />
+
+</div>

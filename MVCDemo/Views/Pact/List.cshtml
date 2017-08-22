@@ -1,0 +1,120 @@
+﻿<div class="easyui-tabs" style="height:auto;" fit="true">  
+
+<div title="合同列表" style="margin:0px;">
+    <table id="dg_pacts" class="easyui-datagrid" toolbar="#toolbar_pacts" >  
+        <thead>  
+            <tr>  
+            <th field="raiserID"     sortable="true" width="60"  >编号</th>  
+            <th field="raiserName"         sortable="true" width="80"  >养户</th>  
+            <th field="areaName"     sortable="true" width="80" >服务点</th>  
+            <th field="batch" >批次</th>  
+            <th field="pactNum"        sortable="true"  >合同数量</th>  
+            <th field="pactDate" formatter="dateFormatter"  sortable="true" width="80" >签约日期</th> 
+            <th field="lastDays" formatter="fpactlastDays" width="60">签约天数</th>
+            <th field="statusFlag" formatter="fpactst" width="40" >状态</th>  
+            </tr>  
+        </thead>  
+    </table>  
+    <div id="toolbar_pacts">  
+        <div>
+            <a href="javascript:void(0)" id="pact-new" class="easyui-linkbutton" iconCls="icon-add" plain="true" 
+                onclick="p_newPact()">增加</a>
+            <a href="javascript:void(0)" id="pact-newpig" class="easyui-linkbutton" iconCls="icon-lorry_add" plain="true" 
+                onclick="p_newPig()">调入</a>
+            <a href="javascript:void(0)" id="pact-del" class="easyui-linkbutton" iconCls="icon-remove" plain="true" 
+                onclick="destroyRow('#dg_pacts','@Url.Content("~/Pact/Delete")')">删除</a> 
+        </div> 
+
+        <script>
+            function p_newPact() {
+                newMainPanel('/Pact/Update', '签约', 'icon-pencil');
+            }
+            function p_newPig() {
+                var row = $('#dg_pacts').datagrid('getSelected');
+                if (row) {
+                    var url = '/Pig/Update?key='+row.raiserID;
+                    newMainPanel(url, '调入', 'icon-lorry_add');
+                }
+            }
+        </script>
+
+        <div style="margin:3px;">
+            <form id="fm_pactfilter">
+            <span style="margin:0 5px">区域
+                @Html.DropDownList("areaID_0", ViewModelHelper.GetAuthoryFieldItems(Request["areaID_0"], true), new { @style = "width:auto;" }) 
+            </span>
+            <span style="margin:0 5px">编号
+                @Html.TextBox("raiserID_0", Request["raiserID_0"], new { @style = "width:50px;" })
+            </span>
+            <span style="margin:0 5px">养户
+                @Html.TextBox("raiserName_4", Request["raiserName_4"], new { @style = "width:60px;" })
+            </span>
+            <span style="margin:0 5px">合同数量
+                @Html.TextBox("pactNum_1", Request["pactNum_1"], new { @class = "easyui-numberbox", @style = "width:30px;" })
+                -
+                @Html.TextBox("pactNum_2", Request["pactNum_2"], new { @class = "easyui-numberbox", @style = "width:30px;" })
+            </span>
+            <span style="margin:0 5px">合同日期
+                @Html.TextBox("pactDate_1", Request["pactDate_1"], new { @class = "easyui-datebox", @style = "width:90px;" })
+                -
+                @Html.TextBox("pactDate_2", Request["pactDate_2"], new { @class = "easyui-datebox",@style = "width:90px;" })
+            </span>
+            <span style="margin:0 5px">状态
+                @Html.DropDownList("statusFlag_0",
+                         ViewModelHelper.GetPactStatusItems(string.IsNullOrEmpty(Request["statusFlag_0"]) ? "0" : Request["statusFlag_0"], true), 
+                         new { @style = "width:auto;" }) 
+            </span>
+
+            <span style="margin:0 5px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" 
+                    onclick="doSearch('#fm_pactfilter','#dg_pacts')">查找</a>
+            </span>
+            </form>
+        </div>
+    </div>  
+    <script type="text/javascript">
+
+        $(function () {
+            var data = getFormJson('#fm_pactfilter');
+            $('#dg_pacts').datagrid({
+                url: '/Pact/List',
+                onSelect: function (rowIndex, rowData) {
+                    updateButton('#pact-newpig', rowData.statusFlag != 0);
+                    updateButton('#pact-del', rowData.statusFlag != 0);
+                },
+                onLoadSuccess: function (rowIndex, rowData) {
+                    updateButton('#pact-newpig', true);
+                    updateButton('#pact-del', true);
+                },
+                queryParams: data,
+                sortName: 'pactDate',
+                sortOrder: 'desc'
+            });
+            $('#dg_pacts').datagrid('detailView', '/Pact/Update?go=Edit');
+        });
+
+        function fpactst(val, row) {
+            var s;
+            switch (val) {
+                case 0: s = '待调'; break;
+                case 1: s = '已调'; break;
+                default: break;
+            }
+            return s;
+        }
+        function fpactlastDays(val, row) {
+            if (row.statusFlag == 1)
+                return '-';
+
+            var d = new Date();
+            var pd = new Date(parseInt(row.pactDate.replace("/Date(", "").replace(")/", ""))).format("yyyy-MM-dd");
+            var today = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
+            return dateDiff('D',pd,today);
+        }
+
+
+    </script>
+
+
+</div>
+</div>

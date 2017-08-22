@@ -1,0 +1,13 @@
+F:\Farm\Farm.Report\bin\Debug\Farm.Report.dll
+F:\Farm\Farm.Report\bin\Debug\Farm.Report.pdb
+F:\Farm\Farm.Report\obj\Debug\Farm.Report.CrystalReport2.resources
+F:\Farm\Farm.Report\obj\Debug\Farm.Report.dll
+F:\Farm\Farm.Report\obj\Debug\Farm.Report.pdb
+F:\Farm\Farm.Report\obj\Debug\Farm.Report.csprojResolveAssemblyReference.cache
+F:\Farm\Farm.Report\obj\Debug\Farm.Report.csproj.GenerateResource.Cache
+F:\Farm\Farm.Report\bin\Debug\Farm.Raisers.dll
+F:\Farm\Farm.Report\bin\Debug\AppCommon.dll
+F:\Farm\Farm.Report\bin\Debug\Farm.Authority.dll
+F:\Farm\Farm.Report\bin\Debug\Farm.Raisers.pdb
+F:\Farm\Farm.Report\bin\Debug\AppCommon.pdb
+F:\Farm\Farm.Report\bin\Debug\Farm.Authority.pdb

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Farm.Raisers.DataContext.GrantFeed>
+
+@{
+    int extantNum = ViewBag.extantNum == null ? 0 : ViewBag.extantNum;
+    double liveRate = ViewBag.liveRate == null ? 0 : (double)ViewBag.liveRate ;
+    double total = ViewBag.total == null ? 0 : ViewBag.total;
+}
+
+<span>总量：</span><span style="color:brown;">@string.Format("{0:f0}", Model.Sum(p=>p.GetFeedBagNum())) 包</span>
+
+@{
+    if (extantNum > 0)
+    {
+        <span>&nbsp;｜&nbsp;</span>
+        <span>当前在养批次：</span>
+        <span>用料：</span><span style="color:brown;">@string.Format("{0:f0}", total ) 包</span>
+        <span>&nbsp;｜&nbsp;</span>
+        <span>头平用料：</span><span style="color:brown;">@string.Format("{0:f2}", total / extantNum) 包</span>
+        <span>&nbsp;｜&nbsp;</span>
+        <span>成活率：</span><span style="color:brown;">@string.Format("{0:p}", liveRate) </span>
+        <span></span>
+    }
+}

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Farm.Raisers.DataContext.LivePig>
+
+@if (Model.Count() == 0)
+{
+    Response.End();
+}
+
+<fieldset>
+    <legend>
+        <a href="javascript:void(0)" 
+            onclick="newMainPanel('/Pig/List?liveRate_2=0.9','在养列表','icon-livepigs')"
+            class="easyui-linkbutton" data-options="plain:true" style="margin:0 5px;">
+            <span>成活率低于90%的在养批次</span>
+        </a>
+    </legend> 
+    <div style="">
+    @foreach (var item in Model.OrderBy(p=>p.liveRate))
+    {
+        <a href="javascript:void(0)" 
+            onclick="newMainPanel('/Pig/List?raiserID_0=@item.raiserID','在养列表','icon-livepigs')"
+            class="easyui-linkbutton" data-options="plain:true" style="margin:0 3px;">
+            <span>@item.raiserName</span><span style="color:brown;">( @string.Format("{0:p}",item.liveRate) )</span>
+        </a>
+    }
+
+    </div>
+</fieldset>
